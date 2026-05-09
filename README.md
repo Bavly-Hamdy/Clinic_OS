@@ -1,73 +1,96 @@
-# Welcome to your Lovable project
+# Clinic OS — Advanced Clinic Management System
 
-## Project info
+[![GitHub License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/Bavly-Hamdy/Clinic_OS/blob/main/LICENSE)
+[![React](https://img.shields.io/badge/React-18.x-61DAFB?logo=react)](https://reactjs.org/)
+[![Vite](https://img.shields.io/badge/Vite-5.x-646CFF?logo=vite)](https://vitejs.dev/)
+[![Firebase](https://img.shields.io/badge/Firebase-v9+-FFCA28?logo=firebase)](https://firebase.google.com/)
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+**Clinic OS** is a high-performance, bilingual clinical management solution designed to streamline medical practices. It provides a seamless, professional experience for doctors, receptionists, and patients through a modern, glassmorphic UI and real-time data synchronization.
 
-## How can I edit this code?
+---
 
-There are several ways of editing your application.
+## 🌟 Key Features
 
-**Use Lovable**
+### 🩺 Professional Doctor's Workspace
+*   **Prescription Builder**: Intelligent drug entry with localized dosage, frequency, and timing options.
+*   **Clinical Sessions**: Dedicated space for chief complaints, diagnosis, and clinical notes.
+*   **Vital Signs Tracking**: Real-time recording and history tracking of patient vitals.
+*   **Drug Allergy Alerts**: Automatic cross-referencing of prescribed drugs against known patient allergies.
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+### 📋 Intelligent Queue Management
+*   **Live Tracking**: Real-time patient queue with "Call Next" functionality.
+*   **Dual-Role Support**: Specialized interfaces for Doctors and Receptionists to manage patient flow efficiently.
+*   **Patient Status**: Visual indicators for Waiting, In-Clinic, and Completed sessions.
 
-Changes made via Lovable will be committed automatically to this repo.
+### 🤖 AI-Powered Drug Autocomplete
+*   **Gemini AI Integration**: Leverages Google's Gemini Pro to provide instant suggestions for medicine names and standard concentrations.
+*   **Hybrid Search**: Combines a local drug dictionary with AI fallback for rare medications.
 
-**Use your preferred IDE**
+### 🌍 Professional Bilingual Support
+*   **Full Localization**: Complete Arabic and English interfaces with professional medical terminology.
+*   **RTL Optimization**: Pixel-perfect layout for Arabic users, including date formatting and directionality.
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+### 📊 Advanced Analytics & Finance
+*   **Revenue Tracking**: Visual dashboard for monitoring clinic income and expenses.
+*   **Financial Reports**: Detailed "Shift Close" reports with PDF export capabilities.
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+### 🖨️ Customizable Prescription Printing
+*   **Stationery Ready**: Designed to print on official clinic stationery with reserved header/footer space.
+*   **Clean Layout**: Professional formatting with clear instructions for patients.
 
-Follow these steps:
+---
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+## 🚀 Tech Stack
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+*   **Frontend**: React 18, Vite, Tailwind CSS, Lucide Icons, Shadcn UI.
+*   **State Management**: React Query (TanStack Query).
+*   **Backend**: Firebase (Firestore, Authentication, Hosting).
+*   **AI Engine**: Google Gemini API.
+*   **Language & RTL**: i18next, date-fns/locale.
+*   **Animations**: Framer Motion, Tailwind Animate.
 
-# Step 3: Install the necessary dependencies.
-npm i
+---
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
+## 🛠️ Installation & Setup
 
-**Edit a file directly in GitHub**
+1.  **Clone the Repository**
+    ```bash
+    git clone https://github.com/Bavly-Hamdy/Clinic_OS.git
+    cd Clinic_OS
+    ```
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+2.  **Install Dependencies**
+    ```bash
+    npm install
+    ```
 
-**Use GitHub Codespaces**
+3.  **Environment Configuration**
+    Create a `.env.local` file and add your Firebase and Gemini API credentials:
+    ```env
+    VITE_FIREBASE_API_KEY=your_key
+    VITE_FIREBASE_AUTH_DOMAIN=your_domain
+    VITE_FIREBASE_PROJECT_ID=your_id
+    VITE_FIREBASE_STORAGE_BUCKET=your_bucket
+    VITE_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
+    VITE_FIREBASE_APP_ID=your_app_id
+    VITE_GEMINI_API_KEY=your_gemini_key
+    ```
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+4.  **Run Development Server**
+    ```bash
+    npm run dev
+    ```
 
-## What technologies are used for this project?
+---
 
-This project is built with:
+## 👨‍💻 Author
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+**Bavly Hamdy**
+*   [GitHub](https://github.com/Bavly-Hamdy)
+*   [LinkedIn](https://www.linkedin.com/in/bavly-hamdy/)
 
-## How can I deploy this project?
+---
 
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
+## 📄 License
 
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
