@@ -1,0 +1,52 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ── Helper: Check if user is admin ──────────────────────────
+    function isAdmin() {
+      return request.auth != null &&
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'ADMIN';
+    }
+
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    // ── Public Access for Queue Tracker ──────────────────────────
+    match /appointments/{id} {
+      allow read: if true;
+      allow write: if isAuthenticated();
+    }
+
+    // ── Subscriptions — Admin only ──────────────────────────────
+    match /subscriptions/{id} {
+      allow read: if isAuthenticated();
+      allow write: if isAdmin();
+    }
+
+    // ── Platform Settings — Admin write, Public read ────────────
+    match /platform_settings/{doc} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // ── Users — Read own doc, Admin manages all ─────────────────
+    match /users/{userId} {
+      allow read: if isAuthenticated();
+      allow create: if isAdmin() || request.auth.uid == userId;
+      allow update: if isAdmin() || request.auth.uid == userId;
+      allow delete: if isAdmin();
+    }
+
+    // ── Notifications — User reads own, Admin writes ────────────
+    match /notifications/{id} {
+      allow read, update, delete: if isAuthenticated() && resource.data.userId == request.auth.uid;
+      allow create: if isAdmin();
+    }
+
+    // ── Everything else requires Auth ─────────────────────────────
+    match /{document=**} {
+      allow read, write: if isAuthenticated();
+    }
+  }
+}

@@ -1,0 +1,304 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --font-heading: 'Inter', sans-serif;
+    --font-arabic: 'Cairo', sans-serif;
+
+    /* Brand: Vibrant Blue */
+    --brand-50: 214 100% 97%;
+    --brand-100: 214 90% 92%;
+    --brand-500: 221 83% 53%; /* #2563eb */
+    --brand-600: 221 83% 45%;
+    --brand-700: 221 83% 35%;
+
+    /* Base surfaces for Light Mode */
+    --background: 210 33% 99%; /* Very subtle cool-toned white */
+    --foreground: 222 47% 11%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+
+    --primary: 221 83% 53%;
+    --primary-foreground: 210 40% 98%;
+    --primary-light: 214 90% 92%;
+
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --success: 142.1 76.2% 36.3%;
+    --success-foreground: 355.7 100% 97.3%;
+    --success-light: 142 60% 92%;
+
+    --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 100%;
+    --warning-light: 38 90% 92%;
+
+    --info: 199 89% 48%;
+    --info-foreground: 0 0% 100%;
+    --info-light: 200 70% 92%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221 83% 53%;
+
+    --radius: 1rem; /* Softer, larger border radius for modern feel */
+
+    /* Sidebar - Crisp Light Mode */
+    --sidebar-background: 210 33% 99%;
+    --sidebar-foreground: 222.2 47.4% 11.2%;
+    --sidebar-primary: 221 83% 53%;
+    --sidebar-primary-foreground: 210 40% 98%;
+    --sidebar-accent: 210 40% 96.1%;
+    --sidebar-accent-foreground: 222.2 47.4% 11.2%;
+    --sidebar-border: 214.3 31.8% 91.4%;
+    --sidebar-ring: 221 83% 53%;
+
+    /* Premium Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(221, 83%, 53%), hsl(221, 83%, 40%));
+    --gradient-hero: linear-gradient(135deg, hsl(222, 47%, 11%), hsl(221, 83%, 25%));
+    --gradient-glow: linear-gradient(to right, rgba(37, 99, 235, 0.2), rgba(37, 99, 235, 0));
+
+    /* Shadows - Soft and Premium */
+    --shadow-sm: 0 2px 4px rgba(0,0,0,0.02);
+    --shadow-md: 0 8px 16px -4px rgba(0,0,0,0.04), 0 4px 6px -2px rgba(0,0,0,0.02);
+    --shadow-lg: 0 20px 25px -5px rgba(0,0,0,0.05), 0 10px 10px -5px rgba(0,0,0,0.02);
+    --shadow-glow: 0 0 20px rgba(37, 99, 235, 0.4);
+  }
+
+  /* Deep, vibrant dark mode for a professional, clinical yet futuristic look */
+  .dark {
+    --background: 230 25% 6%; /* Deep void / Midnight */
+    --foreground: 210 40% 98%;
+
+    --card: 230 25% 9%; /* Slightly elevated */
+    --card-foreground: 210 40% 98%;
+
+    --popover: 230 25% 8%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 230 100% 65%; /* Vibrant Royal Blue */
+    --primary-foreground: 0 0% 100%;
+    --primary-light: 230 100% 75%;
+
+    --secondary: 230 25% 15%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 230 25% 12%;
+    --muted-foreground: 215 20% 65%;
+
+    --accent: 230 25% 16%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 350 85% 65%; /* Adjusted red for better dark mode balance */
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 230 25% 16%;
+    --input: 230 25% 14%;
+    --ring: 230 100% 65%;
+
+    --sidebar-background: 230 25% 6%;
+    --sidebar-foreground: 210 40% 98%;
+    --sidebar-primary: 230 100% 65%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 230 25% 12%;
+    --sidebar-accent-foreground: 210 40% 98%;
+    --sidebar-border: 230 25% 12%;
+    --sidebar-ring: 230 100% 65%;
+
+    --gradient-hero: linear-gradient(135deg, hsl(230, 25%, 15%), hsl(230, 25%, 6%));
+    
+    /* Brand-tinted glass shadow to simulate depth and neon glow */
+    --shadow-sm: 0 2px 8px rgba(0,0,0,0.8);
+    --shadow-md: 0 8px 24px -4px rgba(0,0,0,0.9), 0 0 12px hsl(230, 100%, 65%, 0.05);
+    --shadow-lg: 0 20px 40px -5px rgba(0,0,0,0.95), 0 0 24px hsl(230, 100%, 65%, 0.1);
+  }
+  html[lang="ar"] body {
+    font-family: var(--font-arabic);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    /* Soft mesh background gradient logic for absolute premium feel */
+    background-image: 
+      radial-gradient(at 0% 0%, hsl(var(--primary) / 0.05) 0px, transparent 50%),
+      radial-gradient(at 100% 100%, hsl(var(--info) / 0.05) 0px, transparent 50%);
+    background-attachment: fixed;
+  }
+}
+
+@layer utilities {
+  .shadow-card { box-shadow: var(--shadow-md); }
+  .shadow-elevated { box-shadow: var(--shadow-lg); }
+  .shadow-glow { box-shadow: var(--shadow-glow); }
+  .gradient-primary { background: var(--gradient-primary); }
+  .gradient-hero { background: var(--gradient-hero); }
+  
+  /* Glassmorphism utilities */
+  .glass {
+    @apply bg-background/70 backdrop-blur-xl border border-white/10 shadow-card;
+  }
+  .glass-card {
+    @apply bg-card/80 backdrop-blur-md border border-border shadow-card hover:shadow-elevated transition-all duration-300;
+  }
+
+  /* Text Gradients */
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-info;
+  }
+
+  /* iPhone safe area for bottom navigation */
+  .safe-area-pb {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+}
+
+/* Custom Scrollbar for a polished look */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-muted-foreground/30 rounded-full hover:bg-muted-foreground/50 transition-colors;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Selection color */
+::selection {
+  @apply bg-primary/20 text-primary;
+}
+/* Print Styles - Professional A4 Auditing Ledger (Standalone) */
+@media print {
+  @page {
+    size: A4;
+    margin: 0; /* Container handles margins */
+  }
+  
+  /* Hide UI elements explicitly */
+  .no-print, nav, aside, header, footer, button, [role="navigation"], .md\:hidden, .md\:flex {
+    display: none !important;
+    height: 0 !important;
+    visibility: hidden !important;
+  }
+
+  /* Reset main layout */
+  body, html {
+    background: white !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    overflow: hidden !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Force the report to the top and center with safety margins */
+  #admin-print-report {
+    display: block !important;
+    visibility: visible !important;
+    position: relative !important;
+    width: 100% !important;
+    max-width: 210mm !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    z-index: 9999 !important;
+    background: white !important;
+    page-break-after: avoid !important;
+  }
+
+  #admin-print-report * {
+    visibility: visible !important;
+  }
+
+  /* Global typography reset for document feel */
+  h1, h2, h3, h4, p, td, th, span, div {
+    color: black !important;
+    text-shadow: none !important;
+    box-shadow: none !important;
+  }
+}
+
+@layer utilities {
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  .animate-pulse-subtle {
+    animation: pulse-subtle 3s ease-in-out infinite;
+  }
+
+  /* Blob Animations for Creative Backgrounds */
+  @keyframes blob {
+    0% { transform: translate(0px, 0px) scale(1); }
+    33% { transform: translate(30px, -50px) scale(1.1); }
+    66% { transform: translate(-20px, 20px) scale(0.9); }
+    100% { transform: translate(0px, 0px) scale(1); }
+  }
+  
+  @keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+  }
+
+  @keyframes pulse-subtle {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.8; transform: scale(0.98); }
+  }
+
+  .animate-blob {
+    animation: blob 7s infinite;
+  }
+  .animation-delay-2000 {
+    animation-delay: 2s;
+  }
+  .animation-delay-4000 {
+    animation-delay: 4s;
+  }
+
+  /* Glassmorphism Refined */
+  .glass-card-premium {
+    @apply bg-white/70 dark:bg-black/40 backdrop-blur-2xl border border-white/20 dark:border-white/10 shadow-2xl shadow-primary/5;
+  }
+  
+  .glass-card-glow {
+    @apply relative overflow-hidden;
+  }
+  .glass-card-glow::before {
+    content: '';
+    @apply absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent opacity-0 transition-opacity duration-500 pointer-events-none;
+    z-index: 0;
+  }
+  .glass-card-glow:hover::before {
+    @apply opacity-100;
+  }
+}
