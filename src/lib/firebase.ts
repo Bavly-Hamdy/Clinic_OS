@@ -6,13 +6,13 @@ import { initializeFirestore, persistentLocalCache, persistentMultipleTabManager
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-    apiKey: "AIzaSyBMRjGjTv9ZJJ8oyVMVlfp0Eyx8ZmgGCtA",
-    authDomain: "cinicsystem.firebaseapp.com",
-    projectId: "cinicsystem",
-    storageBucket: "cinicsystem.firebasestorage.app",
-    messagingSenderId: "1049942682038",
-    appId: "1:1049942682038:web:77197ea50a01abcef0b917",
-    measurementId: "G-7D2XW781TM"
+    apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+    authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+    projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+    storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+    appId: import.meta.env.VITE_FIREBASE_APP_ID,
+    measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID
 };
 
 // Initialize Firebase
