@@ -44,6 +44,8 @@ export default defineConfig(({ mode }) => ({
         ],
       },
       workbox: {
+        // Increase limit for large assets (Vercel build fix)
+        maximumFileSizeToCacheInBytes: 5 * 1024 * 1024, 
         // Cache all static JS/CSS/fonts
         globPatterns: ["**/*.{js,css,html,ico,png,svg,woff2}"],
         // Cache Firestore API calls for offline fallback
@@ -60,6 +62,9 @@ export default defineConfig(({ mode }) => ({
       },
     }),
   ].filter(Boolean),
+  build: {
+    chunkSizeWarningLimit: 2000,
+  },
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
