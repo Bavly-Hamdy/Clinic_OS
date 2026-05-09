@@ -78,7 +78,7 @@ export default function RegistrationPage() {
       if (formData.promoCode) lines.push(`*كود الخصم:* ${formData.promoCode}`);
       lines.push('');
       lines.push(divider);
-      lines.push(`_تم الإرسال عبر صفحة اشتراك ClinicOS_`);
+      lines.push(`_تم الإرسال عبر بوابة العيادة_`);
     } else {
       lines.push(`*[ ClinicOS ] New Subscription Request*`);
       lines.push(divider);
@@ -96,7 +96,7 @@ export default function RegistrationPage() {
       if (formData.promoCode) lines.push(`*Promo Code:* ${formData.promoCode}`);
       lines.push('');
       lines.push(divider);
-      lines.push(`_Sent via ClinicOS Subscription Page_`);
+      lines.push(`_Sent via Clinic Portal_`);
     }
 
     const message = lines.join('\n');

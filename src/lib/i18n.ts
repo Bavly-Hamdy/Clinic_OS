@@ -415,7 +415,7 @@ i18n
             refresh: 'Refresh',
             lastUpdate: 'Last Update: {{time}}',
             tip: '💡 Tip: Please arrive at the clinic 15 minutes before your turn to avoid losing your spot.',
-            footer: 'Powered by {{clinic}} © {{year}}'
+            footer: '{{clinic}} © {{year}}'
           },
           landing: {
             hero: {
@@ -478,7 +478,7 @@ i18n
                 yearly: "Yearly",
                 saveLabel: "Save 15%",
                 desc: "Every feature included. No hidden fees. Zero limitations.",
-                features: ["Unlimited Patients", "Advanced Analytics", "Multiple Staff Accounts", "Gemini AI Integration", "Patient Track & Queue", "Bank-Grade Security", "Priority Support"]
+                features: ["Unlimited Patients", "Advanced Analytics", "Multiple Staff Accounts", "Smart Medicine Suggestions", "Patient Track & Queue", "Bank-Grade Security", "Priority Support"]
               }
             },
             faq: {
@@ -512,7 +512,7 @@ i18n
               whatsappPhone: "Phone:",
               whatsappClinic: "Clinic:",
               whatsappPromo: "Promo Code:",
-              whatsappFooter: "Sent from ClinicOS Landing Page"
+              whatsappFooter: "Sent from Clinic Portal"
             },
             validation: {
               nameMin: "Full name must be at least 3 characters",
@@ -973,7 +973,7 @@ i18n
             refresh: 'تحديث',
             lastUpdate: 'آخر تحديث: {{time}}',
             tip: '💡 نصيحة: يرجى التواجد في مقر العيادة قبل موعدك بـ 15 دقيقة على الأقل لضمان عدم تجاوز دورك.',
-            footer: 'مدعوم بواسطة {{clinic}} © {{year}}'
+            footer: '{{clinic}} © {{year}}'
           },
           landing: {
             hero: {
@@ -1036,7 +1036,7 @@ i18n
                 yearly: "سنوياً",
                 saveLabel: "وفر 15%",
                 desc: "كافة المميزات مفعلة. لا توجد رسوم خفية. بلا حدود.",
-                features: ["مرضى غير محدودين", "تحليلات أداء متقدمة", "حسابات متعددة للموظفين", "دمج ذكاء Gemini الاصطناعي", "تتبع دور المرضى", "تشفير بيانات بمستوى بنكي", "دعم فني ذو أولوية"]
+                features: ["مرضى غير محدودين", "تحليلات أداء متقدمة", "حسابات متعددة للموظفين", "نظام اقتراح الأدوية الذكي", "تتبع دور المرضى", "تشفير بيانات بمستوى بنكي", "دعم فني ذو أولوية"]
               }
             },
             faq: {
