@@ -8,6 +8,8 @@
   :root {
     --font-heading: 'Inter', sans-serif;
     --font-arabic: 'Cairo', sans-serif;
+    --electron-titlebar-height: 32px;
+
 
     /* Brand: Vibrant Blue */
     --brand-50: 214 100% 97%;
@@ -301,4 +303,15 @@ html {
   .glass-card-glow:hover::before {
     @apply opacity-100;
   }
+}
+
+/* --- Electron Compatibility --- */
+.is-electron .fixed.top-0,
+.is-electron .sticky.top-0 {
+  top: var(--electron-titlebar-height) !important;
+}
+
+/* Specific layout adjustments for Electron */
+.is-electron .h-screen.sticky.top-0 {
+  height: calc(100vh - var(--electron-titlebar-height)) !important;
 }
