@@ -4,26 +4,37 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+
+  <!-- PWA & Mobile -->
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <meta name="apple-mobile-web-app-title" content="ClinicOS" />
   <meta name="theme-color" content="#2563eb" />
 
-  <title>ClinicOS — Clinic Management System</title>
-  <meta name="description" content="Modern clinic management: live queue, prescriptions, billing, analytics." />
+  <!-- Primary Meta -->
+  <title>ClinicOS — Professional Clinic Management System</title>
+  <meta name="description" content="ClinicOS: A professional bilingual (AR/EN) clinic management system. Real-time patient queue, smart prescription builder, analytics, and shift management." />
   <meta name="author" content="Bavly Hamdy" />
+
+  <!--
+    noindex: This is a private SaaS application — it should not be indexed
+    by search engines. The public landing page handles discoverability.
+  -->
+  <meta name="robots" content="noindex, nofollow" />
 
   <!-- PWA manifest -->
   <link rel="manifest" href="/manifest.json" />
 
-  <!-- Apple touch icon (use generic icon until real ones are placed in /public/icons/) -->
+  <!-- Icons -->
   <link rel="apple-touch-icon" href="/icons/icon-192.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png" />
 
-  <!-- OG tags -->
-  <meta property="og:title" content="ClinicOS" />
-  <meta property="og:description" content="Modern clinic management system — queue, E-prescription, billing." />
+  <!-- Open Graph -->
+  <meta property="og:title" content="ClinicOS — Clinic Management System" />
+  <meta property="og:description" content="Professional clinic management: live patient queue, e-prescriptions, billing, and analytics." />
   <meta property="og:type" content="website" />
+  <meta property="og:image" content="/icons/icon-512.png" />
 </head>
 
 <body>

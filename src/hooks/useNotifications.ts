@@ -1,85 +1,98 @@
 import { useState, useEffect, useCallback } from 'react';
 import { db } from '@/lib/firebase';
-import { 
-  collection, 
-  query, 
-  where, 
-  onSnapshot, 
-  doc, 
-  setDoc, 
-  updateDoc, 
-  deleteDoc, 
+import {
+  collection,
+  query,
+  where,
+  onSnapshot,
+  doc,
+  setDoc,
+  updateDoc,
+  deleteDoc,
   serverTimestamp,
   writeBatch,
-  orderBy
 } from 'firebase/firestore';
 import { AppNotification } from '@/types/clinic';
+import { COLLECTIONS } from '@/lib/constants';
 
 export function useNotifications(userId?: string) {
   const [notifications, setNotifications] = useState<AppNotification[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    if (!userId) return;
+    if (!userId) {
+      setIsLoading(false);
+      return;
+    }
 
     const q = query(
-      collection(db, 'notifications'),
+      collection(db, COLLECTIONS.NOTIFICATIONS),
       where('userId', '==', userId)
     );
 
-    const unsub = onSnapshot(q, (snap) => {
-      const data = snap.docs
-        .map(d => ({ id: d.id, ...d.data() })) as AppNotification[];
-      
-      // Sort in memory to avoid needing a composite index
-      const sortedData = data.sort((a, b) => 
-        new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-      );
-      
-      setNotifications(sortedData);
-      setIsLoading(false);
-    }, (err) => {
-      console.error('Notifications listener error:', err);
-      setIsLoading(false);
-    });
+    const unsubscribe = onSnapshot(
+      q,
+      (snap) => {
+        const data = snap.docs.map((d) => ({ id: d.id, ...d.data() })) as AppNotification[];
+        // Sort in-memory to avoid a composite Firestore index requirement
+        data.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+        setNotifications(data);
+        setIsLoading(false);
+      },
+      (err) => {
+        console.error('[useNotifications] Listener error:', err);
+        setIsLoading(false);
+      }
+    );
 
-    return () => unsub();
+    return () => unsubscribe();
   }, [userId]);
 
-  const markAsRead = async (notificationId: string) => {
-    await updateDoc(doc(db, 'notifications', notificationId), { isRead: true });
-  };
+  const markAsRead = useCallback(async (notificationId: string): Promise<void> => {
+    await updateDoc(doc(db, COLLECTIONS.NOTIFICATIONS, notificationId), { isRead: true });
+  }, []);
 
-  const deleteNotification = async (notificationId: string) => {
-    await deleteDoc(doc(db, 'notifications', notificationId));
-  };
+  const deleteNotification = useCallback(async (notificationId: string): Promise<void> => {
+    await deleteDoc(doc(db, COLLECTIONS.NOTIFICATIONS, notificationId));
+  }, []);
 
-  const sendNotification = async (data: Omit<AppNotification, 'id' | 'createdAt'>) => {
-    const ref = doc(collection(db, 'notifications'));
-    await setDoc(ref, {
-      ...data,
-      createdAt: new Date().toISOString()
-    });
-  };
-
-  const sendBulkNotifications = async (userIds: string[], title: string, message: string, type: AppNotification['type'] = 'warning') => {
-    const batch = writeBatch(db);
-    const now = new Date().toISOString();
-
-    userIds.forEach(uid => {
-      const ref = doc(collection(db, 'notifications'));
-      batch.set(ref, {
-        userId: uid,
-        title,
-        message,
-        type,
-        isRead: false,
-        createdAt: now
+  const sendNotification = useCallback(
+    async (data: Omit<AppNotification, 'id' | 'createdAt'>): Promise<void> => {
+      const ref = doc(collection(db, COLLECTIONS.NOTIFICATIONS));
+      await setDoc(ref, {
+        ...data,
+        // Use serverTimestamp for consistency — avoids client clock drift issues
+        createdAt: serverTimestamp(),
       });
-    });
+    },
+    []
+  );
 
-    await batch.commit();
-  };
+  const sendBulkNotifications = useCallback(
+    async (
+      userIds: string[],
+      title: string,
+      message: string,
+      type: AppNotification['type'] = 'warning'
+    ): Promise<void> => {
+      const batch = writeBatch(db);
+
+      userIds.forEach((uid) => {
+        const ref = doc(collection(db, COLLECTIONS.NOTIFICATIONS));
+        batch.set(ref, {
+          userId: uid,
+          title,
+          message,
+          type,
+          isRead: false,
+          createdAt: serverTimestamp(),
+        });
+      });
+
+      await batch.commit();
+    },
+    []
+  );
 
   return {
     notifications,
@@ -87,6 +100,6 @@ export function useNotifications(userId?: string) {
     markAsRead,
     deleteNotification,
     sendNotification,
-    sendBulkNotifications
+    sendBulkNotifications,
   };
 }

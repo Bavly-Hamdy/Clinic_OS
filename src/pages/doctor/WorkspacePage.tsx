@@ -67,7 +67,7 @@ import {
   Printer,
   Wifi,
 } from 'lucide-react';
-import { useToast } from '@/hooks/use-toast';
+import { useToast } from '@/hooks/useToast';
 import { format, parseISO, differenceInYears } from 'date-fns';
 import { arEG } from 'date-fns/locale';
 import { useTranslation } from 'react-i18next';

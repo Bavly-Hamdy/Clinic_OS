@@ -31,7 +31,7 @@ import {
   Settings, Save, Upload, DollarSign, Users, Plus,
   Trash2, UserCog, Building2, Printer, ShieldCheck,
 } from 'lucide-react';
-import { useToast } from '@/hooks/use-toast';
+import { useToast } from '@/hooks/useToast';
 import { useEffect, useRef, useState } from 'react';
 import { format } from 'date-fns';
 

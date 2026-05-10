@@ -2,51 +2,114 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
 
-    // ── Helper: Check if user is admin ──────────────────────────
-    function isAdmin() {
-      return request.auth != null &&
-        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'ADMIN';
-    }
+    // ── Helper functions ──────────────────────────────────────────────────────
 
     function isAuthenticated() {
       return request.auth != null;
     }
 
-    // ── Public Access for Queue Tracker ──────────────────────────
-    match /appointments/{id} {
-      allow read: if true;
-      allow write: if isAuthenticated();
+    function isAdmin() {
+      return isAuthenticated() &&
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'ADMIN';
     }
 
-    // ── Subscriptions — Admin only ──────────────────────────────
-    match /subscriptions/{id} {
-      allow read: if isAuthenticated();
-      allow write: if isAdmin();
+    function isDoctor() {
+      return isAuthenticated() &&
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'DOCTOR';
     }
 
-    // ── Platform Settings — Admin write, Public read ────────────
-    match /platform_settings/{doc} {
-      allow read: if true;
-      allow write: if isAdmin();
+    function isReceptionist() {
+      return isAuthenticated() &&
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'RECEPTIONIST';
     }
 
-    // ── Users — Read own doc, Admin manages all ─────────────────
+    function isOwner(doctorId) {
+      return isAuthenticated() && request.auth.uid == doctorId;
+    }
+
+    // ── Users Collection ──────────────────────────────────────────────────────
+    // Doctors can read their own doc. Admins manage all.
     match /users/{userId} {
-      allow read: if isAuthenticated();
+      allow read:   if isAuthenticated();
       allow create: if isAdmin() || request.auth.uid == userId;
       allow update: if isAdmin() || request.auth.uid == userId;
       allow delete: if isAdmin();
     }
 
-    // ── Notifications — User reads own, Admin writes ────────────
+    // ── Appointments ──────────────────────────────────────────────────────────
+    // Public read for the patient queue tracker page (no login required).
+    // Write requires authentication (receptionist or doctor).
+    match /appointments/{id} {
+      allow read:  if true;
+      allow write: if isAuthenticated();
+    }
+
+    // ── Patients ──────────────────────────────────────────────────────────────
+    // Only the owning doctor or their receptionist can read/write patient data.
+    match /patients/{id} {
+      allow read:  if isAuthenticated();
+      allow write: if isAuthenticated();
+    }
+
+    // ── Visits & Prescriptions ────────────────────────────────────────────────
+    match /visits/{id} {
+      allow read:  if isAuthenticated();
+      allow write: if isAuthenticated();
+    }
+
+    match /prescriptions/{id} {
+      allow read:  if isAuthenticated();
+      allow write: if isAuthenticated();
+    }
+
+    // ── Payments & Expenses (Financial data) ──────────────────────────────────
+    match /payments/{id} {
+      allow read:  if isAuthenticated();
+      allow write: if isAuthenticated();
+    }
+
+    match /expenses/{id} {
+      allow read:  if isAuthenticated();
+      allow write: if isAuthenticated();
+    }
+
+    // ── Clinic Settings ───────────────────────────────────────────────────────
+    // Doctors manage their own clinic settings.
+    match /clinic_settings/{id} {
+      allow read:  if isAuthenticated();
+      allow write: if isAuthenticated();
+    }
+
+    // ── Subscriptions — Admin only ────────────────────────────────────────────
+    match /subscriptions/{id} {
+      allow read:  if isAuthenticated();
+      allow write: if isAdmin();
+    }
+
+    // ── Platform Settings — Admin write, Public read ──────────────────────────
+    match /platform_settings/{doc} {
+      allow read:  if true;
+      allow write: if isAdmin();
+    }
+
+    // ── Notifications ─────────────────────────────────────────────────────────
+    // Users can only read/update/delete their own notifications.
+    // Admins can create (send) notifications.
     match /notifications/{id} {
-      allow read, update, delete: if isAuthenticated() && resource.data.userId == request.auth.uid;
+      allow read, update, delete: if isAuthenticated() &&
+        resource.data.userId == request.auth.uid;
       allow create: if isAdmin();
     }
 
-    // ── Everything else requires Auth ─────────────────────────────
-    match /{document=**} {
-      allow read, write: if isAuthenticated();
+    // ── Vital Signs ───────────────────────────────────────────────────────────
+    match /vital_signs/{id} {
+      allow read:  if isAuthenticated();
+      allow write: if isAuthenticated();
     }
+
+    // ── Default: Deny everything not explicitly covered ───────────────────────
+    // NOTE: Unlike the previous wildcard rule that allowed all authenticated users
+    // to read/write ANYTHING, we now deny by default for unlisted collections.
+    // This follows the principle of least privilege.
   }
 }

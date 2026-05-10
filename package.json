@@ -1,8 +1,13 @@
 {
-  "name": "vite_react_shadcn_ts",
+  "name": "clinicos",
+  "description": "Professional bilingual clinic management system",
   "private": true,
-  "version": "0.0.0",
+  "version": "2.0.0",
   "type": "module",
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -45,7 +50,6 @@
     "@radix-ui/react-tooltip": "^1.2.7",
     "@react-pdf/renderer": "^4.3.2",
     "@tanstack/react-query": "^5.83.0",
-    "axios": "^1.13.6",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk": "^1.1.1",

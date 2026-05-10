@@ -47,7 +47,7 @@ import {
   CalendarPlus,
   ArrowRight,
 } from 'lucide-react';
-import { useToast } from '@/hooks/use-toast';
+import { useToast } from '@/hooks/useToast';
 import { format } from 'date-fns';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '@/providers/AuthProvider';

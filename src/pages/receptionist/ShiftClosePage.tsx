@@ -24,7 +24,7 @@ import {
   DollarSign, TrendingUp, TrendingDown, Plus, Printer,
   Receipt, FileText, Wallet, ArrowUpRight, ArrowDownRight,
 } from 'lucide-react';
-import { useToast } from '@/hooks/use-toast';
+import { useToast } from '@/hooks/useToast';
 import { format } from 'date-fns';
 import { useAuth } from '@/providers/AuthProvider';
 import { ShiftClosePDFButton } from '@/components/ShiftClosePDF';

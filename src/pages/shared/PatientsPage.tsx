@@ -35,7 +35,7 @@ import {
   MoreHorizontal,
   ExternalLink
 } from 'lucide-react';
-import { useToast } from '@/hooks/use-toast';
+import { useToast } from '@/hooks/useToast';
 import { differenceInYears, parseISO } from 'date-fns';
 import { useAuth } from '@/providers/AuthProvider';
 import { useTranslation } from 'react-i18next';

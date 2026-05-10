@@ -40,7 +40,7 @@ import {
   ChevronDown, ChevronUp, Activity, Clock,
 } from 'lucide-react';
 import { differenceInYears, parseISO, format } from 'date-fns';
-import { useToast } from '@/hooks/use-toast';
+import { useToast } from '@/hooks/useToast';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
