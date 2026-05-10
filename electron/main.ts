@@ -21,7 +21,11 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 // ├─┬ dist
 // │ └── index.html    > Electron-Renderer
 //
-process.env.APP_ROOT = path.join(__dirname, '../..');
+// app.getAppPath() correctly resolves the root in BOTH:
+//   • Dev:        the project root (clinic-flow-main/)
+//   • Production: the asar bundle root (resources/app.asar)
+// Using __dirname + '../..' fails in production because it exits the asar.
+process.env.APP_ROOT = app.getAppPath();
 
 export const MAIN_DIST = path.join(process.env.APP_ROOT, 'dist-electron');
 export const RENDERER_DIST = path.join(process.env.APP_ROOT, 'dist');
