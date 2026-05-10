@@ -192,7 +192,7 @@ export default function LandingPage() {
                 className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/5 border border-primary/10 text-primary text-xs font-bold uppercase tracking-widest"
               >
                 <Zap className="h-3.5 w-3.5 fill-current" />
-                Trusted by 500+ Clinics Worldwide
+                {isRTL ? 'يثق بها أكثر من 500 عيادة حول العالم' : 'Trusted by 500+ Clinics Worldwide'}
               </motion.div>
 
               <h1 className="text-6xl md:text-8xl font-black text-slate-900 tracking-tight leading-[0.95] !mb-4">
@@ -235,13 +235,13 @@ export default function LandingPage() {
               {/* Trust badges */}
               <div className="flex items-center gap-8 pt-8 opacity-60 grayscale hover:grayscale-0 transition-all duration-700">
                  <div className="flex items-center gap-2 font-black text-slate-400">
-                    <ShieldCheck className="h-6 w-6" /> SECURE
+                    <ShieldCheck className="h-6 w-6" /> {isRTL ? 'آمن 100%' : 'SECURE'}
                  </div>
                  <div className="flex items-center gap-2 font-black text-slate-400">
                     <Star className="h-6 w-6" /> 4.9/5
                  </div>
                  <div className="flex items-center gap-2 font-black text-slate-400">
-                    <Users className="h-6 w-6" /> HIPAA
+                    <Users className="h-6 w-6" /> {isRTL ? 'خصوصية البيانات' : 'HIPAA'}
                  </div>
               </div>
             </motion.div>
@@ -292,8 +292,8 @@ export default function LandingPage() {
                              <CheckCircle2 className="h-6 w-6" />
                           </div>
                           <div className="text-start">
-                             <p className="text-xs font-bold text-slate-400 uppercase tracking-widest">Appointment</p>
-                             <p className="text-sm font-black text-slate-800">Confirmed & Ready</p>
+                             <p className="text-xs font-bold text-slate-400 uppercase tracking-widest">{isRTL ? 'موعد طبي' : 'Appointment'}</p>
+                             <p className="text-sm font-black text-slate-800">{isRTL ? 'مؤكد وجاهز ✓' : 'Confirmed & Ready'}</p>
                           </div>
                        </motion.div>
                     </div>
@@ -314,7 +314,7 @@ export default function LandingPage() {
               viewport={{ once: true }}
               className="px-4 py-1.5 rounded-full bg-slate-200/50 text-slate-600 text-[10px] font-black uppercase tracking-[0.2em] inline-block mb-2"
             >
-              Efficiency Redefined
+              {isRTL ? 'كفاءة لا مثيل لها' : 'Efficiency Redefined'}
             </motion.div>
             <motion.h2 
               initial={{ opacity: 0, y: 20 }}
@@ -476,10 +476,10 @@ export default function LandingPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
            <div className="grid grid-cols-2 md:grid-cols-4 gap-12 text-center md:text-start">
               {[
-                { val: "50K+", label: t('landing.stats.patients'), sub: "Monthly Transactions" },
-                { val: "1.2K+", label: t('landing.stats.clinics'), sub: "Professional Users" },
-                { val: "99.9%", label: t('landing.stats.uptime'), sub: "Reliability Guaranteed" },
-                { val: "2.0", label: "Version", sub: "Cutting-edge Stack" }
+                { val: "50K+", label: t('landing.stats.patients'), sub: isRTL ? 'معاملة شهرية' : 'Monthly Transactions' },
+                { val: "1.2K+", label: t('landing.stats.clinics'), sub: isRTL ? 'مستخدم محترف' : 'Professional Users' },
+                { val: "99.9%", label: t('landing.stats.uptime'), sub: isRTL ? 'موثوقية مضمونة' : 'Reliability Guaranteed' },
+                { val: "2.0", label: isRTL ? 'الإصدار' : 'Version', sub: isRTL ? 'تقنيات متطورة' : 'Cutting-edge Stack' }
               ].map((stat, i) => (
                 <motion.div 
                   initial={{ opacity: 0, y: 20 }}
@@ -560,7 +560,7 @@ export default function LandingPage() {
                 <div className="space-y-2 text-start">
                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-[10px] font-black uppercase tracking-widest mb-2">
                       <Star className="h-3 w-3 fill-current" />
-                      Everything Included
+                      {isRTL ? 'كل شيء مشمول' : 'Everything Included'}
                    </div>
                    <h3 className="text-3xl font-black text-slate-900">{t('landing.pricing.plan.title')}</h3>
                    <p className="text-slate-500 font-medium text-lg">{t('landing.pricing.plan.desc')}</p>
@@ -663,15 +663,15 @@ export default function LandingPage() {
                  <div className="flex flex-wrap justify-center gap-8 text-slate-500 font-black uppercase tracking-[0.2em] text-[10px]">
                     <div className="flex items-center gap-2">
                        <CheckCircle2 className="h-4 w-4 text-primary" />
-                       No Setup Fee
+                       {isRTL ? 'بدون رسوم تسجيل' : 'No Setup Fee'}
                     </div>
                     <div className="flex items-center gap-2">
                        <Lock className="h-4 w-4 text-primary" />
-                       Data Privacy First
+                       {isRTL ? 'خصوصية البيانات أولاً' : 'Data Privacy First'}
                     </div>
                     <div className="flex items-center gap-2">
                        <ActivitySquare className="h-4 w-4 text-primary" />
-                       Active Development
+                       {isRTL ? 'تطوير مستمر' : 'Active Development'}
                     </div>
                  </div>
               </div>
@@ -691,32 +691,34 @@ export default function LandingPage() {
                     <span className="text-2xl font-black text-slate-900 tracking-tighter">ClinicOS</span>
                   </div>
                   <p className="text-slate-500 font-medium max-w-sm leading-relaxed">
-                     Empowering medical professionals with intelligent tools designed for excellence. Join the future of healthcare today.
+                     {isRTL
+                       ? 'نُمكّن المتخصصين الطبيين بأدوات ذكية مصممة للتميز. انضم إلى مستقبل الرعاية الصحية اليوم.'
+                       : 'Empowering medical professionals with intelligent tools designed for excellence. Join the future of healthcare today.'}
                   </p>
                </div>
                
                <div className="space-y-6">
-                  <h4 className="text-xs font-black uppercase tracking-[0.3em] text-slate-400">Platform</h4>
+                  <h4 className="text-xs font-black uppercase tracking-[0.3em] text-slate-400">{isRTL ? 'المنصة' : 'Platform'}</h4>
                   <ul className="space-y-4 text-slate-600 font-bold">
-                     <li className="hover:text-primary transition-colors cursor-pointer">Live Queue</li>
-                     <li className="hover:text-primary transition-colors cursor-pointer">Medical Records</li>
-                     <li className="hover:text-primary transition-colors cursor-pointer">Analytics</li>
+                     <li className="hover:text-primary transition-colors cursor-pointer">{isRTL ? 'طابور المرضى' : 'Live Queue'}</li>
+                     <li className="hover:text-primary transition-colors cursor-pointer">{isRTL ? 'السجلات الطبية' : 'Medical Records'}</li>
+                     <li className="hover:text-primary transition-colors cursor-pointer">{isRTL ? 'التحليلات' : 'Analytics'}</li>
                   </ul>
                </div>
 
                <div className="space-y-6">
-                  <h4 className="text-xs font-black uppercase tracking-[0.3em] text-slate-400">Support</h4>
+                  <h4 className="text-xs font-black uppercase tracking-[0.3em] text-slate-400">{isRTL ? 'الدعم' : 'Support'}</h4>
                   <ul className="space-y-4 text-slate-600 font-bold">
-                     <li className="hover:text-primary transition-colors cursor-pointer">Privacy Policy</li>
-                     <li className="hover:text-primary transition-colors cursor-pointer">Terms of Service</li>
-                     <li className="hover:text-primary transition-colors cursor-pointer">Contact Us</li>
+                     <li className="hover:text-primary transition-colors cursor-pointer">{isRTL ? 'سياسة الخصوصية' : 'Privacy Policy'}</li>
+                     <li className="hover:text-primary transition-colors cursor-pointer">{isRTL ? 'شروط الخدمة' : 'Terms of Service'}</li>
+                     <li className="hover:text-primary transition-colors cursor-pointer">{isRTL ? 'تواصل معنا' : 'Contact Us'}</li>
                   </ul>
                </div>
             </div>
 
             <div className="pt-10 border-t border-slate-200/50 flex flex-col md:flex-row items-center justify-between gap-6">
                <p className="text-slate-400 text-xs font-bold uppercase tracking-[0.3em]">
-                  © {new Date().getFullYear()} ClinicOS Management. All rights reserved.
+                  © {new Date().getFullYear()} {isRTL ? 'ClinicOS — جميع الحقوق محفوظة.' : 'ClinicOS Management. All rights reserved.'}
                </p>
                <div className="flex items-center gap-6 opacity-30">
                   <div className="h-6 w-12 bg-slate-400 rounded-md" />
