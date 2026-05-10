@@ -3,7 +3,7 @@
  * All public-facing pages should use the SEO component with data from this file.
  */
 
-export const SITE_URL = 'https://clinicos-b6.vercel.app';
+export const SITE_URL = 'https://clinic-os-beige.vercel.app';
 export const SITE_NAME = 'ClinicOS';
 export const DEFAULT_IMAGE = `${SITE_URL}/icons/icon-512.png`;
 

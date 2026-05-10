@@ -48,4 +48,4 @@ Allow: /
 Allow: /track
 
 # ── Sitemap ───────────────────────────────────────────────────────────────────
-Sitemap: https://clinicos-b6.vercel.app/sitemap.xml
+Sitemap: https://clinic-os-beige.vercel.app/sitemap.xml

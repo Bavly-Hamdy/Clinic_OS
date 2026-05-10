@@ -5,54 +5,33 @@
 
   <!-- ── Landing Page (highest priority — primary SEO target) ────────────── -->
   <url>
-    <loc>https://clinicos-b6.vercel.app/</loc>
+    <loc>https://clinic-os-beige.vercel.app/</loc>
     <lastmod>2026-05-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
-    <!-- Arabic (default) -->
-    <xhtml:link
-      rel="alternate"
-      hreflang="ar"
-      href="https://clinicos-b6.vercel.app/" />
-    <!-- English alternate -->
-    <xhtml:link
-      rel="alternate"
-      hreflang="en"
-      href="https://clinicos-b6.vercel.app/" />
-    <!-- x-default for language negotiation -->
-    <xhtml:link
-      rel="alternate"
-      hreflang="x-default"
-      href="https://clinicos-b6.vercel.app/" />
+    <xhtml:link rel="alternate" hreflang="ar"        href="https://clinic-os-beige.vercel.app/" />
+    <xhtml:link rel="alternate" hreflang="en"        href="https://clinic-os-beige.vercel.app/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://clinic-os-beige.vercel.app/" />
     <image:image>
-      <image:loc>https://clinicos-b6.vercel.app/icons/icon-512.png</image:loc>
+      <image:loc>https://clinic-os-beige.vercel.app/icons/icon-512.png</image:loc>
       <image:title>ClinicOS — Professional Clinic Management System</image:title>
     </image:image>
   </url>
 
   <!-- ── Patient Queue Tracker (public utility page) ──────────────────────── -->
   <url>
-    <loc>https://clinicos-b6.vercel.app/track</loc>
+    <loc>https://clinic-os-beige.vercel.app/track</loc>
     <lastmod>2026-05-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link
-      rel="alternate"
-      hreflang="ar"
-      href="https://clinicos-b6.vercel.app/track" />
-    <xhtml:link
-      rel="alternate"
-      hreflang="en"
-      href="https://clinicos-b6.vercel.app/track" />
-    <xhtml:link
-      rel="alternate"
-      hreflang="x-default"
-      href="https://clinicos-b6.vercel.app/track" />
+    <xhtml:link rel="alternate" hreflang="ar"        href="https://clinic-os-beige.vercel.app/track" />
+    <xhtml:link rel="alternate" hreflang="en"        href="https://clinic-os-beige.vercel.app/track" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://clinic-os-beige.vercel.app/track" />
   </url>
 
-  <!-- ── Login Page (low priority — auth page) ────────────────────────────── -->
+  <!-- ── Login Page ───────────────────────────────────────────────────────── -->
   <url>
-    <loc>https://clinicos-b6.vercel.app/login</loc>
+    <loc>https://clinic-os-beige.vercel.app/login</loc>
     <lastmod>2026-05-10</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
@@ -60,7 +39,7 @@
 
   <!-- ── Subscribe / Registration Page ───────────────────────────────────── -->
   <url>
-    <loc>https://clinicos-b6.vercel.app/subscribe</loc>
+    <loc>https://clinic-os-beige.vercel.app/subscribe</loc>
     <lastmod>2026-05-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
