@@ -20,6 +20,8 @@ import {
   Globe
 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { SEO } from '@/components/SEO';
+import { SEO_DATA } from '@/lib/seo';
 
 export default function TrackQueuePage() {
   const { t, i18n } = useTranslation();
@@ -115,6 +117,13 @@ export default function TrackQueuePage() {
   const BackArrow = isRTL ? ArrowRight : ArrowLeft;
 
   return (
+    <>
+      <SEO
+        title={SEO_DATA.track.title}
+        description={SEO_DATA.track.description}
+        keywords={SEO_DATA.track.keywords}
+        canonical={SEO_DATA.track.canonical}
+      />
     <div className="min-h-screen bg-[#fafafa] dark:bg-[#050505] flex flex-col items-center p-4 pt-12 md:pt-20 font-sans relative text-slate-900 overflow-hidden" dir={isRTL ? 'rtl' : 'ltr'}>
       
       {/* ─── Creative Background Blobs ─── */}
@@ -349,5 +358,6 @@ export default function TrackQueuePage() {
          &copy; {new Date().getFullYear()} {t('trackPage.footer', { clinic: 'ClinicOS', year: '' }).replace(new Date().getFullYear().toString(), '').trim()}
       </footer>
     </div>
+    </>
   );
 }

@@ -5,40 +5,54 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 
-  <!-- PWA & Mobile -->
+  <!-- ── Critical Resource Hints (Core Web Vitals: LCP) ───────────────────── -->
+  <!-- Preconnect to Google Fonts domains to eliminate render-blocking latency -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <!-- Preconnect to Firebase services for faster initial auth + Firestore -->
+  <link rel="preconnect" href="https://identitytoolkit.googleapis.com" />
+  <link rel="preconnect" href="https://firestore.googleapis.com" />
+
+  <!-- Google Fonts — Cairo (Arabic) + Inter (Latin) with font-display: swap for CLS prevention -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Inter:ital,opsz,wght@0,14..32,300;0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;0,14..32,800;0,14..32,900&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- ── PWA & Mobile ──────────────────────────────────────────────────────── -->
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <meta name="apple-mobile-web-app-title" content="ClinicOS" />
+  <meta name="application-name" content="ClinicOS" />
   <meta name="theme-color" content="#2563eb" />
+  <meta name="color-scheme" content="light" />
 
-  <!-- Primary Meta -->
-  <title>ClinicOS — Professional Clinic Management System</title>
-  <meta name="description" content="ClinicOS: A professional bilingual (AR/EN) clinic management system. Real-time patient queue, smart prescription builder, analytics, and shift management." />
+  <!-- ── Default SEO (overridden per-page by react-helmet-async) ──────────── -->
+  <title>ClinicOS — نظام إدارة العيادات الاحترافي</title>
+  <meta
+    name="description"
+    content="ClinicOS: نظام إدارة عيادات احترافي وثنائي اللغة. طابور مرضى فوري، وصفات طبية ذكية، تحليلات مالية، وإدارة شاملة للعيادة."
+  />
   <meta name="author" content="Bavly Hamdy" />
+  <meta name="generator" content="Vite + React + TypeScript" />
 
-  <!--
-    noindex: This is a private SaaS application — it should not be indexed
-    by search engines. The public landing page handles discoverability.
-  -->
-  <meta name="robots" content="noindex, nofollow" />
-
-  <!-- PWA manifest -->
-  <link rel="manifest" href="/manifest.json" />
-
-  <!-- Icons -->
-  <link rel="apple-touch-icon" href="/icons/icon-192.png" />
+  <!-- ── Icons ─────────────────────────────────────────────────────────────── -->
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="192x192" href="/icons/icon-192.png" />
   <link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png" />
+  <link rel="icon" type="image/png" sizes="512x512" href="/icons/icon-512.png" />
 
-  <!-- Open Graph -->
-  <meta property="og:title" content="ClinicOS — Clinic Management System" />
-  <meta property="og:description" content="Professional clinic management: live patient queue, e-prescriptions, billing, and analytics." />
-  <meta property="og:type" content="website" />
-  <meta property="og:image" content="/icons/icon-512.png" />
+  <!-- ── PWA Manifest ───────────────────────────────────────────────────────── -->
+  <link rel="manifest" href="/manifest.json" />
 </head>
 
 <body>
+  <!-- Root mount point — never visible in normal usage -->
   <div id="root"></div>
+
+  <!-- React entry point — Vite injects script module here -->
   <script type="module" src="/src/main.tsx"></script>
 </body>
 

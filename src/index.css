@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+/* Fonts are loaded via <link> preconnect in index.html for optimal LCP performance */
 
 @tailwind base;
 @tailwind components;

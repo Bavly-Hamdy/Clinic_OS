@@ -1,13 +1,13 @@
-import { motion, useScroll, useTransform, useSpring, useMotionValue } from 'framer-motion';
+import { motion, useScroll, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
-import { useState, useRef, useEffect } from 'react';
-import { 
-  ActivitySquare, 
-  Users, 
-  Stethoscope, 
-  BarChart3, 
-  ArrowRight, 
+import { useState, useRef } from 'react';
+import {
+  ActivitySquare,
+  Users,
+  Stethoscope,
+  BarChart3,
+  ArrowRight,
   ArrowLeft,
   Globe,
   CheckCircle2,
@@ -23,6 +23,14 @@ import {
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { usePlatformPricing } from '@/hooks/usePlatformPricing';
+import { SEO } from '@/components/SEO';
+import {
+  SEO_DATA,
+  getSoftwareSchema,
+  getOrganizationSchema,
+  getWebsiteSchema,
+  getFAQSchema,
+} from '@/lib/seo';
 
 // --- Sub-components for Advanced UI ---
 
@@ -86,6 +94,32 @@ export default function LandingPage() {
   const IconArrow = isRTL ? ArrowLeft : ArrowRight;
 
   return (
+    <>
+      <SEO
+        title={SEO_DATA.landing.title}
+        description={SEO_DATA.landing.description}
+        keywords={SEO_DATA.landing.keywords}
+        canonical={SEO_DATA.landing.canonical}
+        schema={[
+          getSoftwareSchema(),
+          getOrganizationSchema(),
+          getWebsiteSchema(),
+          getFAQSchema([
+            {
+              q: 'What is ClinicOS?',
+              a: 'ClinicOS is a professional, bilingual clinic management system featuring real-time patient queuing, smart prescriptions, financial analytics, and multi-role access for doctors, receptionists, and admins.',
+            },
+            {
+              q: 'Does ClinicOS work in Arabic?',
+              a: 'Yes. ClinicOS is fully bilingual with complete Arabic (RTL) and English (LTR) support. You can switch languages instantly without any page reload.',
+            },
+            {
+              q: 'Is ClinicOS available offline?',
+              a: 'Yes. ClinicOS uses Firebase Firestore with persistent offline cache, so it continues to work even in low-connectivity clinic environments.',
+            },
+          ]),
+        ]}
+      />
     <div ref={containerRef} className="min-h-screen bg-[#F8FAFC] font-sans selection:bg-primary/20 selection:text-primary overflow-x-hidden" dir={isRTL ? 'rtl' : 'ltr'}>
       {/* --- Advanced Navigation --- */}
       <nav className="fixed top-0 w-full z-[100] bg-white/60 backdrop-blur-2xl border-b border-slate-200/50">
@@ -693,5 +727,6 @@ export default function LandingPage() {
          </div>
       </footer>
     </div>
+    </>
   );
 }

@@ -1,14 +1,51 @@
+# ── Clinic OS — robots.txt ────────────────────────────────────────────────────
+# Controls search engine crawler access to ClinicOS pages.
+# Public pages are fully indexed; private app pages block crawlers.
+# See: https://developers.google.com/search/docs/advanced/robots/robots_txt
+
+# ── Allow all crawlers on public-facing pages ─────────────────────────────────
+User-agent: *
+Allow: /
+Allow: /track
+
+# ── Block access to private app pages (require auth — can't be crawled anyway) 
+Disallow: /dashboard
+Disallow: /doctor/
+Disallow: /receptionist/
+Disallow: /admin/
+Disallow: /profile
+Disallow: /subscription-expired
+Disallow: /setup-admin
+Disallow: /patients/
+
+# ── Fine-grained crawler rules ────────────────────────────────────────────────
+
+# Googlebot — full access to public pages
 User-agent: Googlebot
 Allow: /
+Allow: /track
+Disallow: /dashboard
+Disallow: /doctor/
+Disallow: /receptionist/
+Disallow: /admin/
 
-User-agent: Bingbot
-Allow: /
+# Google image bot — allow indexing OG images
+User-agent: Googlebot-Image
+Allow: /icons/
+Allow: /public/
 
+# Social crawlers — allow for rich previews
 User-agent: Twitterbot
 Allow: /
+Allow: /track
 
 User-agent: facebookexternalhit
 Allow: /
+Allow: /track
 
-User-agent: *
+User-agent: LinkedInBot
 Allow: /
+Allow: /track
+
+# ── Sitemap ───────────────────────────────────────────────────────────────────
+Sitemap: https://clinicos-b6.vercel.app/sitemap.xml
