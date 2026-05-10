@@ -122,7 +122,7 @@ export default function LandingPage() {
       />
     <div ref={containerRef} className="min-h-screen bg-[#F8FAFC] font-sans selection:bg-primary/20 selection:text-primary overflow-x-hidden" dir={isRTL ? 'rtl' : 'ltr'}>
       {/* --- Advanced Navigation --- */}
-      <nav className="fixed top-0 w-full z-[100] bg-white/60 backdrop-blur-2xl border-b border-slate-200/50">
+      <nav className="fixed w-full z-[100] bg-white/60 backdrop-blur-2xl border-b border-slate-200/50" style={{ top: 'var(--titlebar-height, 0px)' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
           <motion.div 
             initial={{ opacity: 0, x: -20 }}

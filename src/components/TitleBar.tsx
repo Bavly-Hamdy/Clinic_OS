@@ -1,5 +1,5 @@
 import { Minus, Square, X, ActivitySquare } from 'lucide-react';
-import { useElectron } from '@/hooks/useElectron';
+import { useEffect, useState } from 'react';
 
 // Type definition for our electronAPI to avoid TypeScript errors
 declare global {
@@ -15,15 +15,22 @@ declare global {
 }
 
 export function TitleBar() {
-  const isElectron = useElectron();
+  const [isElectron, setIsElectron] = useState(false);
 
   useEffect(() => {
-    if (isElectron) {
-      document.body.style.paddingTop = 'var(--electron-titlebar-height)';
-    } else {
-      document.body.style.paddingTop = '0px';
+    // Check if we are running inside Electron by looking for our custom API
+    if (window.electronAPI && window.electronAPI.windowControls) {
+      setIsElectron(true);
+      // Set a CSS variable so any fixed element (navbar, dialogs, etc.) can offset themselves
+      document.documentElement.style.setProperty('--titlebar-height', '32px');
+      document.body.style.paddingTop = '32px';
+      
+      return () => {
+        document.documentElement.style.removeProperty('--titlebar-height');
+        document.body.style.paddingTop = '0px';
+      };
     }
-  }, [isElectron]);
+  }, []);
 
   // If not running in Electron (e.g., normal web browser), don't render the title bar
   if (!isElectron) return null;
