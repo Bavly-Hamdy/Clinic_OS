@@ -4,12 +4,13 @@ import { Toaster } from '@/components/ui/toaster';
 import { Toaster as Sonner } from '@/components/ui/sonner';
 import { TooltipProvider } from '@/components/ui/tooltip';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { HashRouter, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from '@/providers/AuthProvider';
 import { ProtectedRoute } from '@/components/ProtectedRoute';
 import { ThemeProvider } from '@/providers/ThemeProvider';
 import { LanguageProvider } from '@/providers/LanguageProvider';
 import { QUERY_STALE_TIME, QUERY_RETRY_COUNT } from '@/lib/constants';
+import { TitleBar } from '@/components/TitleBar';
 
 // ── Layouts (eagerly loaded — small, always needed) ───────────────────────────
 import DashboardLayout from '@/layouts/DashboardLayout';
@@ -75,10 +76,11 @@ const App = () => (
     <QueryClientProvider client={queryClient}>
     <ThemeProvider defaultTheme="light" storageKey="clinic-os-theme">
       <LanguageProvider>
+        <TitleBar />
         <TooltipProvider>
           <Toaster />
           <Sonner />
-          <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+          <HashRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
             <AuthProvider>
               <Suspense fallback={<PageLoader />}>
                 <Routes>
@@ -134,7 +136,7 @@ const App = () => (
                 </Routes>
               </Suspense>
             </AuthProvider>
-          </BrowserRouter>
+          </HashRouter>
         </TooltipProvider>
       </LanguageProvider>
     </ThemeProvider>

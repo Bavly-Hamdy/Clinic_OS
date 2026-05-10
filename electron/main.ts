@@ -43,6 +43,8 @@ function createWindow() {
     minHeight: 768,
     icon: path.join(process.env.VITE_PUBLIC || '', 'icons/icon-512.png'),
     title: 'ClinicOS',
+    frame: false, // Custom Title Bar
+    titleBarStyle: 'hidden',
     show: false, // Don't show until ready-to-show
     webPreferences: {
       preload: path.join(__dirname, 'preload.mjs'),
@@ -118,15 +120,30 @@ app.on('activate', () => {
   }
 });
 
-app.whenReady().then(() => {
-  createWindow();
-  createTray();
-  
-  // Check for updates
-  if (process.env.NODE_ENV === 'production') {
-    autoUpdater.checkForUpdatesAndNotify();
-  }
-});
+const gotTheLock = app.requestSingleInstanceLock();
+
+if (!gotTheLock) {
+  app.quit();
+} else {
+  app.on('second-instance', () => {
+    // Someone tried to run a second instance, we should focus our window.
+    if (win) {
+      if (win.isMinimized()) win.restore();
+      if (!win.isVisible()) win.show();
+      win.focus();
+    }
+  });
+
+  app.whenReady().then(() => {
+    createWindow();
+    createTray();
+    
+    // Check for updates
+    if (process.env.NODE_ENV === 'production') {
+      autoUpdater.checkForUpdatesAndNotify();
+    }
+  });
+}
 
 // We use the top-level isQuitting variable instead of modifying the app object
 
@@ -136,4 +153,25 @@ ipcMain.handle('get-app-version', () => app.getVersion());
 ipcMain.on('show-notification', (event, title, body) => {
   // In a real app, you might use the native Notification module here
   log.info(`Notification requested: ${title} - ${body}`);
+});
+
+// Window Controls IPC
+ipcMain.on('window-minimize', () => {
+  win?.minimize();
+});
+
+ipcMain.on('window-maximize', () => {
+  if (win?.isMaximized()) {
+    win?.unmaximize();
+  } else {
+    win?.maximize();
+  }
+});
+
+ipcMain.on('window-close', () => {
+  if (!isQuitting) {
+    win?.hide();
+  } else {
+    win?.close();
+  }
 });
