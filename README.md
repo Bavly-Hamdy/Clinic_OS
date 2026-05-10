@@ -20,6 +20,7 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178C6?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![Firebase](https://img.shields.io/badge/Firebase-12.x-FFCA28?style=flat-square&logo=firebase&logoColor=black)](https://firebase.google.com/)
 [![Vite](https://img.shields.io/badge/Vite-5.x-646CFF?style=flat-square&logo=vite&logoColor=white)](https://vitejs.dev/)
+[![Electron](https://img.shields.io/badge/Electron-42.x-47848F?style=flat-square&logo=electron&logoColor=white)](https://www.electronjs.org/)
 [![TailwindCSS](https://img.shields.io/badge/Tailwind-3.x-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
 [![License](https://img.shields.io/badge/License-MIT-22c55e?style=flat-square)](./LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-Welcome-ff69b4?style=flat-square)]()
@@ -39,6 +40,7 @@
 
 - [🌟 Overview](#-overview)
 - [✨ Features](#-features)
+- [🖥️ Desktop Application](#️-desktop-application)
 - [🏗️ Architecture](#️-architecture)
 - [🛠️ Tech Stack](#️-tech-stack)
 - [📁 Project Structure](#-project-structure)
@@ -46,6 +48,7 @@
 - [⚙️ Environment Variables](#️-environment-variables)
 - [🔥 Firebase Configuration](#-firebase-configuration)
 - [🤖 AI Integration](#-ai-integration)
+- [🔍 SEO & Performance](#-seo--performance)
 - [🔒 Security](#-security)
 - [⚡ Performance](#-performance)
 - [📱 Screenshots](#-screenshots)
@@ -139,7 +142,100 @@ Real-time queue management shared between Doctor and Receptionist.
 
 ---
 
-## 🏗️ Architecture
+## 🖥️ Desktop Application
+
+ClinicOS is available as a **native Windows Desktop Application** built with **Electron 42**, delivering a full Premium Desktop experience — same power as the web app, packaged into a standalone `.exe` installer.
+
+### ✨ Desktop-Specific Features
+
+| Feature | Description |
+|---------|-------------|
+| **Frameless Window** | Custom borderless design — no standard OS chrome, pure premium feel |
+| **Custom Title Bar** | React-built title bar with Minimize, Maximize, and Close controls with hover animations |
+| **Window Dragging** | Native window drag via `-webkit-app-region: drag` on the title bar |
+| **System Tray** | App hides to the system tray on close — stays running for quick access |
+| **Single Instance Lock** | Only one instance can run — prevents duplicate windows during HMR reloads |
+| **Context Isolation** | `nodeIntegration: false` + `contextIsolation: true` — maximum security |
+| **Secure IPC Bridge** | `contextBridge` exposes a safe, minimal API from Electron to React |
+| **Auto Updates** | `electron-updater` integration for seamless silent background updates |
+| **Electron Logging** | `electron-log` persists crash logs and events to disk for diagnostics |
+| **External Link Guard** | All `https://` links open in the OS default browser, not inside Electron |
+| **Dark / Light Mode** | The custom Title Bar respects the application theme automatically |
+| **Graceful Loading** | Window stays hidden until content is fully loaded — zero white flash on startup |
+
+### 🏗️ Electron Architecture
+
+```
+clinic-os/
+├── 📁 electron/
+│   ├── 📄 main.ts       # Main Process — BrowserWindow, Tray, IPC, Auto-Updater
+│   └── 📄 preload.ts    # Preload Script — Secure contextBridge API
+│
+├── 📁 src/
+│   └── 📁 components/
+│       └── 📄 TitleBar.tsx  # Custom React Title Bar with window controls
+│
+└── 📁 dist-electron/    # Compiled Electron output (git-ignored)
+```
+
+**IPC Communication Map:**
+
+```
+Renderer (React)                 Main Process (Electron)
+─────────────────                ──────────────────────
+window-minimize      ──────►     win.minimize()
+window-maximize      ──────►     win.maximize() / win.unmaximize()
+window-close         ──────►     win.hide() (→ Tray)
+get-app-version      ◄──────     app.getVersion()
+show-notification    ──────►     electron-log.info()
+```
+
+### 📦 Building the Desktop App
+
+**Option 1 — Development (with HMR):**
+```bash
+npm run dev
+```
+*Opens the app directly in an Electron window. Vite HMR works live inside the window.*
+
+**Option 2 — Production Installer (`.exe`):**
+
+> ⚠️ **Important:** Run this in a terminal opened as **Administrator**, or enable **Developer Mode** in Windows Settings → Privacy & Security → For Developers. This is required for Electron Builder to create symlinks during packaging.
+
+```bash
+npm run build:electron
+```
+
+This produces a professional Windows installer at:
+```
+release/
+└── ClinicOS Setup 2.0.0.exe    ← Professional NSIS installer
+```
+
+**Installer Features:**
+- Allows user to choose installation directory
+- Creates Desktop shortcut
+- Creates Start Menu shortcut
+- Professional NSIS setup experience
+
+---
+
+## 🔍 SEO & Performance
+
+ClinicOS is fully optimized for search engine indexing and Core Web Vitals.
+
+| Optimization | Implementation |
+|---|---|
+| **Dynamic Meta Tags** | `react-helmet-async` — each route has its own `<title>`, `<description>`, OG tags |
+| **JSON-LD Schema** | 4 structured data schemas: SoftwareApplication, Organization, WebSite, FAQPage |
+| **Bilingual Sitemap** | `sitemap.xml` with `hreflang` tags for Arabic and English indexing |
+| **robots.txt** | Custom crawler rules optimized for Google, Bing, and social media bots |
+| **Preconnect Hints** | Google Fonts loaded with `preconnect` in `<head>` — non-render-blocking |
+| **PWA Ready** | Service worker pre-caches all static assets for instant repeat visits |
+| **Open Graph** | Full OG + Twitter Card meta tags for rich social sharing previews |
+
+---
+
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
@@ -223,7 +319,9 @@ RECEPTIONIST (linked to a Doctor)
 | **React** | 18.x | UI framework with concurrent features |
 | **TypeScript** | 5.x | Type safety throughout the entire codebase |
 | **Vite** | 5.x | Build tool with HMR and SWC transpilation |
-| **React Router** | 6.x | Client-side routing with lazy loading |
+| **Electron** | 42.x | Cross-platform desktop application shell |
+| **electron-builder** | 26.x | Packages Electron app into `.exe` / `.dmg` installers |
+| **React Router** | 6.x | Client-side routing with lazy loading (HashRouter in Electron) |
 | **TanStack Query** | 5.x | Server state management and caching |
 | **Tailwind CSS** | 3.x | Utility-first styling with RTL logical properties |
 | **Shadcn/UI** | — | Accessible, headless component system |
@@ -233,6 +331,7 @@ RECEPTIONIST (linked to a Doctor)
 | **date-fns** | 3.x | Date arithmetic and formatting |
 | **Recharts** | 2.x | Financial analytics charts |
 | **@react-pdf/renderer** | 4.x | Shift report PDF generation |
+| **react-helmet-async** | 3.x | Dynamic SEO meta tag management per route |
 | **Lucide React** | — | Consistent icon system |
 | **Zod** | 3.x | Runtime schema validation |
 
@@ -257,18 +356,24 @@ RECEPTIONIST (linked to a Doctor)
 
 ```
 clinic-os/
-├── 📄 index.html                 # App shell with PWA meta tags
-├── 📄 vite.config.ts             # Build config with manual chunk splitting
+├── 📄 index.html                 # App shell with PWA + SEO meta tags
+├── 📄 vite.config.ts             # Build config with Electron + manual chunk splitting
 ├── 📄 tailwind.config.ts         # Design system tokens
 ├── 📄 firestore.rules            # Server-side Firestore security rules
 ├── 📄 .env.local                 # Local environment variables (never committed)
 │
+├── 📁 electron/                  # ★ Electron Desktop Application
+│   ├── 📄 main.ts               # Main Process (BrowserWindow, Tray, IPC, AutoUpdater)
+│   └── 📄 preload.ts            # Preload script (Secure contextBridge)
+│
 ├── 📁 public/
-│   └── icons/                    # PWA icons (192x192, 512x512)
+│   ├── icons/                    # PWA + Desktop icons (192x192, 512x512)
+│   ├── 📄 sitemap.xml            # Bilingual SEO sitemap with hreflang
+│   └── 📄 robots.txt            # Crawler access configuration
 │
 └── 📁 src/
     ├── 📄 main.tsx               # Entry point — StrictMode + root guard
-    ├── 📄 App.tsx                # Router + providers + lazy page loading
+    ├── 📄 App.tsx                # Router (HashRouter) + providers + lazy page loading
     │
     ├── 📁 lib/
     │   ├── 📄 firebase.ts        # Firebase initialization + env validation
@@ -291,6 +396,8 @@ clinic-os/
     │   └── 📄 AdminLayout.tsx     # Admin-specific layout
     │
     ├── 📁 components/
+    │   ├── 📄 TitleBar.tsx        # ★ Custom Electron title bar with window controls
+    │   ├── 📄 SEO.tsx             # ★ Dynamic SEO meta tag component (react-helmet-async)
     │   ├── 📄 AppSidebar.tsx      # Navigation sidebar with live stats
     │   ├── 📄 ProtectedRoute.tsx  # RBAC route guard
     │   ├── 📄 NotificationBell.tsx # Real-time notification center
@@ -374,12 +481,13 @@ The app will be available at `http://localhost:8080`
 ### Available Scripts
 
 ```bash
-npm run dev          # Start development server with HMR
-npm run build        # Production build (outputs to /dist)
-npm run preview      # Preview production build locally
-npm run lint         # ESLint code quality check
-npm run test         # Run unit tests (Vitest)
-npm run test:watch   # Run tests in watch mode
+npm run dev            # Start Electron desktop app (Vite dev server + Electron window)
+npm run build          # Production web build (outputs to /dist)
+npm run build:electron # Build + package into Windows .exe installer (needs Admin)
+npm run preview        # Preview web production build locally
+npm run lint           # ESLint code quality check
+npm run test           # Run unit tests (Vitest)
+npm run test:watch     # Run tests in watch mode
 ```
 
 ---
@@ -568,6 +676,7 @@ vendor-pdf       │ 1.5 MB │ PDF renderer — only downloaded on Shift Close 
 
 ## 🗺️ Roadmap
 
+- [x] **Desktop Application** — Native Windows `.exe` via Electron with custom title bar
 - [ ] **Digital Signature** — Capture/upload doctor signature on prescriptions
 - [ ] **WhatsApp Notifications** — Automated appointment reminders via WhatsApp API
 - [ ] **Multi-clinic Support** — One doctor account managing multiple clinic branches

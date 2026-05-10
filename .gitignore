@@ -2,6 +2,8 @@
 dist/
 build/
 .output/
+dist-electron/
+release/
 
 # ── Dependencies ──────────────────────────────────────────────────────────────
 node_modules/
