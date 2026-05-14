@@ -71,7 +71,10 @@ export default function AdminLayout() {
   return (
     <div className="min-h-screen flex w-full bg-background" dir={dir}>
       {/* Sidebar */}
-      <aside className={`hidden md:flex flex-col w-72 sticky top-0 h-screen bg-card/80 backdrop-blur-xl border-e border-border/30 shadow-lg z-40 ${isRtl ? 'order-2' : 'order-1'}`}>
+      <aside 
+        className={`hidden md:flex flex-col w-72 sticky bg-card/80 backdrop-blur-xl border-e border-border/30 shadow-lg z-40 ${isRtl ? 'order-2' : 'order-1'}`}
+        style={{ top: 'var(--titlebar-height, 0px)', height: 'calc(100vh - var(--titlebar-height, 0px))' }}
+      >
         {/* Brand */}
         <div className="px-6 py-6 border-b border-border/30">
           <div
@@ -84,7 +87,7 @@ export default function AdminLayout() {
             </div>
             <div className="flex flex-col">
               <span className="text-xl font-black tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-amber-500 to-orange-600">
-                ClinicOS
+                Clinic Hub
               </span>
               <span className="text-[10px] font-bold tracking-[0.15em] text-muted-foreground uppercase">
                 {isRtl ? 'لوحة الإدارة' : 'Admin Panel'}
@@ -172,7 +175,10 @@ export default function AdminLayout() {
       {/* Main Content */}
       <div className={`flex flex-1 flex-col min-w-0 z-10 ${isRtl ? 'order-1' : 'order-2'}`}>
         {/* Top Header */}
-        <header className={`sticky top-0 z-30 flex h-16 items-center gap-4 bg-background/60 backdrop-blur-2xl px-6 border-b border-border/30 shadow-sm print:hidden ${isRtl ? 'flex-row-reverse' : ''}`}>
+        <header 
+          className={`sticky z-30 flex h-16 items-center gap-4 bg-background/60 backdrop-blur-2xl px-6 border-b border-border/30 shadow-sm print:hidden ${isRtl ? 'flex-row-reverse' : ''}`}
+          style={{ top: 'var(--titlebar-height, 0px)' }}
+        >
           {/* Mobile brand */}
           <div className={`md:hidden flex items-center gap-2 ${isRtl ? 'flex-row-reverse' : ''}`}>
             <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center shadow-lg shadow-amber-500/20">

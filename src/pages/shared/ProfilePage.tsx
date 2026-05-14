@@ -152,7 +152,7 @@ export default function ProfilePage() {
                        <Shield className="h-3 w-3 text-primary" />
                        {t('profile.workspace')}
                      </p>
-                     <p className="text-lg font-bold text-foreground border-b border-border/30 pb-2">ClinicOS Management System</p>
+                     <p className="text-lg font-bold text-foreground border-b border-border/30 pb-2">Clinic Hub Management System</p>
                    </div>
                 </div>
 

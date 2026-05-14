@@ -129,8 +129,8 @@ export default function DoctorManagementPage() {
       if (form.phone) {
         const baseUrl = window.location.origin;
         const msg = isRtl
-          ? `*ClinicOS | نظام إدارة العيادات*\n--------------------------------------------\nمرحباً د. *${form.fullName}*\n\nتم تفعيل حسابكم بنجاح على المنصة.\nيمكنكم البدء في استخدام النظام ببيانات الدخول التالية:\n\n*تفاصيل الحساب:*\n- البريد الإلكتروني: ${form.email}\n- كلمة المرور: ${form.password}\n- كود التعريف (ID): ${displayId}\n\n*رابط الدخول:*\n${baseUrl}/login\n\n--------------------------------------------\n_نتمنى لكم تجربة موفقة._`
-          : `*ClinicOS | Clinic Management System*\n--------------------------------------------\nHello Dr. *${form.fullName}*\n\nYour account has been successfully activated.\nYou can start using the system with the following credentials:\n\n*Account Details:*\n- Email: ${form.email}\n- Password: ${form.password}\n- ID: ${displayId}\n\n*Login Link:*\n${baseUrl}/login\n\n--------------------------------------------\n_We wish you a successful experience._`;
+          ? `*Clinic Hub | نظام إدارة العيادات*\n--------------------------------------------\nمرحباً د. *${form.fullName}*\n\nتم تفعيل حسابكم بنجاح على المنصة.\nيمكنكم البدء في استخدام النظام ببيانات الدخول التالية:\n\n*تفاصيل الحساب:*\n- البريد الإلكتروني: ${form.email}\n- كلمة المرور: ${form.password}\n- كود التعريف (ID): ${displayId}\n\n*رابط الدخول:*\n${baseUrl}/login\n\n--------------------------------------------\n_نتمنى لكم تجربة موفقة._`
+          : `*Clinic Hub | Clinic Management System*\n--------------------------------------------\nHello Dr. *${form.fullName}*\n\nYour account has been successfully activated.\nYou can start using the system with the following credentials:\n\n*Account Details:*\n- Email: ${form.email}\n- Password: ${form.password}\n- ID: ${displayId}\n\n*Login Link:*\n${baseUrl}/login\n\n--------------------------------------------\n_We wish you a successful experience._`;
         
         const url = `https://wa.me/2${form.phone}?text=${encodeURIComponent(msg)}`;
         window.open(url, '_blank');

@@ -157,7 +157,7 @@ export default function TrackQueuePage() {
         </div>
         <div className="mt-4">
           <h1 className="text-4xl font-black tracking-tighter bg-clip-text text-transparent bg-gradient-to-b from-foreground to-foreground/60">
-            ClinicOS
+            Clinic Hub
           </h1>
           <div className="flex items-center gap-2 mt-1">
             <span className="h-1 w-1 rounded-full bg-primary" />
@@ -355,7 +355,7 @@ export default function TrackQueuePage() {
       </div>
 
       <footer className="mt-auto py-12 text-muted-foreground/40 text-[10px] font-black uppercase tracking-[0.4em] text-center" dir="ltr">
-         &copy; {new Date().getFullYear()} {t('trackPage.footer', { clinic: 'ClinicOS', year: '' }).replace(new Date().getFullYear().toString(), '').trim()}
+         &copy; {new Date().getFullYear()} {t('trackPage.footer', { clinic: 'Clinic Hub', year: '' }).replace(new Date().getFullYear().toString(), '').trim()}
       </footer>
     </div>
     </>

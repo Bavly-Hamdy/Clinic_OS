@@ -2,9 +2,9 @@
 
 <br/>
 
-<img src="https://img.shields.io/badge/ClinicOS-2.0.0-2563eb?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0iTTIyIDEyaDRhMiAyIDAgMCAxIDIgMnY0YTIgMiAwIDAgMS0yIDJIMiIvPjxwYXRoIGQ9Ik0xIDYgMTIgMmwxMSA0Ii8+PHBhdGggZD0iTTkgMTV2M20zLTN2M20zLTN2MyIvPjwvc3ZnPg==" alt="ClinicOS"/>
+<img src="https://img.shields.io/badge/ClinicHub-2.0.0-2563eb?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0iTTIyIDEyaDRhMiAyIDAgMCAxIDIgMnY0YTIgMiAwIDAgMS0yIDJIMiIvPjxwYXRoIGQ9Ik0xIDYgMTIgMmwxMSA0Ii8+PHBhdGggZD0iTTkgMTV2M20zLTN2M20zLTN2MyIvPjwvc3ZnPg==" alt="Clinic Hub"/>
 
-<h1>🏥 ClinicOS</h1>
+<h1>🏥 Clinic Hub</h1>
 
 <p><strong>The Professional, Bilingual Clinic Management System</strong></p>
 
@@ -59,7 +59,7 @@
 
 ## 🌟 Overview
 
-**ClinicOS** is a **production-grade, full-stack clinic management system** designed to digitize and streamline every aspect of a modern medical practice. It serves a **multi-role, multi-tenant architecture** — where a single deployment manages multiple clinics, each isolated with their own data, settings, and staff.
+**Clinic Hub** is a **production-grade, full-stack clinic management system** designed to digitize and streamline every aspect of a modern medical practice. It serves a **multi-role, multi-tenant architecture** — where a single deployment manages multiple clinics, each isolated with their own data, settings, and staff.
 
 The system is built with a **bilingual-first design** (Arabic RTL + English LTR), making it uniquely suited for the Egyptian and broader MENA healthcare market.
 
@@ -144,7 +144,7 @@ Real-time queue management shared between Doctor and Receptionist.
 
 ## 🖥️ Desktop Application
 
-ClinicOS is available as a **native Windows Desktop Application** built with **Electron 42**, delivering a full Premium Desktop experience — same power as the web app, packaged into a standalone `.exe` installer.
+Clinic Hub is available as a **native Windows Desktop Application** built with **Electron 42**, delivering a full Premium Desktop experience — same power as the web app, packaged into a standalone `.exe` installer.
 
 ### ✨ Desktop-Specific Features
 
@@ -209,7 +209,7 @@ npm run build:electron
 This produces a professional Windows installer at:
 ```
 release/
-└── ClinicOS Setup 2.0.0.exe    ← Professional NSIS installer
+└── Clinic Hub Setup 2.0.0.exe    ← Professional NSIS installer
 ```
 
 **Installer Features:**
@@ -222,7 +222,7 @@ release/
 
 ## 🔍 SEO & Performance
 
-ClinicOS is fully optimized for search engine indexing and Core Web Vitals.
+Clinic Hub is fully optimized for search engine indexing and Core Web Vitals.
 
 | Optimization | Implementation |
 |---|---|
@@ -557,7 +557,7 @@ Navigate to `/setup-admin` after deployment to bootstrap the first admin user. *
 
 ## 🤖 AI Integration
 
-ClinicOS uses **Google Gemini 1.5 Flash** for intelligent drug name autocomplete in the Prescription Builder.
+Clinic Hub uses **Google Gemini 1.5 Flash** for intelligent drug name autocomplete in the Prescription Builder.
 
 ### How It Works
 
@@ -724,7 +724,7 @@ This project is licensed under the **MIT License** — see the [LICENSE](./LICEN
 ---
 
 <p>
-  <strong>ClinicOS</strong> — Built with ❤️ for the Egyptian medical community
+  <strong>Clinic Hub</strong> — Built with ❤️ for the Egyptian medical community
   <br/>
   <sub>© 2026 Bavly Hamdy. All rights reserved.</sub>
 </p>

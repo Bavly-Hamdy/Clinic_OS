@@ -2,7 +2,7 @@ import { Helmet } from 'react-helmet-async';
 import { SITE_NAME, SITE_URL, DEFAULT_IMAGE } from '@/lib/seo';
 
 interface SEOProps {
-  /** Page title — will be appended with "| ClinicOS" if not already included */
+  /** Page title — will be appended with "| Clinic Hub" if not already included */
   title: string;
   /** Meta description — aim for 150-160 characters for optimal SERP display */
   description: string;
@@ -26,7 +26,7 @@ interface SEOProps {
  * Usage:
  * ```tsx
  * <SEO
- *   title="ClinicOS — Smart Clinic Management"
+ *   title="Clinic Hub — Smart Clinic Management"
  *   description="Manage your clinic efficiently..."
  *   canonical="/"
  *   schema={getSoftwareSchema()}

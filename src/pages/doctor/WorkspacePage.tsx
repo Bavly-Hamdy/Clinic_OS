@@ -1474,10 +1474,7 @@ export default function DoctorWorkspacePage() {
                 </div>
               </div>
               <div className="flex gap-2 items-center flex-[1.2] ms-8">
-                <span className="font-bold">Diagnosis:</span>
-                <div className="border-b border-dotted border-black flex-1 pb-1 px-4 min-h-[28px]">
-                  {diagnosis || '---'}
-                </div>
+                {/* Diagnosis removed per user request */}
               </div>
             </div>
           </div>

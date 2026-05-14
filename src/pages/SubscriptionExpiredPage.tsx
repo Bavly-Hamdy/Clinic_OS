@@ -18,8 +18,8 @@ export default function SubscriptionExpiredPage() {
 
   const handleContact = () => {
     const msg = isRtl
-      ? 'مرحباً، أرغب في تجديد اشتراكي في ClinicOS.'
-      : 'Hello, I would like to renew my ClinicOS subscription.';
+      ? 'مرحباً، أرغب في تجديد اشتراكي في Clinic Hub.'
+      : 'Hello, I would like to renew my Clinic Hub subscription.';
     window.open(`https://wa.me/201111835471?text=${encodeURIComponent(msg)}`, '_blank');
   };
 
@@ -39,8 +39,8 @@ export default function SubscriptionExpiredPage() {
         </h1>
         <p className="text-muted-foreground font-medium leading-relaxed">
           {isRtl
-            ? 'لقد انتهت صلاحية اشتراكك في ClinicOS. يرجى التواصل مع إدارة المنصة لتجديد الاشتراك واستعادة الوصول إلى حسابك.'
-            : 'Your ClinicOS subscription has expired. Please contact the platform administration to renew your subscription and regain access to your account.'}
+            ? 'لقد انتهت صلاحية اشتراكك في Clinic Hub. يرجى التواصل مع إدارة المنصة لتجديد الاشتراك واستعادة الوصول إلى حسابك.'
+            : 'Your Clinic Hub subscription has expired. Please contact the platform administration to renew your subscription and regain access to your account.'}
         </p>
 
         <div className="space-y-3 pt-4">

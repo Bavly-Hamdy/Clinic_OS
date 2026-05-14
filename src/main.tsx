@@ -7,7 +7,7 @@ import './lib/i18n';
 const rootElement = document.getElementById('root');
 if (!rootElement) {
   throw new Error(
-    '[Clinic OS] Root element #root not found in the DOM. ' +
+    '[Clinic Hub] Root element #root not found in the DOM. ' +
     'Check your index.html file.'
   );
 }

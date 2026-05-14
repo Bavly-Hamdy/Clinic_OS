@@ -1,6 +1,6 @@
 {
-    "name": "ClinicOS",
-    "short_name": "ClinicOS",
+    "name": "Clinic Hub",
+    "short_name": "Clinic Hub",
     "description": "Modern Clinic Management System — queue, prescriptions, billing, analytics.",
     "start_url": "/",
     "display": "standalone",

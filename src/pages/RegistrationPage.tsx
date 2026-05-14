@@ -56,13 +56,13 @@ export default function RegistrationPage() {
     e.preventDefault();
     setIsSubmitting(true);
 
-    const whatsappNumber = '201111835471';
+    const whatsappNumber = '201153762560';
     const divider = '\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501';
     
     const lines: string[] = [];
     
     if (isRTL) {
-      lines.push(`*[ ClinicOS ] طلب اشتراك جديد*`);
+      lines.push(`*[ Clinic Hub ] طلب اشتراك جديد*`);
       lines.push(divider);
       lines.push('');
       lines.push(`*الاسم:* ${formData.name}`);
@@ -80,7 +80,7 @@ export default function RegistrationPage() {
       lines.push(divider);
       lines.push(`_تم الإرسال عبر بوابة العيادة_`);
     } else {
-      lines.push(`*[ ClinicOS ] New Subscription Request*`);
+      lines.push(`*[ Clinic Hub ] New Subscription Request*`);
       lines.push(divider);
       lines.push('');
       lines.push(`*Name:* ${formData.name}`);
@@ -117,9 +117,12 @@ export default function RegistrationPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] font-sans selection:bg-primary/20 selection:text-primary overflow-x-hidden" dir={isRTL ? 'rtl' : 'ltr'}>
+    <div className="min-h-screen bg-background font-sans selection:bg-primary/20 selection:text-primary overflow-x-hidden" dir={isRTL ? 'rtl' : 'ltr'}>
       {/* Navigation */}
-      <nav className="fixed top-0 w-full z-[100] bg-white/60 backdrop-blur-2xl border-b border-slate-200/50">
+      <nav 
+        className="fixed w-full z-[100] bg-card dark:bg-card/60 backdrop-blur-2xl border-b border-slate-200 dark:border-slate-800/50"
+        style={{ top: 'var(--titlebar-height, 0px)' }}
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
           <motion.div 
             initial={{ opacity: 0, x: -20 }}
@@ -130,13 +133,13 @@ export default function RegistrationPage() {
             <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-primary to-blue-600 flex items-center justify-center shadow-lg shadow-primary/20">
               <ActivitySquare className="h-6 w-6 text-white" />
             </div>
-            <span className="text-2xl font-black text-slate-900 tracking-tighter">ClinicOS</span>
+            <span className="text-2xl font-black text-foreground tracking-tighter">Clinic Hub</span>
           </motion.div>
 
           <Button 
             variant="ghost" 
             onClick={() => navigate('/')}
-            className="gap-2 font-bold text-slate-600 hover:text-primary transition-all rounded-xl"
+            className="gap-2 font-bold text-muted-foreground hover:text-primary transition-all rounded-xl"
           >
             <ArrowLeft className={`h-4 w-4 ${isRTL ? 'rotate-180' : ''}`} />
             {isRTL ? 'العودة للرئيسية' : 'Back to Home'}
@@ -154,10 +157,10 @@ export default function RegistrationPage() {
             className="lg:col-span-7 space-y-8 text-start"
           >
             <div className="space-y-3">
-              <h1 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tight leading-tight">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-foreground tracking-tight leading-tight">
                 {t('registration.title')}
               </h1>
-              <p className="text-lg text-slate-500 font-medium leading-relaxed max-w-xl">
+              <p className="text-lg text-muted-foreground font-medium leading-relaxed max-w-xl">
                 {t('registration.subtitle')}
               </p>
             </div>
@@ -172,7 +175,7 @@ export default function RegistrationPage() {
                   <p className="text-xs font-black uppercase tracking-widest text-slate-400">
                     {isRTL ? 'الخطة المختارة' : 'Selected Plan'}
                   </p>
-                  <p className="text-base font-black text-slate-900">{planLabel}</p>
+                  <p className="text-base font-black text-foreground">{planLabel}</p>
                 </div>
               </div>
               <button
@@ -184,7 +187,7 @@ export default function RegistrationPage() {
               </button>
             </div>
 
-            <form onSubmit={handleSubmit} className="bg-white p-8 md:p-10 rounded-[2.5rem] border border-slate-200 shadow-2xl shadow-slate-200/50 space-y-6">
+            <form onSubmit={handleSubmit} className="glass-card p-6 md:p-10 rounded-[2.5rem] space-y-6 relative z-10">
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="space-y-2">
                   <Label className="text-xs font-black uppercase tracking-widest text-slate-400 ms-1 flex items-center gap-1 justify-start rtl:justify-start">
@@ -199,7 +202,7 @@ export default function RegistrationPage() {
                       value={formData.name}
                       onChange={handleChange}
                       placeholder={isRTL ? "د. أحمد محمد" : "Dr. John Doe"}
-                      className="h-14 rounded-2xl border-slate-200 bg-slate-50/50 focus:bg-white transition-all px-14 text-base font-bold text-slate-900 placeholder:text-slate-400 text-left rtl:text-right" 
+                      className="h-14 rounded-2xl border-border bg-muted/50 focus:bg-card transition-all px-14 text-base font-bold text-foreground placeholder:text-muted-foreground text-left rtl:text-right" 
                     />
                   </div>
                 </div>
@@ -215,7 +218,7 @@ export default function RegistrationPage() {
                       value={formData.job}
                       onChange={handleChange}
                       placeholder={isRTL ? "طبيب ممارس" : "Medical Practitioner"}
-                      className="h-14 rounded-2xl border-slate-200 bg-slate-50/50 focus:bg-white transition-all px-14 text-base font-bold text-slate-900 placeholder:text-slate-400 text-left rtl:text-right" 
+                      className="h-14 rounded-2xl border-border bg-muted/50 focus:bg-card transition-all px-14 text-base font-bold text-foreground placeholder:text-muted-foreground text-left rtl:text-right" 
                     />
                   </div>
                 </div>
@@ -233,7 +236,7 @@ export default function RegistrationPage() {
                       value={formData.specialty}
                       onChange={handleChange}
                       placeholder={isRTL ? "أطفال / باطنة" : "Pediatrics / Internal Medicine"}
-                      className="h-14 rounded-2xl border-slate-200 bg-slate-50/50 focus:bg-white transition-all px-14 text-base font-bold text-slate-900 placeholder:text-slate-400 text-left rtl:text-right" 
+                      className="h-14 rounded-2xl border-border bg-muted/50 focus:bg-card transition-all px-14 text-base font-bold text-foreground placeholder:text-muted-foreground text-left rtl:text-right" 
                     />
                   </div>
                 </div>
@@ -252,7 +255,7 @@ export default function RegistrationPage() {
                       value={formData.phone}
                       onChange={handleChange}
                       placeholder="01xxxxxxxxx"
-                      className="h-14 rounded-2xl border-slate-200 bg-slate-50/50 focus:bg-white transition-all px-14 text-base font-bold text-slate-900 placeholder:text-slate-400 text-left rtl:text-right" 
+                      className="h-14 rounded-2xl border-border bg-muted/50 focus:bg-card transition-all px-14 text-base font-bold text-foreground placeholder:text-muted-foreground text-left rtl:text-right" 
                     />
                   </div>
                 </div>
@@ -269,7 +272,7 @@ export default function RegistrationPage() {
                     value={formData.clinicName}
                     onChange={handleChange}
                     placeholder={isRTL ? "عيادة الأمل التخصصية" : "Hope Specialized Clinic"}
-                    className="h-14 rounded-2xl border-slate-200 bg-slate-50/50 focus:bg-white transition-all px-14 text-base font-bold text-slate-900 placeholder:text-slate-400 text-left rtl:text-right" 
+                    className="h-14 rounded-2xl border-border bg-muted/50 focus:bg-card transition-all px-14 text-base font-bold text-foreground placeholder:text-muted-foreground text-left rtl:text-right" 
                   />
                 </div>
               </div>
@@ -285,7 +288,7 @@ export default function RegistrationPage() {
                     value={formData.promoCode}
                     onChange={handleChange}
                     placeholder="CO2024"
-                    className="h-14 rounded-2xl border-slate-200 bg-slate-50/50 focus:bg-white transition-all px-14 text-base font-bold text-slate-900 placeholder:text-slate-400 text-left rtl:text-right" 
+                    className="h-14 rounded-2xl border-border bg-muted/50 focus:bg-card transition-all px-14 text-base font-bold text-foreground placeholder:text-muted-foreground text-left rtl:text-right" 
                   />
                 </div>
               </div>
@@ -308,12 +311,12 @@ export default function RegistrationPage() {
             transition={{ delay: 0.2 }}
             className="lg:col-span-5 space-y-6 pt-12"
           >
-            <div className="p-8 rounded-[2rem] bg-slate-900 text-white space-y-6 relative overflow-hidden group">
+            <div className="p-6 md:p-8 rounded-[2rem] bg-slate-900 dark:bg-slate-950 text-white space-y-6 relative overflow-hidden group shadow-elevated">
               <div className="absolute top-0 right-0 p-8 text-primary opacity-10 group-hover:scale-125 transition-transform duration-700">
                 <ActivitySquare className="h-32 w-32" />
               </div>
               <h3 className="text-2xl font-black relative z-10">
-                {isRTL ? 'لماذا تختار ClinicOS؟' : 'Why Choose ClinicOS?'}
+                {isRTL ? 'لماذا تختار Clinic Hub؟' : 'Why Choose Clinic Hub?'}
               </h3>
               <div className="space-y-4 relative z-10">
                 {[
@@ -334,8 +337,8 @@ export default function RegistrationPage() {
               </div>
             </div>
 
-            <div className="p-8 rounded-[2rem] border border-slate-200 bg-white space-y-4">
-               <p className="text-slate-500 font-medium text-sm leading-relaxed">
+            <div className="glass-card p-6 md:p-8 rounded-[2rem] space-y-4">
+               <p className="text-slate-500 dark:text-slate-400 font-medium text-sm leading-relaxed">
                   {isRTL 
                     ? 'بعد إرسال الطلب، سيتم تحويلك إلى واتساب. يرجى إرسال الرسالة المكتوبة وسيتواصل معك أحد ممثلينا خلال دقائق.' 
                     : 'After submitting, you will be redirected to WhatsApp. Please send the pre-written message and a representative will contact you within minutes.'}

@@ -22,7 +22,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 // │ └── index.html    > Electron-Renderer
 //
 // app.getAppPath() correctly resolves the root in BOTH:
-//   • Dev:        the project root (clinic-flow-main/)
+//   • Dev:        the project root (Clinic Hub-main/)
 //   • Production: the asar bundle root (resources/app.asar)
 // Using __dirname + '../..' fails in production because it exits the asar.
 process.env.APP_ROOT = app.getAppPath();
@@ -46,7 +46,7 @@ function createWindow() {
     minWidth: 1024,
     minHeight: 768,
     icon: path.join(process.env.VITE_PUBLIC || '', 'icons/icon-512.png'),
-    title: 'ClinicOS',
+    title: 'Clinic Hub',
     frame: false, // Custom Title Bar
     titleBarStyle: 'hidden',
     show: false, // Don't show until ready-to-show
@@ -94,7 +94,7 @@ function createTray() {
   tray = new Tray(iconPath);
   
   const contextMenu = Menu.buildFromTemplate([
-    { label: 'Show ClinicOS', click: () => win?.show() },
+    { label: 'Show Clinic Hub', click: () => win?.show() },
     { type: 'separator' },
     { label: 'Quit', click: () => {
       isQuitting = true;
@@ -102,7 +102,7 @@ function createTray() {
     }}
   ]);
   
-  tray.setToolTip('ClinicOS Management System');
+  tray.setToolTip('Clinic Hub Management System');
   tray.setContextMenu(contextMenu);
   
   tray.on('click', () => {

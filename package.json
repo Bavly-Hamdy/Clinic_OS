@@ -1,5 +1,5 @@
 {
-  "name": "clinicos",
+  "name": "clinic-hub",
   "description": "Professional bilingual clinic management system",
   "private": true,
   "version": "2.0.0",
@@ -111,8 +111,8 @@
     "vitest": "^3.2.4"
   },
   "build": {
-    "appId": "com.clinicos.app",
-    "productName": "ClinicOS",
+    "appId": "com.clinichub.app",
+    "productName": "Clinic Hub",
     "directories": {
       "output": "release/"
     },

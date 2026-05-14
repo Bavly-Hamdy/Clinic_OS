@@ -64,7 +64,7 @@ export default function SetupAdminPage() {
             <Shield className="h-7 w-7 text-white" />
           </div>
           <div>
-            <h1 className="text-2xl font-black text-white">ClinicOS Setup</h1>
+            <h1 className="text-2xl font-black text-white">Clinic Hub Setup</h1>
             <p className="text-sm text-white/50">Create Admin Account</p>
           </div>
         </div>
@@ -115,7 +115,7 @@ export default function SetupAdminPage() {
                 value={form.email}
                 onChange={(e) => setForm(p => ({ ...p, email: e.target.value }))}
                 className="h-12 rounded-xl bg-white/5 border-white/10 text-white placeholder:text-white/30"
-                placeholder="admin@clinicos.com"
+                placeholder="admin@Clinic Hub.com"
               />
             </div>
 

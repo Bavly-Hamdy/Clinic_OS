@@ -387,7 +387,7 @@ i18n
           },
           trackPage: {
             title: 'Track Your Turn',
-            subtitle: 'ClinicOS Patient Directory',
+            subtitle: 'Clinic Hub Patient Directory',
             welcome: 'Welcome 👋',
             enterPhone: 'Enter your registered phone number to track your turn',
             phonePlaceholder: '01xxxxxxxxx',
@@ -485,17 +485,17 @@ i18n
               title: "Common Questions",
               subtitle: "Everything you need to know about the platform.",
               q1: { q: "How secure is my patient data?", a: "We use bank-grade AES-256 encryption for all data at rest and during transit." },
-              q2: { q: "Can I use it on my mobile?", a: "Yes, ClinicOS is fully responsive and works perfectly on iOS and Android devices." },
+              q2: { q: "Can I use it on my mobile?", a: "Yes, Clinic Hub is fully responsive and works perfectly on iOS and Android devices." },
               q3: { q: "Is there a setup fee?", a: "No, you can start for free without any initial setup or hidden costs." }
             },
             cta: {
               title: "Ready to elevate your practice?",
-              desc: "Join thousands of doctors who trust ClinicOS for their daily operations.",
+              desc: "Join thousands of doctors who trust Clinic Hub for their daily operations.",
               button: "Start Free Trial"
             }
           },
           registration: {
-              title: "Join ClinicOS",
+              title: "Join Clinic Hub",
               subtitle: "Start your professional journey today. Fill in your details and our team will contact you to activate your account.",
               name: "Full Name",
               job: "Profession / Job Title",
@@ -505,7 +505,7 @@ i18n
               promoCode: "Discount Code (Optional)",
               submit: "Send Subscription Request",
               success: "Redirecting to WhatsApp...",
-              whatsappHeader: "*Subscription Request - ClinicOS*",
+              whatsappHeader: "*Subscription Request - Clinic Hub*",
               whatsappName: "Name:",
               whatsappJob: "Profession:",
               whatsappSpecialty: "Specialty:",
@@ -945,7 +945,7 @@ i18n
           },
           trackPage: {
             title: 'تتبع دورك',
-            subtitle: 'دليل مرضى ClinicOS',
+            subtitle: 'دليل مرضى Clinic Hub',
             welcome: 'أهلاً بك 👋',
             enterPhone: 'أدخل رقم هاتفك المسجل لمتابعة دورك',
             phonePlaceholder: '01xxxxxxxxx',
@@ -1043,17 +1043,17 @@ i18n
               title: "أسئلة شائعة",
               subtitle: "كل ما تحتاج لمعرفته حول النظام.",
               q1: { q: "ما مدى أمان بيانات المرضى؟", a: "نستخدم تشفير AES-256 بمستوى بنكي لضمان حماية كافة البيانات المخزنة والمنتقلة." },
-              q2: { q: "هل يمكنني استخدامه على الجوال؟", a: "نعم، ClinicOS متجاوب بالكامل ويعمل بسلاسة على أجهزة الأندرويد والآيفون." },
+              q2: { q: "هل يمكنني استخدامه على الجوال؟", a: "نعم، Clinic Hub متجاوب بالكامل ويعمل بسلاسة على أجهزة الأندرويد والآيفون." },
               q3: { q: "هل هناك رسوم للتأسيس؟", a: "لا، يمكنك البدء مجاناً دون أي رسوم تأسيسية أو تكاليف مخفية." }
             },
             cta: {
               title: "جاهز للارتقاء بممارستك الطبية؟",
-              desc: "انضم لآلاف الأطباء الذين يثقون في ClinicOS لإدارة عملياتهم اليومية.",
+              desc: "انضم لآلاف الأطباء الذين يثقون في Clinic Hub لإدارة عملياتهم اليومية.",
               button: "ابدأ تجربتك المجانية"
             }
           },
             registration: {
-              title: "انضم إلى ClinicOS",
+              title: "انضم إلى Clinic Hub",
               subtitle: "ابدأ رحلتك المهنية اليوم. أدخل بياناتك وسيقوم فريقنا بالتواصل معك لتفعيل حسابك.",
               name: "الاسم بالكامل",
               job: "المهنة / المسمى الوظيفي",
@@ -1063,14 +1063,14 @@ i18n
               promoCode: "كود الخصم (اختياري)",
               submit: "إرسال طلب الاشتراك",
               success: "جاري التحويل إلى واتساب...",
-              whatsappHeader: "*طلب اشتراك جديد - ClinicOS*",
+              whatsappHeader: "*طلب اشتراك جديد - Clinic Hub*",
               whatsappName: "الاسم:",
               whatsappJob: "المهنة:",
               whatsappSpecialty: "التخصص:",
               whatsappPhone: "الهاتف:",
               whatsappClinic: "العيادة:",
               whatsappPromo: "كود الخصم:",
-              whatsappFooter: "تم الإرسال من صفحة هبوط ClinicOS"
+              whatsappFooter: "تم الإرسال من صفحة هبوط Clinic Hub"
             },
             validation: {
               nameMin: "يجب أن يتكون الاسم الكامل من 3 أحرف على الأقل",

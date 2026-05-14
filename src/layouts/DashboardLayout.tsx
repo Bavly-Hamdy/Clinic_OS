@@ -45,13 +45,19 @@ export default function DashboardLayout() {
       <div className="min-h-screen flex w-full bg-background relative selection:bg-primary/20" dir={dir}>
         
         {/* Sidebar — hidden on mobile, visible on md+ */}
-        <div className={`hidden md:block sticky top-0 h-screen shadow-elevated z-40 bg-card/80 backdrop-blur-xl border-e border-white/10 print:hidden ${dir === 'rtl' ? 'order-2' : 'order-1'}`}>
+        <div 
+          className={`hidden md:block sticky z-40 bg-card/80 backdrop-blur-xl border-e border-white/10 shadow-elevated print:hidden ${dir === 'rtl' ? 'order-2' : 'order-1'}`}
+          style={{ top: 'var(--titlebar-height, 0px)', height: 'calc(100vh - var(--titlebar-height, 0px))' }}
+        >
           <AppSidebar />
         </div>
 
         <div className={`flex flex-1 flex-col min-w-0 z-10 ${dir === 'rtl' ? 'order-1' : 'order-2'}`}>
           {/* Top header - Floating Glassmorphic */}
-          <header className={`sticky top-0 z-30 flex h-16 items-center gap-4 bg-background/60 backdrop-blur-2xl px-6 border-b border-white/10 shadow-sm transition-all print:hidden ${dir === 'rtl' ? 'flex-row-reverse' : ''}`}>
+          <header 
+            className={`sticky z-30 flex h-16 items-center gap-4 bg-background/60 backdrop-blur-2xl px-6 border-b border-white/10 shadow-sm transition-all print:hidden ${dir === 'rtl' ? 'flex-row-reverse' : ''}`}
+            style={{ top: 'var(--titlebar-height, 0px)' }}
+          >
             {/* Only show sidebar trigger on desktop */}
             <div className="hidden md:block">
               <SidebarTrigger className={`text-muted-foreground hover:text-primary transition-colors hover:scale-105 active:scale-95 ${dir === 'rtl' ? 'rotate-180' : ''}`} />
@@ -59,13 +65,13 @@ export default function DashboardLayout() {
 
              {/* App title on mobile */}
              <div className={`md:hidden flex items-center gap-2 ${dir === 'rtl' ? 'flex-row-reverse text-end' : ''}`}>
-              <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-primary to-blue-600 flex items-center justify-center shadow-lg shadow-primary/20">
+              <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-primary to-blue-600 flex items-center justify-center shadow-lg shadow-primary/20 shrink-0">
                 <ActivitySquare className="h-4 w-4 text-white" />
               </div>
-              <span className="font-extrabold text-lg bg-clip-text text-transparent bg-gradient-to-r from-primary to-info tracking-tight">ClinicOS</span>
+              <span className="font-extrabold text-lg bg-clip-text text-transparent bg-gradient-to-r from-primary to-info tracking-tight truncate">Clinic Hub</span>
               <Badge
                 variant="outline"
-                className={`text-[10px] px-2 py-0.5 h-5 rounded-full ${
+                className={`text-[10px] px-2 py-0.5 h-5 rounded-full shrink-0 ${
                   user?.role === 'DOCTOR'
                     ? 'border-primary/40 text-primary bg-primary/5'
                     : 'border-info/40 text-info bg-info/5'
@@ -77,7 +83,7 @@ export default function DashboardLayout() {
 
             <div className="flex-1" />
 
-            <div className={`flex items-center gap-3 ${dir === 'rtl' ? 'flex-row-reverse' : ''}`}>
+            <div className={`flex items-center gap-1 sm:gap-3 ${dir === 'rtl' ? 'flex-row-reverse' : ''}`}>
               <NotificationBell />
 
               <LanguageToggle />

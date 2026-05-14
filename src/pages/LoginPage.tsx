@@ -115,7 +115,7 @@ export default function LoginPage() {
               <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-primary to-blue-600 shadow-lg shadow-primary/30">
                 <ActivitySquare className="h-6 w-6 text-white" />
               </div>
-              <span className={`text-2xl font-extrabold tracking-tight`}>ClinicOS</span>
+              <span className={`text-2xl font-extrabold tracking-tight`}>Clinic Hub</span>
             </div>
 
             <div className={`mb-8`}>

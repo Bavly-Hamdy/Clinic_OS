@@ -148,7 +148,7 @@ export function AppSidebar() {
           {!collapsed && (
             <div className={`flex flex-col animate-fade-in overflow-hidden ${isRtl ? 'items-start' : ''}`}>
               <span className="text-2xl font-black tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-primary via-info to-primary animate-gradient-x">
-                ClinicOS
+                Clinic Hub
               </span>
               <span className="text-[10px] font-bold tracking-[0.2em] text-muted-foreground uppercase opacity-80 flex items-center gap-1">
                 <Sparkles className="h-3 w-3 text-info" />
@@ -234,7 +234,7 @@ export function AppSidebar() {
         )}
       </SidebarContent>
 
-      <SidebarFooter className="p-4 mt-auto border-t border-border/30">
+      <SidebarFooter className="p-4 pb-8 mt-auto border-t border-border/30">
         {!collapsed ? (
           <button 
             onClick={() => navigate('/profile')}

@@ -1,5 +1,5 @@
 /**
- * Firebase SDK initialization for Clinic OS.
+ * Firebase SDK initialization for Clinic Hub.
  *
  * Architecture notes:
  * - `app` / `auth` / `db`: Primary Firebase instance used for all client operations.
@@ -28,7 +28,7 @@ const REQUIRED_ENV_VARS = [
 for (const key of REQUIRED_ENV_VARS) {
   if (!import.meta.env[key]) {
     throw new Error(
-      `[Clinic OS] Missing required environment variable: ${key}\n` +
+      `[Clinic Hub] Missing required environment variable: ${key}\n` +
       `Ensure your .env.local file is present and contains all VITE_FIREBASE_* keys.`
     );
   }

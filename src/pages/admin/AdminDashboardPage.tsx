@@ -196,8 +196,8 @@ export default function AdminDashboardPage() {
 
   const sendWhatsAppReminder = (phone: string, name: string, daysLeft: number) => {
     const msg = isRtl
-      ? `*ClinicOS - تذكير تجديد الاشتراك*\n\nمرحباً ${name}،\n\nنود تذكيركم بأن اشتراككم في ClinicOS سينتهي خلال ${daysLeft} يوم.\n\nيرجى التواصل معنا لتجديد الاشتراك وتفادي توقف الخدمة.\n\nشكراً لكم.`
-      : `*ClinicOS - Subscription Renewal Reminder*\n\nHello ${name},\n\nThis is a reminder that your ClinicOS subscription will expire in ${daysLeft} days.\n\nPlease contact us to renew your subscription and avoid service interruption.\n\nThank you.`;
+      ? `*Clinic Hub - تذكير تجديد الاشتراك*\n\nمرحباً ${name}،\n\nنود تذكيركم بأن اشتراككم في Clinic Hub سينتهي خلال ${daysLeft} يوم.\n\nيرجى التواصل معنا لتجديد الاشتراك وتفادي توقف الخدمة.\n\nشكراً لكم.`
+      : `*Clinic Hub - Subscription Renewal Reminder*\n\nHello ${name},\n\nThis is a reminder that your Clinic Hub subscription will expire in ${daysLeft} days.\n\nPlease contact us to renew your subscription and avoid service interruption.\n\nThank you.`;
     const url = `https://wa.me/2${phone}?text=${encodeURIComponent(msg)}`;
     window.open(url, '_blank');
   };
@@ -583,7 +583,7 @@ export default function AdminDashboardPage() {
                 <div className="h-10 w-10 bg-black flex items-center justify-center">
                   <Shield className="h-6 w-6 text-white" />
                 </div>
-                <h1 className="text-4xl font-black tracking-tighter uppercase italic">ClinicOS</h1>
+                <h1 className="text-4xl font-black tracking-tighter uppercase italic">Clinic Hub</h1>
               </div>
               <p className="text-[10px] font-black tracking-[0.3em] text-gray-500 uppercase">Automated Health Auditing Suite</p>
               <div className="mt-6 text-[9px] text-gray-400 font-medium max-w-sm leading-relaxed uppercase">
@@ -607,7 +607,7 @@ export default function AdminDashboardPage() {
                 </p>
                 <p className="flex justify-end gap-3">
                   <span className="text-gray-400 uppercase tracking-widest font-black">{isRtl ? 'المنشأة:' : 'Entity:'}</span>
-                  <span className="uppercase">ClinicOS Global Platform</span>
+                  <span className="uppercase">Clinic Hub Global Platform</span>
                 </p>
               </div>
             </div>
@@ -732,8 +732,8 @@ export default function AdminDashboardPage() {
               </div>
               <p className="text-[8px] italic text-gray-400 leading-relaxed">
                 {isRtl 
-                  ? 'هذا المستند معتمد وصادر عن نظام ClinicOS المركزى. تم إجراء الجرد بناءً على البيانات المسجلة حتى تاريخه.' 
-                  : 'Authorized electronic record issued by ClinicOS Audit Core. Figures verified against active ledger entries as of current timestamp.'}
+                  ? 'هذا المستند معتمد وصادر عن نظام Clinic Hub المركزى. تم إجراء الجرد بناءً على البيانات المسجلة حتى تاريخه.' 
+                  : 'Authorized electronic record issued by Clinic Hub Audit Core. Figures verified against active ledger entries as of current timestamp.'}
               </p>
             </div>
 
@@ -755,7 +755,7 @@ export default function AdminDashboardPage() {
 
           {/* Page Footer */}
           <div className="mt-10 pt-4 border-t border-gray-100 flex justify-between items-center text-[8px] font-bold text-gray-300 uppercase tracking-[0.4em]">
-            <p>Confidential • Platform Auditing Ledger • ClinicOS v2.4.0</p>
+            <p>Confidential • Platform Auditing Ledger • Clinic Hub v2.4.0</p>
             <p>End of Official Audit Record</p>
           </div>
         </div>

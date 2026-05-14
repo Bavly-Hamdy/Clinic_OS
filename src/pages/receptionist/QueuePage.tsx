@@ -462,7 +462,7 @@ function QueueRow({ appt, onStatusChange }: { appt: Appointment; onStatusChange:
       </div>
 
       {/* Payment */}
-      <div className="hidden sm:flex flex-col items-end gap-1.5 shrink-0 px-4 border-e border-border/50">
+      <div className="flex flex-col items-end gap-1.5 shrink-0 px-2 sm:px-4 border-e border-border/50">
         <span className="text-[15px] font-black">{appt.fee > 0 ? `${appt.fee} ${t('common.egp') || 'EGP'}` : t('queuePage.markFree').replace('Mark ', '').replace('تسجيل ', '')}</span>
         <MarkPaidButton appt={appt} />
       </div>
@@ -560,11 +560,30 @@ export default function ReceptionistQueuePage() {
   // ── Status mutation ───────────────────────────────────────────────────────
   const handleStatusChange = async (id: string, status: AppointmentStatus) => {
     try {
+      const appt = appointments.find(a => a.id === id);
+      const isCompletingUnpaid = status === 'COMPLETED' && appt && !appt.isPaid;
+
       await updateDoc(doc(db, 'appointments', id), {
         status,
         ...(status === 'COMPLETED' ? { completedAt: new Date().toISOString() } : {}),
         ...(status === 'IN_CLINIC' ? { calledAt: new Date().toISOString() } : {}),
+        ...(isCompletingUnpaid ? { isPaid: true } : {}),
       });
+
+      if (isCompletingUnpaid) {
+        const effectiveDoctorId = user?.role === 'DOCTOR' ? user?.id : user?.doctorId;
+        const method = appt.fee === 0 ? 'FREE' : 'CASH';
+        await addDoc(collection(db, 'payments'), {
+          appointmentId: appt.id,
+          patientId: appt.patientId,
+          doctorId: effectiveDoctorId,
+          amount: method === 'FREE' ? 0 : appt.fee,
+          method,
+          collectedById: user?.id ?? '',
+          createdAt: new Date().toISOString(),
+        });
+        toast({ title: t('queuePage.paymentRecorded', { defaultValue: 'Payment Recorded' }).replace('{{method}}', method) });
+      }
     } catch (err) {
       console.error(err);
       toast({ title: 'Error', description: 'Could not update status.', variant: 'destructive' });

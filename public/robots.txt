@@ -1,5 +1,5 @@
-# ── Clinic OS — robots.txt ────────────────────────────────────────────────────
-# Controls search engine crawler access to ClinicOS pages.
+# ── Clinic Hub — robots.txt ────────────────────────────────────────────────────
+# Controls search engine crawler access to Clinic Hub pages.
 # Public pages are fully indexed; private app pages block crawlers.
 # See: https://developers.google.com/search/docs/advanced/robots/robots_txt
 

@@ -1,5 +1,7 @@
-import { Minus, Square, X, ActivitySquare } from 'lucide-react';
+import { Minus, Square, X, ActivitySquare, ArrowLeft, ArrowRight } from 'lucide-react';
 import { useEffect, useState } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 // Type definition for our electronAPI to avoid TypeScript errors
 declare global {
@@ -16,6 +18,10 @@ declare global {
 
 export function TitleBar() {
   const [isElectron, setIsElectron] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { i18n } = useTranslation();
+  const isRtl = i18n.language === 'ar';
 
   useEffect(() => {
     // Check if we are running inside Electron by looking for our custom API
@@ -40,12 +46,24 @@ export function TitleBar() {
       className="fixed top-0 left-0 right-0 h-[32px] bg-white dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 flex justify-between items-center select-none z-[9999]"
       style={{ WebkitAppRegion: 'drag' } as React.CSSProperties}
     >
-      {/* Brand & Logo */}
-      <div className="flex items-center gap-2 px-3 h-full">
-        <ActivitySquare className="h-4 w-4 text-primary" />
-        <span className="text-xs font-bold text-slate-700 dark:text-slate-300 tracking-wider">
-          ClinicOS
-        </span>
+      {/* Brand & Logo & Navigation */}
+      <div className="flex items-center gap-2 px-2 h-full">
+        {/* Global Back Button */}
+        <button
+          onClick={() => navigate(-1)}
+          className="h-6 w-6 flex items-center justify-center rounded-md text-slate-500 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors"
+          style={{ WebkitAppRegion: 'no-drag' } as React.CSSProperties}
+          title="Back"
+        >
+          {isRtl ? <ArrowRight className="h-4 w-4" /> : <ArrowLeft className="h-4 w-4" />}
+        </button>
+
+        <div className="flex items-center gap-2 ms-1">
+          <ActivitySquare className="h-4 w-4 text-primary" />
+          <span className="text-xs font-bold text-slate-700 dark:text-slate-300 tracking-wider">
+            Clinic Hub
+          </span>
+        </div>
       </div>
 
       {/* Window Controls */}

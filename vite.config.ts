@@ -35,8 +35,8 @@ export default defineConfig({
       registerType: 'autoUpdate',
       includeAssets: ['icons/icon-192.png', 'icons/icon-512.png'],
       manifest: {
-        name: 'ClinicOS',
-        short_name: 'ClinicOS',
+        name: 'Clinic Hub',
+        short_name: 'Clinic Hub',
         description: 'Professional Clinic Management System',
         theme_color: '#2563eb',
         background_color: '#0f172a',

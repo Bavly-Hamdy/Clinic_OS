@@ -76,11 +76,11 @@ const App = () => (
     <QueryClientProvider client={queryClient}>
     <ThemeProvider defaultTheme="light" storageKey="clinic-os-theme">
       <LanguageProvider>
-        <TitleBar />
         <TooltipProvider>
           <Toaster />
           <Sonner />
           <HashRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+            <TitleBar />
             <AuthProvider>
               <Suspense fallback={<PageLoader />}>
                 <Routes>

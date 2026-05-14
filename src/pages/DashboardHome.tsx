@@ -130,7 +130,7 @@ export default function DashboardHome() {
                 <Stethoscope className="h-6 w-6 text-white" />
               </div>
               <div className={`flex flex-col rtl:items-end`}>
-                <span className="text-sm font-bold tracking-wider text-white/80 uppercase">ClinicOS</span>
+                <span className="text-sm font-bold tracking-wider text-white/80 uppercase">Clinic Hub</span>
                 <span className="text-xs text-white/60 font-medium">{t('sidebar.proEdition')}</span>
               </div>
             </div>

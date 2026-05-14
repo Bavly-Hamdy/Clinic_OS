@@ -1,25 +1,25 @@
 /**
- * SEO constants and structured data generators for Clinic OS.
+ * SEO constants and structured data generators for Clinic Hub.
  * All public-facing pages should use the SEO component with data from this file.
  */
 
 export const SITE_URL = 'https://clinic-os-beige.vercel.app';
-export const SITE_NAME = 'ClinicOS';
+export const SITE_NAME = 'Clinic Hub';
 export const DEFAULT_IMAGE = `${SITE_URL}/icons/icon-512.png`;
 
 // ── Per-page SEO data ─────────────────────────────────────────────────────────
 
 export const SEO_DATA = {
   landing: {
-    title: 'ClinicOS — نظام إدارة العيادات الاحترافي | Clinic Management System',
+    title: 'Clinic Hub — نظام إدارة العيادات الاحترافي | Clinic Management System',
     description:
-      'ClinicOS هو نظام إدارة عيادات متكامل وثنائي اللغة (عربي/إنجليزي). إدارة طابور المرضى، الوصفات الطبية الذكية، التحليلات المالية، والتقارير — كل ذلك في منصة واحدة سهلة وآمنة.',
+      'Clinic Hub هو نظام إدارة عيادات متكامل وثنائي اللغة (عربي/إنجليزي). إدارة طابور المرضى، الوصفات الطبية الذكية، التحليلات المالية، والتقارير — كل ذلك في منصة واحدة سهلة وآمنة.',
     keywords:
-      'نظام إدارة عيادات, برنامج عيادة, طابور مرضى, وصفة طبية, تحليلات طبية, ClinicOS, clinic management, patient queue, medical software, hospital management, EMR, electronic medical records',
+      'نظام إدارة عيادات, برنامج عيادة, طابور مرضى, وصفة طبية, تحليلات طبية, Clinic Hub, clinic management, patient queue, medical software, hospital management, EMR, electronic medical records',
     canonical: '/',
   },
   track: {
-    title: 'تتبع دورك في الانتظار | Patient Queue Tracker — ClinicOS',
+    title: 'تتبع دورك في الانتظار | Patient Queue Tracker — Clinic Hub',
     description:
       'تتبع موقعك في طابور انتظار العيادة بسهولة. أدخل رقم هاتفك لمعرفة ترتيبك الحالي وموعد دورك دون الحاجة لتسجيل دخول.',
     keywords:
@@ -35,7 +35,7 @@ export function getSoftwareSchema() {
   return {
     '@context': 'https://schema.org',
     '@type': 'SoftwareApplication',
-    name: 'ClinicOS',
+    name: 'Clinic Hub',
     applicationCategory: 'HealthApplication',
     applicationSubCategory: 'Clinic Management Software',
     operatingSystem: 'Web, Android, iOS (PWA)',
@@ -75,7 +75,7 @@ export function getOrganizationSchema() {
   return {
     '@context': 'https://schema.org',
     '@type': 'Organization',
-    name: 'ClinicOS',
+    name: 'Clinic Hub',
     url: SITE_URL,
     logo: DEFAULT_IMAGE,
     description:
@@ -98,7 +98,7 @@ export function getWebsiteSchema() {
   return {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
-    name: 'ClinicOS',
+    name: 'Clinic Hub',
     url: SITE_URL,
     description: 'Professional bilingual clinic management system for modern medical practices.',
     inLanguage: ['ar', 'en'],
