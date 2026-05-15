@@ -3,18 +3,18 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { 
-  ArrowLeft, 
-  ArrowRight, 
-  CheckCircle2, 
-  Stethoscope, 
-  Building2, 
-  Smartphone, 
-  User, 
-  Briefcase, 
+  ArrowLeft,
+  ArrowRight,
+  CheckCircle2,
+  Stethoscope,
+  Building2,
+  Smartphone,
+  User,
+  Briefcase,
   Tag,
-  ActivitySquare
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Logo } from '@/components/Logo';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { usePlatformPricing } from '@/hooks/usePlatformPricing';
@@ -56,7 +56,8 @@ export default function RegistrationPage() {
     e.preventDefault();
     setIsSubmitting(true);
 
-    const whatsappNumber = '201153762560';
+    const supportNumbers = ['201111835471', '201153762560'];
+    const whatsappNumber = supportNumbers[Math.floor(Math.random() * supportNumbers.length)];
     const divider = '\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501';
     
     const lines: string[] = [];
@@ -130,10 +131,7 @@ export default function RegistrationPage() {
             className="flex items-center gap-3 cursor-pointer"
             onClick={() => navigate('/')}
           >
-            <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-primary to-blue-600 flex items-center justify-center shadow-lg shadow-primary/20">
-              <ActivitySquare className="h-6 w-6 text-white" />
-            </div>
-            <span className="text-2xl font-black text-foreground tracking-tighter">Clinic Hub</span>
+            <Logo className="h-14 w-auto" />
           </motion.div>
 
           <Button 
@@ -313,7 +311,7 @@ export default function RegistrationPage() {
           >
             <div className="p-6 md:p-8 rounded-[2rem] bg-slate-900 dark:bg-slate-950 text-white space-y-6 relative overflow-hidden group shadow-elevated">
               <div className="absolute top-0 right-0 p-8 text-primary opacity-10 group-hover:scale-125 transition-transform duration-700">
-                <ActivitySquare className="h-32 w-32" />
+                <Stethoscope className="h-32 w-32" />
               </div>
               <h3 className="text-2xl font-black relative z-10">
                 {isRTL ? 'لماذا تختار Clinic Hub؟' : 'Why Choose Clinic Hub?'}

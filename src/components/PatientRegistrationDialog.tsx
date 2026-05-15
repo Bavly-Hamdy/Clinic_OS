@@ -116,13 +116,13 @@ export function PatientRegistrationDialog({
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         {trigger || (
-          <Button className="rounded-xl shadow-lg hover:shadow-primary/30 transition-all font-bold">
+          <Button className="w-full sm:w-auto rounded-xl shadow-lg hover:shadow-primary/30 transition-all font-bold">
             <Plus className="h-4 w-4 me-2" />
             {t('patientDialog.newPatient')}
           </Button>
         )}
       </DialogTrigger>
-      <DialogContent className="sm:max-w-xl border-white/20 bg-background/80 backdrop-blur-2xl shadow-2xl rounded-3xl p-0 overflow-hidden" aria-describedby={undefined}>
+      <DialogContent className="w-[95vw] sm:max-w-xl max-h-[90vh] flex flex-col border-white/20 bg-background/80 backdrop-blur-2xl shadow-2xl rounded-3xl p-0 overflow-hidden" aria-describedby={undefined}>
         <DialogHeader className="p-6 border-b border-border/10">
           <DialogTitle className="flex items-center gap-3 text-xl font-black">
              <div className="h-10 w-10 flex items-center justify-center rounded-2xl bg-primary/10 text-primary shrink-0">
@@ -131,8 +131,8 @@ export function PatientRegistrationDialog({
              {isEdit ? (t('patientDialog.editPatient') || 'Edit Patient') : t('patientDialog.registerNew')}
           </DialogTitle>
         </DialogHeader>
-        <form onSubmit={handleSubmit((v) => mutation.mutate(v))} className="space-y-6 p-6 bg-muted/5">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <form onSubmit={handleSubmit((v) => mutation.mutate(v))} className="space-y-4 md:space-y-6 p-4 md:p-6 bg-muted/5 flex-1 overflow-y-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
             <div className="md:col-span-2 space-y-2 group">
               <Label className="text-[11px] font-black text-foreground/80 uppercase tracking-widest ps-1">{t('patientDialog.fullName')} <span className="text-destructive">*</span></Label>
               <Input 

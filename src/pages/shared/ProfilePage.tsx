@@ -3,8 +3,7 @@ import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import { 
-  User, Mail, Shield, Calendar, Clock, ActivitySquare, 
-  MapPin, Phone, Award, LogOut, CheckCircle2 
+  User, Mail, Shield, Calendar, Clock, MapPin, Phone, Award, LogOut, CheckCircle2, Zap, Star 
 } from 'lucide-react';
 import { format } from 'date-fns';
 import { ar, enUS } from 'date-fns/locale';
@@ -171,8 +170,8 @@ export default function ProfilePage() {
 
                    <div className={`space-y-2 ${currentLang === 'ar' ? 'text-end' : ''}`}>
                      <p className={`text-[10px] font-black text-muted-foreground uppercase tracking-[0.2em] flex items-center gap-2 ${currentLang === 'ar' ? 'flex-row-reverse' : ''}`}>
-                       <ActivitySquare className="h-3 w-3 text-warning" />
-                       {t('profile.status')}
+                        <Zap className="h-3 w-3 text-warning" />
+                        {t('profile.status')}
                      </p>
                      <div className={`flex items-center gap-2 text-success font-bold text-lg ${currentLang === 'ar' ? 'flex-row-reverse mt-1' : ''}`}>
                         <span className="h-3 w-3 rounded-full bg-success animate-pulse shadow-[0_0_10px_rgba(34,197,94,0.6)]" />
@@ -188,7 +187,7 @@ export default function ProfilePage() {
           <div className="grid sm:grid-cols-3 gap-6">
             <div className="rounded-3xl border border-white/10 glass-card p-6 flex flex-col items-center text-center group hover:border-primary/30 transition-all">
                <div className="h-12 w-12 rounded-2xl bg-primary/10 text-primary flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                  <ActivitySquare className="h-6 w-6" />
+                  <Star className="h-6 w-6" />
                </div>
                <p className="text-2xl font-black text-foreground">{user.role === 'DOCTOR' ? t('profile.pro') : t('profile.standard')}</p>
                <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest mt-1">{t('profile.tier')}</p>

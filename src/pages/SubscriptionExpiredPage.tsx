@@ -16,13 +16,6 @@ export default function SubscriptionExpiredPage() {
     navigate('/login', { replace: true });
   };
 
-  const handleContact = () => {
-    const msg = isRtl
-      ? 'مرحباً، أرغب في تجديد اشتراكي في Clinic Hub.'
-      : 'Hello, I would like to renew my Clinic Hub subscription.';
-    window.open(`https://wa.me/201111835471?text=${encodeURIComponent(msg)}`, '_blank');
-  };
-
   return (
     <div className="min-h-screen flex items-center justify-center bg-background p-4" dir={dir}>
       <motion.div
@@ -44,10 +37,28 @@ export default function SubscriptionExpiredPage() {
         </p>
 
         <div className="space-y-3 pt-4">
-          <Button onClick={handleContact} className="w-full h-14 rounded-2xl text-lg font-black gap-2 bg-gradient-to-r from-emerald-500 to-green-600 shadow-lg shadow-emerald-500/20">
-            <MessageCircle className="h-5 w-5" />
-            {isRtl ? 'تواصل مع الإدارة' : 'Contact Admin'}
-          </Button>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <Button 
+              onClick={() => {
+                const msg = isRtl ? 'مرحباً، أرغب في تجديد اشتراكي (رقم 1).' : 'Hello, I would like to renew my subscription (Admin 1).';
+                window.open(`https://wa.me/201111835471?text=${encodeURIComponent(msg)}`, '_blank');
+              }} 
+              className="w-full h-14 rounded-2xl text-sm font-black gap-2 bg-gradient-to-r from-emerald-500 to-green-600 shadow-lg shadow-emerald-500/20"
+            >
+              <MessageCircle className="h-5 w-5" />
+              {isRtl ? 'الإدارة (1)' : 'Admin (1)'}
+            </Button>
+            <Button 
+              onClick={() => {
+                const msg = isRtl ? 'مرحباً، أرغب في تجديد اشتراكي (رقم 2).' : 'Hello, I would like to renew my subscription (Admin 2).';
+                window.open(`https://wa.me/201153762560?text=${encodeURIComponent(msg)}`, '_blank');
+              }} 
+              className="w-full h-14 rounded-2xl text-sm font-black gap-2 bg-gradient-to-r from-blue-500 to-indigo-600 shadow-lg shadow-blue-500/20"
+            >
+              <MessageCircle className="h-5 w-5" />
+              {isRtl ? 'الإدارة (2)' : 'Admin (2)'}
+            </Button>
+          </div>
           <Button onClick={handleLogout} variant="outline" className="w-full h-12 rounded-2xl font-bold gap-2">
             <LogOut className="h-4 w-4" />
             {isRtl ? 'تسجيل الخروج' : 'Sign Out'}

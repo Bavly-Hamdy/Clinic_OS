@@ -23,11 +23,11 @@ import {
   Settings,
   LogOut,
   Shield,
-  ActivitySquare,
   ChevronRight,
   ChevronLeft,
   User as UserIcon,
 } from 'lucide-react';
+import { Logo } from '@/components/Logo';
 
 const adminNavItems = [
   { key: 'dashboard', icon: LayoutDashboard, path: '/admin/dashboard' },
@@ -81,14 +81,8 @@ export default function AdminLayout() {
             className="flex items-center gap-3 cursor-pointer group"
             onClick={() => navigate('/admin/dashboard')}
           >
-            <div className="relative flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 shadow-xl shadow-amber-500/20 group-hover:scale-105 transition-transform overflow-hidden ring-1 ring-white/10">
-              <div className="absolute inset-0 bg-white/20 rounded-xl" />
-              <Shield className="h-6 w-6 text-white relative z-10" strokeWidth={2.5} />
-            </div>
+            <Logo className="h-20 w-auto" />
             <div className="flex flex-col">
-              <span className="text-xl font-black tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-amber-500 to-orange-600">
-                Clinic Hub
-              </span>
               <span className="text-[10px] font-bold tracking-[0.15em] text-muted-foreground uppercase">
                 {isRtl ? 'لوحة الإدارة' : 'Admin Panel'}
               </span>

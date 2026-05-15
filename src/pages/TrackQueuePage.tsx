@@ -13,15 +13,16 @@ import {
   Clock,
   UserCheck,
   Stethoscope,
-  ActivitySquare,
   Phone,
   ArrowLeft,
   ArrowRight,
-  Globe
+  Globe,
+  Zap,
 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { SEO } from '@/components/SEO';
 import { SEO_DATA } from '@/lib/seo';
+import { Logo } from '@/components/Logo';
 
 export default function TrackQueuePage() {
   const { t, i18n } = useTranslation();
@@ -150,10 +151,7 @@ export default function TrackQueuePage() {
       {/* ─── App Header ─── */}
       <div className="relative z-10 flex flex-col items-center gap-3 mb-12 text-center animate-fade-in">
         <div className="group relative">
-          <div className="absolute -inset-1 bg-gradient-to-r from-primary to-blue-600 rounded-[2rem] blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200" />
-          <div className="relative h-20 w-20 rounded-[2rem] bg-white dark:bg-black flex items-center justify-center shadow-2xl border border-white/20 dark:border-white/10 transition-transform duration-500 group-hover:scale-110">
-            <ActivitySquare className="h-10 w-10 text-primary animate-pulse-subtle" />
-          </div>
+           <Logo className="h-44 w-auto relative z-10 transition-transform duration-500 group-hover:scale-110" />
         </div>
         <div className="mt-4">
           <h1 className="text-4xl font-black tracking-tighter bg-clip-text text-transparent bg-gradient-to-b from-foreground to-foreground/60">

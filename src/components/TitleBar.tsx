@@ -1,7 +1,8 @@
-import { Minus, Square, X, ActivitySquare, ArrowLeft, ArrowRight } from 'lucide-react';
+import { Minus, Square, X, ArrowLeft, ArrowRight } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { Logo } from './Logo';
 
 // Type definition for our electronAPI to avoid TypeScript errors
 declare global {
@@ -59,10 +60,7 @@ export function TitleBar() {
         </button>
 
         <div className="flex items-center gap-2 ms-1">
-          <ActivitySquare className="h-4 w-4 text-primary" />
-          <span className="text-xs font-bold text-slate-700 dark:text-slate-300 tracking-wider">
-            Clinic Hub
-          </span>
+            <Logo className="h-8 w-auto" />
         </div>
       </div>
 

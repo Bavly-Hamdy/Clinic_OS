@@ -29,3 +29,8 @@ export const QUERY_RETRY_COUNT = 1;
 // ── App Metadata ──────────────────────────────────────────────────────────────
 export const APP_NAME    = 'Clinic Hub' as const;
 export const APP_VERSION = '2.0.0'   as const;
+
+export const PLATFORM_SUPPORT_NUMBERS = [
+  '201111835471',
+  '201153762560'
+] as const;

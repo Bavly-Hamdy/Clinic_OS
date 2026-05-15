@@ -28,7 +28,6 @@ import {
   BarChart3,
   Settings,
   DollarSign,
-  ActivitySquare,
   ChevronRight,
   Wifi,
   Sparkles,
@@ -36,6 +35,7 @@ import {
   ChevronLeft,
 } from 'lucide-react';
 import { Appointment } from '@/types/clinic';
+import { Logo } from './Logo';
 
 export function AppSidebar() {
   const { user } = useAuth();
@@ -136,20 +136,12 @@ export function AppSidebar() {
       {/* Brand Header */}
       <SidebarHeader className="px-4 py-6 border-b border-border/30 mb-2">
         <div 
-          className={`flex items-center ${collapsed ? 'justify-center' : 'gap-3'} transition-all cursor-pointer group`}
+          className={`flex items-center ${collapsed ? 'justify-center' : 'gap-3'} transition-all cursor-pointer group px-2`}
           onClick={() => navigate('/dashboard')}
         >
-          <div className="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-info shadow-xl shadow-primary/20 group-hover:scale-105 transition-transform duration-500 overflow-hidden ring-1 ring-white/10">
-             <div className="absolute inset-0 bg-white/20 rounded-xl" />
-             <ActivitySquare className="h-6 w-6 text-white relative z-10" strokeWidth={2.5} />
-             {/* Shimmer effect */}
-             <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/40 to-transparent animate-[shimmer_2.5s_infinite]" />
-          </div>
+          <Logo className={`${collapsed ? 'h-14' : 'h-20'} w-auto transition-all duration-300`} />
           {!collapsed && (
             <div className={`flex flex-col animate-fade-in overflow-hidden ${isRtl ? 'items-start' : ''}`}>
-              <span className="text-2xl font-black tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-primary via-info to-primary animate-gradient-x">
-                Clinic Hub
-              </span>
               <span className="text-[10px] font-bold tracking-[0.2em] text-muted-foreground uppercase opacity-80 flex items-center gap-1">
                 <Sparkles className="h-3 w-3 text-info" />
                 {currentEdition}

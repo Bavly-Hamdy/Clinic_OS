@@ -4,7 +4,7 @@ import { AppSidebar } from '@/components/AppSidebar';
 import { MobileBottomNav } from '@/components/MobileBottomNav';
 import { SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar';
 import { Button } from '@/components/ui/button';
-import { Bell, LogOut, User, ActivitySquare } from 'lucide-react';
+import { Bell, LogOut, User } from 'lucide-react';
 import { ModeToggle } from '@/components/ModeToggle';
 import { LanguageToggle } from '@/components/LanguageToggle';
 import { useLanguage } from '@/providers/LanguageProvider';
@@ -20,6 +20,7 @@ import {
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { NotificationBell } from '@/components/NotificationBell';
+import { Logo } from '@/components/Logo';
 
 export default function DashboardLayout() {
   const { user, logout } = useAuth();
@@ -65,10 +66,7 @@ export default function DashboardLayout() {
 
              {/* App title on mobile */}
              <div className={`md:hidden flex items-center gap-2 ${dir === 'rtl' ? 'flex-row-reverse text-end' : ''}`}>
-              <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-primary to-blue-600 flex items-center justify-center shadow-lg shadow-primary/20 shrink-0">
-                <ActivitySquare className="h-4 w-4 text-white" />
-              </div>
-              <span className="font-extrabold text-lg bg-clip-text text-transparent bg-gradient-to-r from-primary to-info tracking-tight truncate">Clinic Hub</span>
+              <Logo className="h-16 w-auto" />
               <Badge
                 variant="outline"
                 className={`text-[10px] px-2 py-0.5 h-5 rounded-full shrink-0 ${

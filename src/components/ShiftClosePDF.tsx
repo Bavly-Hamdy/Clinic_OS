@@ -82,7 +82,7 @@ const s = StyleSheet.create({
     },
 
     // Table
-    tableHead: { flexDirection: 'row', backgroundColor: c.primary, padding: '5 8', borderRadius: '4 4 0 0' },
+    tableHead: { flexDirection: 'row', backgroundColor: c.primary, padding: '5 8', borderTopLeftRadius: 4, borderTopRightRadius: 4 },
     tableRow: { flexDirection: 'row', padding: '5 8', borderBottomWidth: 1, borderBottomColor: c.border },
     tableAlt: { backgroundColor: c.bg },
     tableFoot: { flexDirection: 'row', padding: '6 8', borderTopWidth: 2, borderTopColor: c.dark },
@@ -263,7 +263,7 @@ function ShiftClosePDFDocument({
     );
 }
 
-// ─── Download button ──────────────────────────────────────────────────────────
+import { pdf } from '@react-pdf/renderer';
 
 export function ShiftClosePDFButton({
     date,
@@ -273,6 +273,7 @@ export function ShiftClosePDFButton({
     shiftData: ShiftData;
 }) {
     const [settings, setSettings] = useState<Partial<ClinicSettings>>({});
+    const [isGenerating, setIsGenerating] = useState(false);
     const { t } = useTranslation();
 
     useEffect(() => {
@@ -283,17 +284,31 @@ export function ShiftClosePDFButton({
 
     const fileName = `shift_close_${date}.pdf`;
 
+    const handleDownload = async () => {
+        try {
+            setIsGenerating(true);
+            const doc = <ShiftClosePDFDocument date={date} shiftData={shiftData} settings={settings} />;
+            const blob = await pdf(doc).toBlob();
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = fileName;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+        } catch (error: any) {
+            console.error("Failed to generate PDF:", error);
+            alert(t('common.error') + ':\n\n' + (error.stack || error.message || String(error)));
+        } finally {
+            setIsGenerating(false);
+        }
+    };
+
     return (
-        <PDFDownloadLink
-            document={<ShiftClosePDFDocument date={date} shiftData={shiftData} settings={settings} />}
-            fileName={fileName}
-        >
-            {({ loading }) => (
-                <Button variant="outline" disabled={loading}>
-                    <Download className="h-4 w-4 me-2" />
-                    {loading ? t('common.generating') : t('common.downloadReport')}
-                </Button>
-            )}
-        </PDFDownloadLink>
+        <Button variant="outline" onClick={handleDownload} disabled={isGenerating}>
+            <Download className="h-4 w-4 me-2" />
+            {isGenerating ? t('common.generating') || 'Generating...' : t('common.downloadReport') || 'Download Report'}
+        </Button>
     );
 }

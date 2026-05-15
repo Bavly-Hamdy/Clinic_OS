@@ -4,8 +4,15 @@ import path from 'path';
 import { VitePWA } from 'vite-plugin-pwa';
 import electron from 'vite-plugin-electron/simple';
 
+// Detect if we are building for web/Vercel
+const isWeb = process.env.VERCEL || process.env.NETLIFY || process.env.WEB;
+
 // https://vitejs.dev/config/
 export default defineConfig({
+  define: {
+    'process.env': {},
+    global: 'window',
+  },
   server: {
     host: '::',
     port: 8080,
@@ -17,7 +24,7 @@ export default defineConfig({
 
   plugins: [
     react(),
-    electron({
+    !isWeb && electron({
       main: {
         // Shortcut of `build.lib.entry`.
         entry: 'electron/main.ts',
@@ -27,9 +34,6 @@ export default defineConfig({
         // Preload scripts may contain Web assets, so use the `build.rollupOptions.input` instead `build.lib.entry`.
         input: path.join(__dirname, 'electron/preload.ts'),
       },
-      // Ployfill the Electron and Node.js built-in modules for Renderer process.
-      // See 👉 https://github.com/electron-vite/vite-plugin-electron-renderer
-      renderer: {},
     }),
     VitePWA({
       registerType: 'autoUpdate',
@@ -76,7 +80,7 @@ export default defineConfig({
         ],
       },
     }),
-  ],
+  ].filter(Boolean),
 
   build: {
     // Raise chunk size warning threshold to silence expected large vendor bundles

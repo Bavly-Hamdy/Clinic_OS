@@ -3,7 +3,6 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { useState, useRef } from 'react';
 import {
-  ActivitySquare,
   Users,
   Stethoscope,
   BarChart3,
@@ -18,13 +17,15 @@ import {
   Cpu,
   Star,
   Plus,
-  CalendarClock
+  CalendarClock,
+  HeartPulse
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { usePlatformPricing } from '@/hooks/usePlatformPricing';
 import { SEO } from '@/components/SEO';
 import { ModeToggle } from '@/components/ModeToggle';
+import { Logo } from '@/components/Logo';
 import {
   SEO_DATA,
   getSoftwareSchema,
@@ -131,10 +132,7 @@ export default function LandingPage() {
             className="flex items-center gap-3 cursor-pointer"
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           >
-            <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-primary to-blue-600 flex items-center justify-center shadow-lg shadow-primary/20 ring-1 ring-white/20 shrink-0">
-              <ActivitySquare className="h-6 w-6 text-white" />
-            </div>
-            <span className="hidden sm:inline text-2xl font-black text-foreground tracking-tighter">Clinic Hub</span>
+            <Logo className="h-14 w-auto" />
           </motion.div>
 
           <div className="flex items-center gap-2 sm:gap-6">
@@ -276,7 +274,7 @@ export default function LandingPage() {
                              transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
                              className="h-32 bg-primary/10 rounded-2xl border border-primary/20 flex items-center justify-center"
                           >
-                             <ActivitySquare className="h-10 w-10 text-primary" />
+                             <Stethoscope className="h-10 w-10 text-primary" />
                           </motion.div>
                           <div className="space-y-4">
                              <div className="h-4 bg-white/10 rounded-full w-full" />
@@ -673,7 +671,7 @@ export default function LandingPage() {
                        {isRTL ? 'خصوصية البيانات أولاً' : 'Data Privacy First'}
                     </div>
                     <div className="flex items-center gap-2">
-                       <ActivitySquare className="h-4 w-4 text-primary" />
+                       <Zap className="h-4 w-4 text-primary" />
                        {isRTL ? 'تطوير مستمر' : 'Active Development'}
                     </div>
                  </div>
@@ -688,10 +686,7 @@ export default function LandingPage() {
             <div className="grid md:grid-cols-4 gap-12 mb-20 text-start">
                <div className="col-span-1 md:col-span-2 space-y-8">
                   <div className="flex items-center gap-3">
-                    <div className="h-10 w-10 rounded-xl bg-foreground flex items-center justify-center">
-                       <ActivitySquare className="h-6 w-6 text-background" />
-                    </div>
-                    <span className="text-2xl font-black text-foreground tracking-tighter">Clinic Hub</span>
+                    <Logo className="h-20 w-auto" />
                   </div>
                   <p className="text-muted-foreground font-medium max-w-sm leading-relaxed">
                      {isRTL
@@ -718,9 +713,19 @@ export default function LandingPage() {
                <div className="space-y-6">
                   <h4 className="text-xs font-black uppercase tracking-[0.3em] text-muted-foreground">{isRTL ? 'الدعم الفني' : 'Support'}</h4>
                   <ul className="space-y-4 text-muted-foreground font-bold">
+                      <li>
+                        <a href="https://wa.me/201111835471" target="_blank" rel="noreferrer" className="hover:text-primary transition-colors flex items-center gap-2">
+                           {isRTL ? 'الدعم الفني (1)' : 'Technical Support (1)'}
+                        </a>
+                     </li>
                      <li>
                         <a href="https://wa.me/201153762560" target="_blank" rel="noreferrer" className="hover:text-primary transition-colors flex items-center gap-2">
-                           {isRTL ? 'محادثة واتساب' : 'WhatsApp Chat'}
+                           {isRTL ? 'الدعم الفني (2)' : 'Technical Support (2)'}
+                        </a>
+                     </li>
+                     <li>
+                        <a href="tel:+201111835471" className="hover:text-primary transition-colors flex items-center gap-2" dir="ltr">
+                           +20 111 183 5471
                         </a>
                      </li>
                      <li>

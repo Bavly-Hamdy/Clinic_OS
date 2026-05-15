@@ -7,8 +7,9 @@ import { useAuth } from '@/providers/AuthProvider';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { AlertCircle, Eye, EyeOff, ActivitySquare, ArrowRight, ShieldCheck, ArrowLeft } from 'lucide-react';
+import { AlertCircle, Eye, EyeOff, ArrowRight, ShieldCheck, ArrowLeft } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+import { Logo } from '@/components/Logo';
 
 type LoginFormValues = {
   email: string;
@@ -111,11 +112,8 @@ export default function LoginPage() {
             {/* Subtle inner top glow */}
             <div className="absolute top-0 start-0 end-0 h-1 bg-gradient-to-r from-transparent via-primary/50 to-transparent opacity-50" />
             
-            <div className={`flex items-center gap-3 mb-8`}>
-              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-primary to-blue-600 shadow-lg shadow-primary/30">
-                <ActivitySquare className="h-6 w-6 text-white" />
-              </div>
-              <span className={`text-2xl font-extrabold tracking-tight`}>Clinic Hub</span>
+            <div className={`flex items-center gap-3 mb-8 justify-center lg:justify-start`}>
+              <Logo className="h-32 w-auto" />
             </div>
 
             <div className={`mb-8`}>
