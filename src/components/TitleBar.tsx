@@ -60,7 +60,6 @@ export function TitleBar() {
         </button>
 
         <div className="flex items-center gap-2 ms-2">
-            <img src="/Icon.ico" alt="App Icon" className="h-4 w-4" />
             <Logo className="h-8 w-auto" />
         </div>
       </div>
