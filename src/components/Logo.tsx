@@ -14,7 +14,7 @@ export function Logo({ className = "h-8 w-auto object-contain" }: { className?: 
     }
   }, [theme]);
 
-  const logoSrc = resolvedTheme === "dark" ? "/LogoDark.png" : "/LogoLight.png";
+  const logoSrc = resolvedTheme === "dark" ? "LogoDark.png" : "LogoLight.png";
 
   return (
     <img 
