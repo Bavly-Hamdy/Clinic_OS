@@ -59,7 +59,8 @@ export function TitleBar() {
           {isRtl ? <ArrowRight className="h-4 w-4" /> : <ArrowLeft className="h-4 w-4" />}
         </button>
 
-        <div className="flex items-center gap-2 ms-1">
+        <div className="flex items-center gap-2 ms-2">
+            <img src="/Icon.ico" alt="App Icon" className="h-4 w-4" />
             <Logo className="h-8 w-auto" />
         </div>
       </div>

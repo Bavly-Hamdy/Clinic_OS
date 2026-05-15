@@ -124,7 +124,7 @@
       "target": [
         "nsis"
       ],
-      "icon": "public/icons/icon-512.png"
+      "icon": "public/Icon.ico"
     },
     "nsis": {
       "oneClick": false,
