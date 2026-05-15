@@ -124,13 +124,23 @@
       "target": [
         "nsis"
       ],
-      "icon": "public/Icon.ico"
+      "icon": "public/Icon.png"
     },
     "nsis": {
       "oneClick": false,
+      "perMachine": true,
       "allowToChangeInstallationDirectory": true,
       "createDesktopShortcut": true,
-      "createStartMenuShortcut": true
+      "createStartMenuShortcut": true,
+      "installerIcon": "public/Icon.ico",
+      "uninstallerIcon": "public/Icon.ico",
+      "installerHeaderIcon": "public/Icon.ico",
+      "installerSidebar": "public/installerSidebar.png",
+      "uninstallerSidebar": "public/installerSidebar.png",
+      "runAfterFinish": true,
+      "artifactName": "${productName} Setup ${version}.${ext}",
+      "uninstallDisplayName": "${productName}",
+      "deleteAppDataOnUninstall": false
     }
   }
 }

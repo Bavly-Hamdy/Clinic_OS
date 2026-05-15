@@ -45,7 +45,7 @@ function createWindow() {
     height: 800,
     minWidth: 1024,
     minHeight: 768,
-    icon: path.join(process.env.VITE_PUBLIC || '', 'Icon.ico'),
+    icon: path.join(process.env.VITE_PUBLIC || '', 'Icon.png'),
     title: 'Clinic Hub',
     frame: false, // Custom Title Bar
     titleBarStyle: 'hidden',
@@ -90,7 +90,7 @@ function createWindow() {
 }
 
 function createTray() {
-  const iconPath = path.join(process.env.VITE_PUBLIC || '', 'Icon.ico');
+  const iconPath = path.join(process.env.VITE_PUBLIC || '', 'Icon.png');
   tray = new Tray(iconPath);
   
   const contextMenu = Menu.buildFromTemplate([
