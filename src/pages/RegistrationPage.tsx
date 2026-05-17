@@ -98,137 +98,197 @@ export default function RegistrationPage() {
 
   // ── Success Screen ─────────────────────────────────────────────────────────
   if (isSuccess) {
+    const steps = isRTL
+      ? [
+          { icon: '✅', title: 'تم استلام طلبك', desc: 'وصل طلبك إلى فريق Clinic Hub وتم تسجيله بنجاح في النظام.' },
+          { icon: '📞', title: 'سيتواصل معك فريقنا', desc: `سيتواصل معك أحد متخصصينا عبر الواتساب على رقم ${submittedPhone} خلال دقائق.` },
+          { icon: '🚀', title: 'تفعيل حسابك', desc: 'سيتم إعداد بيئتك الخاصة بالكامل وتفعيل حسابك فور تأكيدك.' },
+        ]
+      : [
+          { icon: '✅', title: 'Request Received', desc: 'Your request has been logged in the Clinic Hub system successfully.' },
+          { icon: '📞', title: 'Our team will reach you', desc: `A specialist will contact you via WhatsApp on ${submittedPhone} within minutes.` },
+          { icon: '🚀', title: 'Account Activation', desc: 'Your dedicated environment will be fully set up and activated upon your confirmation.' },
+        ];
+
     return (
       <div
-        className="min-h-screen bg-background font-sans flex flex-col items-center justify-center px-4"
+        className="min-h-screen font-sans relative overflow-hidden"
         dir={isRTL ? 'rtl' : 'ltr'}
+        style={{ background: 'radial-gradient(ellipse at 60% 0%, hsl(142 76% 96%) 0%, hsl(220 14% 96%) 50%, hsl(262 83% 97%) 100%)' }}
       >
-        <AnimatePresence>
+        {/* Decorative background blobs */}
+        <div className="pointer-events-none absolute inset-0 overflow-hidden">
+          <div className="absolute -top-40 -start-40 h-[600px] w-[600px] rounded-full bg-emerald-400/10 blur-3xl" />
+          <div className="absolute top-1/2 -end-40 h-[500px] w-[500px] rounded-full bg-primary/10 blur-3xl" />
+          <div className="absolute -bottom-40 start-1/3 h-[400px] w-[400px] rounded-full bg-amber-400/10 blur-3xl" />
+        </div>
+
+        <div className="relative z-10 flex min-h-screen flex-col items-center justify-center px-4 py-16">
           <motion.div
-            key="success"
-            initial={{ opacity: 0, scale: 0.85, y: 30 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            transition={{ type: 'spring', damping: 20, stiffness: 200 }}
-            className="max-w-lg w-full text-center space-y-8"
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ type: 'spring', damping: 22, stiffness: 180 }}
+            className="w-full max-w-2xl"
           >
-            {/* Animated check icon */}
-            <motion.div
-              className="relative mx-auto"
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              transition={{ delay: 0.15, type: 'spring', damping: 14, stiffness: 200 }}
-            >
-              <div className="h-28 w-28 mx-auto rounded-full bg-gradient-to-br from-emerald-400 to-green-600 flex items-center justify-center shadow-2xl shadow-emerald-500/40">
-                <CheckCircle2 className="h-14 w-14 text-white" strokeWidth={2.5} />
-              </div>
-              {/* Pulsing ring */}
-              <motion.div
-                className="absolute inset-0 rounded-full border-4 border-emerald-400/40"
-                animate={{ scale: [1, 1.3, 1], opacity: [0.8, 0, 0.8] }}
-                transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-              />
-              <motion.div
-                className="absolute inset-0 rounded-full border-4 border-emerald-300/20"
-                animate={{ scale: [1, 1.6, 1], opacity: [0.6, 0, 0.6] }}
-                transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut', delay: 0.3 }}
-              />
-            </motion.div>
+            {/* ── Top hero card ───────────────────────────────────────────── */}
+            <div className="relative rounded-[2.5rem] overflow-hidden shadow-2xl shadow-emerald-500/10 mb-6">
+              {/* Green gradient header */}
+              <div className="bg-gradient-to-br from-emerald-500 via-green-500 to-teal-600 p-10 text-center relative overflow-hidden">
+                {/* Shimmer overlay */}
+                <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(255,255,255,0.15)_0%,transparent_50%,rgba(255,255,255,0.05)_100%)]" />
 
-            {/* Sparkles decoration */}
-            <motion.div
-              className="flex justify-center gap-2 text-amber-400"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.35 }}
-            >
-              <Sparkles className="h-5 w-5" />
-              <Sparkles className="h-4 w-4 mt-1" />
-              <Sparkles className="h-5 w-5" />
-            </motion.div>
+                {/* Animated check icon */}
+                <motion.div
+                  className="relative mx-auto mb-6 h-28 w-28"
+                  initial={{ scale: 0, rotate: -180 }}
+                  animate={{ scale: 1, rotate: 0 }}
+                  transition={{ delay: 0.2, type: 'spring', damping: 14, stiffness: 200 }}
+                >
+                  <div className="absolute inset-0 rounded-full bg-white/20 animate-ping" />
+                  <div className="absolute inset-2 rounded-full bg-white/10 animate-ping" style={{ animationDelay: '0.3s' }} />
+                  <div className="relative h-28 w-28 rounded-full bg-white/20 backdrop-blur-sm border-2 border-white/40 flex items-center justify-center shadow-xl">
+                    <CheckCircle2 className="h-14 w-14 text-white drop-shadow-lg" strokeWidth={2.5} />
+                  </div>
+                </motion.div>
 
-            {/* Title */}
-            <motion.div
-              className="space-y-3"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.25 }}
-            >
-              <h1 className="text-3xl sm:text-4xl font-black text-foreground tracking-tight">
-                {isRTL ? '🎉 تم استلام طلبك بنجاح!' : '🎉 Request Received!'}
-              </h1>
-              <p className="text-lg text-muted-foreground font-medium leading-relaxed">
-                {isRTL
-                  ? `شكراً لك! تم تسجيل طلب انضمامك لـ Clinic Hub بنجاح.`
-                  : `Thank you! Your Clinic Hub join request has been submitted successfully.`}
-              </p>
-            </motion.div>
-
-            {/* Info card */}
-            <motion.div
-              className="glass-card rounded-[2rem] p-6 space-y-4 text-start"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 }}
-            >
-              <div className="flex items-start gap-4">
-                <div className="h-10 w-10 shrink-0 rounded-2xl bg-blue-500/10 flex items-center justify-center">
-                  <MessageCircle className="h-5 w-5 text-blue-500" />
-                </div>
-                <div className="space-y-1">
-                  <p className="font-bold text-foreground">
-                    {isRTL ? 'سيتواصل معك فريق الدعم' : 'Our support team will contact you'}
-                  </p>
-                  <p className="text-sm text-muted-foreground leading-relaxed">
+                <motion.div
+                  initial={{ opacity: 0, y: 16 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.35 }}
+                  className="relative space-y-2"
+                >
+                  <div className="flex items-center justify-center gap-2 mb-3">
+                    <Sparkles className="h-5 w-5 text-yellow-300 animate-pulse" />
+                    <Sparkles className="h-4 w-4 text-yellow-200 animate-pulse" style={{ animationDelay: '0.2s' }} />
+                    <Sparkles className="h-5 w-5 text-yellow-300 animate-pulse" style={{ animationDelay: '0.4s' }} />
+                  </div>
+                  <h1 className="text-3xl sm:text-4xl font-black text-white tracking-tight drop-shadow-md">
+                    {isRTL ? '🎉 تم استلام طلبك بنجاح!' : '🎉 Request Submitted!'}
+                  </h1>
+                  <p className="text-green-100 text-base sm:text-lg font-medium leading-relaxed max-w-md mx-auto">
                     {isRTL
-                      ? `سيقوم أحد متخصصي فريق Clinic Hub بالتواصل معك عبر الواتساب على رقم ${submittedPhone} لتفعيل حسابك وإرشادك خلال دقائق.`
-                      : `A Clinic Hub specialist will reach out to you via WhatsApp on ${submittedPhone} to activate your account and guide you within minutes.`}
+                      ? 'مرحباً بك في عائلة Clinic Hub! طلب انضمامك في أيدٍ أمينة الآن.'
+                      : 'Welcome to the Clinic Hub family! Your request is now in safe hands.'}
                   </p>
-                </div>
+                </motion.div>
               </div>
-              <div className="flex items-start gap-4">
-                <div className="h-10 w-10 shrink-0 rounded-2xl bg-amber-500/10 flex items-center justify-center">
-                  <Clock className="h-5 w-5 text-amber-500" />
-                </div>
-                <div className="space-y-1">
-                  <p className="font-bold text-foreground">
-                    {isRTL ? 'وقت التفعيل المتوقع' : 'Expected Activation Time'}
-                  </p>
-                  <p className="text-sm text-muted-foreground">
-                    {isRTL ? 'خلال دقائق من استلام طلبك (أيام العمل).' : 'Within minutes of receiving your request (business days).'}
-                  </p>
-                </div>
-              </div>
-            </motion.div>
 
-            {/* Plan badge */}
+              {/* White body */}
+              <div className="bg-card p-8 space-y-6">
+                {/* Plan badge */}
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 0.45 }}
+                  className="flex items-center justify-center"
+                >
+                  <div className="inline-flex items-center gap-3 px-6 py-3 rounded-2xl bg-primary/5 border border-primary/20">
+                    <span className="text-xl">{plan === 'monthly' ? '📅' : '🗓️'}</span>
+                    <div className="text-start">
+                      <p className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">
+                        {isRTL ? 'الخطة المختارة' : 'Selected Plan'}
+                      </p>
+                      <p className="font-black text-sm text-foreground">{planLabel}</p>
+                    </div>
+                  </div>
+                </motion.div>
+
+                {/* Divider */}
+                <div className="flex items-center gap-3">
+                  <div className="flex-1 h-px bg-border/60" />
+                  <span className="text-xs font-black uppercase tracking-widest text-muted-foreground/60">
+                    {isRTL ? 'خطوات ما بعد التسجيل' : 'What happens next'}
+                  </span>
+                  <div className="flex-1 h-px bg-border/60" />
+                </div>
+
+                {/* Steps timeline */}
+                <motion.div
+                  className="space-y-4"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.55 }}
+                >
+                  {steps.map((step, i) => (
+                    <motion.div
+                      key={i}
+                      initial={{ opacity: 0, x: isRTL ? 20 : -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.55 + i * 0.12 }}
+                      className="flex items-start gap-4"
+                    >
+                      {/* Step number + icon */}
+                      <div className="relative shrink-0">
+                        <div className={`h-12 w-12 rounded-2xl flex items-center justify-center text-xl shadow-sm ${
+                          i === 0 ? 'bg-emerald-500/10 border border-emerald-500/20' :
+                          i === 1 ? 'bg-blue-500/10 border border-blue-500/20' :
+                          'bg-primary/10 border border-primary/20'
+                        }`}>
+                          {step.icon}
+                        </div>
+                        {/* Connector line */}
+                        {i < steps.length - 1 && (
+                          <div className="absolute start-1/2 top-12 bottom-0 w-px h-4 bg-border/60 -translate-x-1/2 rtl:translate-x-1/2" />
+                        )}
+                      </div>
+                      <div className="pt-1 space-y-0.5 flex-1 min-w-0">
+                        <p className="font-black text-sm text-foreground">{step.title}</p>
+                        <p className="text-sm text-muted-foreground leading-relaxed">{step.desc}</p>
+                      </div>
+                    </motion.div>
+                  ))}
+                </motion.div>
+              </div>
+            </div>
+
+            {/* ── Stats row ───────────────────────────────────────────────── */}
             <motion.div
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-primary/10 border border-primary/20"
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.5 }}
+              className="grid grid-cols-3 gap-3 mb-6"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.7 }}
             >
-              <span className="text-sm font-bold text-primary">
-                {plan === 'monthly' ? '📅' : '🗓️'} {planLabel}
-              </span>
+              {(isRTL
+                ? [
+                    { value: '+500', label: 'طبيب يثق بنا' },
+                    { value: '24/7', label: 'دعم فني متواصل' },
+                    { value: '< 5 دقائق', label: 'وقت الاستجابة' },
+                  ]
+                : [
+                    { value: '500+', label: 'Doctors Trust Us' },
+                    { value: '24/7', label: 'Support Available' },
+                    { value: '< 5 min', label: 'Response Time' },
+                  ]
+              ).map((stat, i) => (
+                <div key={i} className="rounded-2xl bg-card border border-border/60 p-4 text-center shadow-sm">
+                  <p className="text-lg sm:text-xl font-black text-foreground leading-none">{stat.value}</p>
+                  <p className="text-[10px] sm:text-xs text-muted-foreground font-medium mt-1 leading-tight">{stat.label}</p>
+                </div>
+              ))}
             </motion.div>
 
-            {/* Back button */}
+            {/* ── CTA button ──────────────────────────────────────────────── */}
             <motion.div
+              className="text-center"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 0.6 }}
+              transition={{ delay: 0.85 }}
             >
               <Button
-                variant="outline"
-                className="rounded-2xl px-8 h-12 font-bold gap-2"
                 onClick={() => navigate('/')}
+                className="h-14 px-10 rounded-2xl text-base font-black shadow-xl shadow-primary/20 gap-3 hover:scale-[1.03] active:scale-[0.97] transition-transform"
               >
-                <ArrowLeft className={`h-4 w-4 ${isRTL ? 'rotate-180' : ''}`} />
-                {isRTL ? 'العودة للرئيسية' : 'Back to Home'}
+                <ArrowLeft className={`h-5 w-5 ${isRTL ? 'rotate-180' : ''}`} />
+                {isRTL ? 'العودة إلى الصفحة الرئيسية' : 'Back to Home'}
               </Button>
+              <p className="text-xs text-muted-foreground font-medium mt-4">
+                {isRTL
+                  ? 'أو أغلق هذه النافذة وانتظر تواصلنا معك على الواتساب قريباً 🤝'
+                  : 'Or close this window and expect our WhatsApp message shortly 🤝'}
+              </p>
             </motion.div>
           </motion.div>
-        </AnimatePresence>
+        </div>
       </div>
     );
   }
