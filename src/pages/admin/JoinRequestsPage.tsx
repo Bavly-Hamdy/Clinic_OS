@@ -164,21 +164,20 @@ export default function JoinRequestsPage() {
       ? (isRtl ? 'الخطة الشهرية' : 'Monthly Plan')
       : (isRtl ? 'الخطة السنوية' : 'Yearly Plan');
 
-    // تعريف الـ Emojis بنظام Unicode عشان نتفادى أي مشكلة في تشفير الملف
-    const star = '\u2728'; // ✨
-    const wave = '\uD83D\uDC4B'; // 👋
-    const hospital = '\uD83C\uDFE5'; // 🏥
-    const check = '\u2705'; // ✅
-    const list = '\uD83D\uDCCB'; // 📋
-    const docIcon = '\uD83D\uDC68\u200D\u2695\uFE0F'; // 👨⚕️
-    const steth = '\uD83E\uDE7A'; // 🩺
-    const building = '\uD83C\uDFE2'; // 🏢
-    const gem = '\uD83D\uDC8E'; // 💎
-    const rocket = '\uD83D\uDE80'; // 🚀
-    const gear = '\u2699\uFE0F'; // ⚙️
-    const clock = '\uD83D\uDD52'; // 🕒
-    const handshake = '\uD83E\uDD1D'; // 🤝
-    const globe = '\uD83C\uDF10'; // 🌐
+    const star = '\u2728';
+    const wave = '\uD83D\uDC4B';
+    const hospital = '\uD83C\uDFE5';
+    const check = '\u2705';
+    const list = '\uD83D\uDCCB';
+    const docIcon = '\uD83D\uDC68\u200D\u2695\uFE0F';
+    const steth = '\uD83E\uDE7A';
+    const building = '\uD83C\uDFE2';
+    const gem = '\uD83D\uDC8E';
+    const rocket = '\uD83D\uDE80';
+    const gear = '\u2699\uFE0F';
+    const clock = '\uD83D\uDD52';
+    const handshake = '\uD83E\uDD1D';
+    const globe = '\uD83C\uDF10';
 
     const msg = isRtl
       ? `${star} *CLINIC HUB | SUPPORT* ${star}\n` +
@@ -215,12 +214,15 @@ export default function JoinRequestsPage() {
         `*Customer Relations | Clinic Hub*\n` +
         `${globe} www.clinichub.com`;
 
-
-    const encoded = encodeURIComponent(msg);
     SUPPORT_NUMBERS.forEach((num) => {
-      window.open(`https://wa.me/${num}?text=${encoded}`, '_blank');
+      // الحل السحري: استخدام API الواتساب المباشر وبناء الرابط بـ URLSearchParams
+      const whatsappUrl = new URL('https://api.whatsapp.com/send');
+      whatsappUrl.searchParams.append('phone', num);
+      whatsappUrl.searchParams.append('text', msg);
+      
+      window.open(whatsappUrl.toString(), '_blank');
     });
-    // Also mark as contacted if still 'new'
+    
     if (req.status === 'new') {
       updateStatus(req.id, 'contacted').catch(console.error);
     }
