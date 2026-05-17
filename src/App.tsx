@@ -42,6 +42,7 @@ const DoctorManagementPage      = lazy(() => import('@/pages/admin/DoctorManagem
 const SubscriptionManagementPage = lazy(() => import('@/pages/admin/SubscriptionManagementPage'));
 const PricingManagementPage     = lazy(() => import('@/pages/admin/PricingManagementPage'));
 const AdminSettingsPage         = lazy(() => import('@/pages/admin/AdminSettingsPage'));
+const JoinRequestsPage          = lazy(() => import('@/pages/admin/JoinRequestsPage'));
 
 const NotFound                  = lazy(() => import('@/pages/NotFound'));
 
@@ -99,6 +100,7 @@ const App = () => (
                       <Route path="/admin/doctors"       element={<DoctorManagementPage />} />
                       <Route path="/admin/subscriptions" element={<SubscriptionManagementPage />} />
                       <Route path="/admin/pricing"       element={<PricingManagementPage />} />
+                      <Route path="/admin/join-requests" element={<JoinRequestsPage />} />
                       <Route path="/admin/settings"      element={<AdminSettingsPage />} />
                     </Route>
                   </Route>

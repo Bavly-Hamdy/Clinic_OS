@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { 
+import { motion, AnimatePresence } from 'framer-motion';
+import {
   ArrowLeft,
   ArrowRight,
   CheckCircle2,
@@ -12,12 +12,20 @@ import {
   User,
   Briefcase,
   Tag,
+  Sparkles,
+  Clock,
+  MessageCircle,
+  Send,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Logo } from '@/components/Logo';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { usePlatformPricing } from '@/hooks/usePlatformPricing';
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
+import { db } from '@/lib/firebase';
+import { COLLECTIONS } from '@/lib/constants';
+import { toast } from 'sonner';
 
 export default function RegistrationPage() {
   const { t, i18n } = useTranslation();
@@ -26,16 +34,16 @@ export default function RegistrationPage() {
   const isRTL = i18n.language === 'ar';
   const IconArrow = isRTL ? ArrowLeft : ArrowRight;
 
-   const { pricing, isLoading: pricingLoading } = usePlatformPricing();
+  const { pricing, isLoading: pricingLoading } = usePlatformPricing();
 
   // Read billing cycle from URL param (set by LandingPage)
   const plan = (searchParams.get('plan') as 'monthly' | 'yearly') || 'monthly';
-  
-  const savingPercent = pricing.monthlyPrice > 0 
-    ? Math.round(((pricing.monthlyPrice * 12 - pricing.yearlyPrice) / (pricing.monthlyPrice * 12)) * 100) 
+
+  const savingPercent = pricing.monthlyPrice > 0
+    ? Math.round(((pricing.monthlyPrice * 12 - pricing.yearlyPrice) / (pricing.monthlyPrice * 12)) * 100)
     : 0;
 
-  const planLabel = pricingLoading 
+  const planLabel = pricingLoading
     ? (isRTL ? 'جاري التحميل...' : 'Loading...')
     : plan === 'monthly'
       ? (isRTL ? `شهري - ${pricing.monthlyPrice} ج.م / شهر` : `Monthly - ${pricing.monthlyPrice} EGP / month`)
@@ -51,64 +59,34 @@ export default function RegistrationPage() {
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [submittedPhone, setSubmittedPhone] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    const supportNumbers = ['201111835471', '201153762560'];
-    const divider = '\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501';
-    
-    const lines: string[] = [];
-    
-    if (isRTL) {
-      lines.push(`*[ Clinic Hub ] طلب اشتراك جديد*`);
-      lines.push(divider);
-      lines.push('');
-      lines.push(`*الاسم:* ${formData.name}`);
-      if (formData.job) lines.push(`*المهنة:* ${formData.job}`);
-      if (formData.specialty) lines.push(`*التخصص:* ${formData.specialty}`);
-      lines.push(`*الهاتف:* ${formData.phone}`);
-      if (formData.clinicName) lines.push(`*العيادة:* ${formData.clinicName}`);
-      lines.push('');
-      lines.push(divider);
-      lines.push('');
-      lines.push(`*الخطة المختارة:*`);
-      lines.push(`  ${plan === 'monthly' ? '[خطة شهرية]' : '[خطة سنوية]'} ${planLabel}`);
-      if (formData.promoCode) lines.push(`*كود الخصم:* ${formData.promoCode}`);
-      lines.push('');
-      lines.push(divider);
-      lines.push(`_تم الإرسال عبر بوابة العيادة_`);
-    } else {
-      lines.push(`*[ Clinic Hub ] New Subscription Request*`);
-      lines.push(divider);
-      lines.push('');
-      lines.push(`*Name:* ${formData.name}`);
-      if (formData.job) lines.push(`*Profession:* ${formData.job}`);
-      if (formData.specialty) lines.push(`*Specialty:* ${formData.specialty}`);
-      lines.push(`*Phone:* ${formData.phone}`);
-      if (formData.clinicName) lines.push(`*Clinic:* ${formData.clinicName}`);
-      lines.push('');
-      lines.push(divider);
-      lines.push('');
-      lines.push(`*Selected Plan:*`);
-      lines.push(`  ${plan === 'monthly' ? '[Monthly Plan]' : '[Yearly Plan]'} ${planLabel}`);
-      if (formData.promoCode) lines.push(`*Promo Code:* ${formData.promoCode}`);
-      lines.push('');
-      lines.push(divider);
-      lines.push(`_Sent via Clinic Portal_`);
-    }
-
-    const message = lines.join('\n');
-    const encodedMessage = encodeURIComponent(message);
-
-    setTimeout(() => {
-      supportNumbers.forEach((num) => {
-        const whatsappUrl = `https://wa.me/${num}?text=${encodedMessage}`;
-        window.open(whatsappUrl, '_blank');
+    try {
+      await addDoc(collection(db, COLLECTIONS.REGISTRATION_REQUESTS), {
+        name: formData.name.trim(),
+        job: formData.job.trim() || null,
+        specialty: formData.specialty.trim() || null,
+        phone: formData.phone.trim(),
+        clinicName: formData.clinicName.trim() || null,
+        promoCode: formData.promoCode.trim() || null,
+        plan,
+        status: 'new',
+        submittedAt: serverTimestamp(),
       });
+
+      setSubmittedPhone(formData.phone.trim());
+      setIsSuccess(true);
+    } catch (err) {
+      console.error('[RegistrationPage] submit error:', err);
+      toast.error(isRTL ? 'حدث خطأ، يرجى المحاولة مجدداً.' : 'Something went wrong. Please try again.');
+    } finally {
       setIsSubmitting(false);
-    }, 1000);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -118,15 +96,152 @@ export default function RegistrationPage() {
     }));
   };
 
+  // ── Success Screen ─────────────────────────────────────────────────────────
+  if (isSuccess) {
+    return (
+      <div
+        className="min-h-screen bg-background font-sans flex flex-col items-center justify-center px-4"
+        dir={isRTL ? 'rtl' : 'ltr'}
+      >
+        <AnimatePresence>
+          <motion.div
+            key="success"
+            initial={{ opacity: 0, scale: 0.85, y: 30 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ type: 'spring', damping: 20, stiffness: 200 }}
+            className="max-w-lg w-full text-center space-y-8"
+          >
+            {/* Animated check icon */}
+            <motion.div
+              className="relative mx-auto"
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              transition={{ delay: 0.15, type: 'spring', damping: 14, stiffness: 200 }}
+            >
+              <div className="h-28 w-28 mx-auto rounded-full bg-gradient-to-br from-emerald-400 to-green-600 flex items-center justify-center shadow-2xl shadow-emerald-500/40">
+                <CheckCircle2 className="h-14 w-14 text-white" strokeWidth={2.5} />
+              </div>
+              {/* Pulsing ring */}
+              <motion.div
+                className="absolute inset-0 rounded-full border-4 border-emerald-400/40"
+                animate={{ scale: [1, 1.3, 1], opacity: [0.8, 0, 0.8] }}
+                transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+              />
+              <motion.div
+                className="absolute inset-0 rounded-full border-4 border-emerald-300/20"
+                animate={{ scale: [1, 1.6, 1], opacity: [0.6, 0, 0.6] }}
+                transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut', delay: 0.3 }}
+              />
+            </motion.div>
+
+            {/* Sparkles decoration */}
+            <motion.div
+              className="flex justify-center gap-2 text-amber-400"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.35 }}
+            >
+              <Sparkles className="h-5 w-5" />
+              <Sparkles className="h-4 w-4 mt-1" />
+              <Sparkles className="h-5 w-5" />
+            </motion.div>
+
+            {/* Title */}
+            <motion.div
+              className="space-y-3"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.25 }}
+            >
+              <h1 className="text-3xl sm:text-4xl font-black text-foreground tracking-tight">
+                {isRTL ? '🎉 تم استلام طلبك بنجاح!' : '🎉 Request Received!'}
+              </h1>
+              <p className="text-lg text-muted-foreground font-medium leading-relaxed">
+                {isRTL
+                  ? `شكراً لك! تم تسجيل طلب انضمامك لـ Clinic Hub بنجاح.`
+                  : `Thank you! Your Clinic Hub join request has been submitted successfully.`}
+              </p>
+            </motion.div>
+
+            {/* Info card */}
+            <motion.div
+              className="glass-card rounded-[2rem] p-6 space-y-4 text-start"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4 }}
+            >
+              <div className="flex items-start gap-4">
+                <div className="h-10 w-10 shrink-0 rounded-2xl bg-blue-500/10 flex items-center justify-center">
+                  <MessageCircle className="h-5 w-5 text-blue-500" />
+                </div>
+                <div className="space-y-1">
+                  <p className="font-bold text-foreground">
+                    {isRTL ? 'سيتواصل معك فريق الدعم' : 'Our support team will contact you'}
+                  </p>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    {isRTL
+                      ? `سيقوم أحد متخصصي فريق Clinic Hub بالتواصل معك عبر الواتساب على رقم ${submittedPhone} لتفعيل حسابك وإرشادك خلال دقائق.`
+                      : `A Clinic Hub specialist will reach out to you via WhatsApp on ${submittedPhone} to activate your account and guide you within minutes.`}
+                  </p>
+                </div>
+              </div>
+              <div className="flex items-start gap-4">
+                <div className="h-10 w-10 shrink-0 rounded-2xl bg-amber-500/10 flex items-center justify-center">
+                  <Clock className="h-5 w-5 text-amber-500" />
+                </div>
+                <div className="space-y-1">
+                  <p className="font-bold text-foreground">
+                    {isRTL ? 'وقت التفعيل المتوقع' : 'Expected Activation Time'}
+                  </p>
+                  <p className="text-sm text-muted-foreground">
+                    {isRTL ? 'خلال دقائق من استلام طلبك (أيام العمل).' : 'Within minutes of receiving your request (business days).'}
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Plan badge */}
+            <motion.div
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-primary/10 border border-primary/20"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.5 }}
+            >
+              <span className="text-sm font-bold text-primary">
+                {plan === 'monthly' ? '📅' : '🗓️'} {planLabel}
+              </span>
+            </motion.div>
+
+            {/* Back button */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.6 }}
+            >
+              <Button
+                variant="outline"
+                className="rounded-2xl px-8 h-12 font-bold gap-2"
+                onClick={() => navigate('/')}
+              >
+                <ArrowLeft className={`h-4 w-4 ${isRTL ? 'rotate-180' : ''}`} />
+                {isRTL ? 'العودة للرئيسية' : 'Back to Home'}
+              </Button>
+            </motion.div>
+          </motion.div>
+        </AnimatePresence>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-background font-sans selection:bg-primary/20 selection:text-primary overflow-x-hidden" dir={isRTL ? 'rtl' : 'ltr'}>
       {/* Navigation */}
-      <nav 
+      <nav
         className="fixed w-full z-[100] bg-card dark:bg-card/60 backdrop-blur-2xl border-b border-slate-200 dark:border-slate-800/50"
         style={{ top: 'var(--titlebar-height, 0px)' }}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             className="flex items-center gap-3 cursor-pointer"
@@ -135,8 +250,8 @@ export default function RegistrationPage() {
             <Logo className="h-14 w-auto" />
           </motion.div>
 
-          <Button 
-            variant="ghost" 
+          <Button
+            variant="ghost"
             onClick={() => navigate('/')}
             className="gap-2 font-bold text-muted-foreground hover:text-primary transition-all rounded-xl"
           >
@@ -148,9 +263,9 @@ export default function RegistrationPage() {
 
       <main className="pt-32 pb-20 px-4">
         <div className="max-w-5xl mx-auto grid lg:grid-cols-12 gap-12 items-start">
-          
+
           {/* Form Side */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             className="lg:col-span-7 space-y-8 text-start"
@@ -195,13 +310,13 @@ export default function RegistrationPage() {
                   </Label>
                   <div className="relative">
                     <User className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400 rtl:left-auto rtl:right-4 z-10" />
-                    <Input 
+                    <Input
                       required
                       name="name"
                       value={formData.name}
                       onChange={handleChange}
                       placeholder={isRTL ? "د. أحمد محمد" : "Dr. John Doe"}
-                      className="h-14 rounded-2xl border-border bg-muted/50 focus:bg-card transition-all px-14 text-base font-bold text-foreground placeholder:text-muted-foreground text-left rtl:text-right" 
+                      className="h-14 rounded-2xl border-border bg-muted/50 focus:bg-card transition-all px-14 text-base font-bold text-foreground placeholder:text-muted-foreground text-left rtl:text-right"
                     />
                   </div>
                 </div>
@@ -212,12 +327,12 @@ export default function RegistrationPage() {
                   </Label>
                   <div className="relative">
                     <Briefcase className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400 rtl:left-auto rtl:right-4 z-10" />
-                    <Input 
+                    <Input
                       name="job"
                       value={formData.job}
                       onChange={handleChange}
                       placeholder={isRTL ? "طبيب ممارس" : "Medical Practitioner"}
-                      className="h-14 rounded-2xl border-border bg-muted/50 focus:bg-card transition-all px-14 text-base font-bold text-foreground placeholder:text-muted-foreground text-left rtl:text-right" 
+                      className="h-14 rounded-2xl border-border bg-muted/50 focus:bg-card transition-all px-14 text-base font-bold text-foreground placeholder:text-muted-foreground text-left rtl:text-right"
                     />
                   </div>
                 </div>
@@ -230,12 +345,12 @@ export default function RegistrationPage() {
                   </Label>
                   <div className="relative">
                     <Stethoscope className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400 rtl:left-auto rtl:right-4 z-10" />
-                    <Input 
+                    <Input
                       name="specialty"
                       value={formData.specialty}
                       onChange={handleChange}
                       placeholder={isRTL ? "أطفال / باطنة" : "Pediatrics / Internal Medicine"}
-                      className="h-14 rounded-2xl border-border bg-muted/50 focus:bg-card transition-all px-14 text-base font-bold text-foreground placeholder:text-muted-foreground text-left rtl:text-right" 
+                      className="h-14 rounded-2xl border-border bg-muted/50 focus:bg-card transition-all px-14 text-base font-bold text-foreground placeholder:text-muted-foreground text-left rtl:text-right"
                     />
                   </div>
                 </div>
@@ -247,14 +362,14 @@ export default function RegistrationPage() {
                   </Label>
                   <div className="relative">
                     <Smartphone className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400 rtl:left-auto rtl:right-4 z-10" />
-                    <Input 
+                    <Input
                       required
                       name="phone"
                       type="tel"
                       value={formData.phone}
                       onChange={handleChange}
                       placeholder="01xxxxxxxxx"
-                      className="h-14 rounded-2xl border-border bg-muted/50 focus:bg-card transition-all px-14 text-base font-bold text-foreground placeholder:text-muted-foreground text-left rtl:text-right" 
+                      className="h-14 rounded-2xl border-border bg-muted/50 focus:bg-card transition-all px-14 text-base font-bold text-foreground placeholder:text-muted-foreground text-left rtl:text-right"
                     />
                   </div>
                 </div>
@@ -266,12 +381,12 @@ export default function RegistrationPage() {
                 </Label>
                 <div className="relative">
                   <Building2 className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400 rtl:left-auto rtl:right-4 z-10" />
-                  <Input 
+                  <Input
                     name="clinicName"
                     value={formData.clinicName}
                     onChange={handleChange}
                     placeholder={isRTL ? "عيادة الأمل التخصصية" : "Hope Specialized Clinic"}
-                    className="h-14 rounded-2xl border-border bg-muted/50 focus:bg-card transition-all px-14 text-base font-bold text-foreground placeholder:text-muted-foreground text-left rtl:text-right" 
+                    className="h-14 rounded-2xl border-border bg-muted/50 focus:bg-card transition-all px-14 text-base font-bold text-foreground placeholder:text-muted-foreground text-left rtl:text-right"
                   />
                 </div>
               </div>
@@ -282,29 +397,38 @@ export default function RegistrationPage() {
                 </Label>
                 <div className="relative">
                   <Tag className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400 rtl:left-auto rtl:right-4 z-10" />
-                  <Input 
+                  <Input
                     name="promoCode"
                     value={formData.promoCode}
                     onChange={handleChange}
                     placeholder="CO2024"
-                    className="h-14 rounded-2xl border-border bg-muted/50 focus:bg-card transition-all px-14 text-base font-bold text-foreground placeholder:text-muted-foreground text-left rtl:text-right" 
+                    className="h-14 rounded-2xl border-border bg-muted/50 focus:bg-card transition-all px-14 text-base font-bold text-foreground placeholder:text-muted-foreground text-left rtl:text-right"
                   />
                 </div>
               </div>
 
-              <Button 
-                type="submit" 
+              <Button
+                type="submit"
                 disabled={isSubmitting}
-                className="w-full h-16 rounded-2xl text-lg font-black shadow-2xl shadow-primary/30 transition-all hover:scale-[1.02] active:scale-[0.98] mt-4"
+                className="w-full h-16 rounded-2xl text-lg font-black shadow-2xl shadow-primary/30 transition-all hover:scale-[1.02] active:scale-[0.98] mt-4 gap-3"
               >
-                {isSubmitting ? t('registration.success') : t('registration.submit')}
-                {!isSubmitting && <IconArrow className="ms-3 h-5 w-5 rtl:rotate-180" />}
+                {isSubmitting ? (
+                  <>
+                    <div className="h-5 w-5 animate-spin rounded-full border-3 border-white/30 border-t-white" />
+                    {isRTL ? 'جاري الإرسال...' : 'Sending...'}
+                  </>
+                ) : (
+                  <>
+                    <Send className="h-5 w-5" />
+                    {t('registration.submit')}
+                  </>
+                )}
               </Button>
             </form>
           </motion.div>
 
           {/* Info Side */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.2 }}
@@ -337,11 +461,19 @@ export default function RegistrationPage() {
             </div>
 
             <div className="glass-card p-6 md:p-8 rounded-[2rem] space-y-4">
-               <p className="text-slate-500 dark:text-slate-400 font-medium text-sm leading-relaxed">
-                  {isRTL 
-                    ? 'بعد إرسال الطلب، سيتم تحويلك إلى واتساب. يرجى إرسال الرسالة المكتوبة وسيتواصل معك أحد ممثلينا خلال دقائق.' 
-                    : 'After submitting, you will be redirected to WhatsApp. Please send the pre-written message and a representative will contact you within minutes.'}
-               </p>
+              <div className="flex items-center gap-3">
+                <div className="h-9 w-9 rounded-xl bg-emerald-500/10 flex items-center justify-center">
+                  <Send className="h-4 w-4 text-emerald-500" />
+                </div>
+                <p className="font-bold text-sm text-foreground">
+                  {isRTL ? 'بدون أي تعقيد' : 'No hassle at all'}
+                </p>
+              </div>
+              <p className="text-slate-500 dark:text-slate-400 font-medium text-sm leading-relaxed">
+                {isRTL
+                  ? 'فقط أدخل بياناتك واضغط إرسال — سيتواصل معك فريق Clinic Hub مباشرةً عبر الواتساب لإتمام التفعيل خلال دقائق.'
+                  : 'Just fill in your details and hit send — the Clinic Hub team will contact you directly via WhatsApp to complete activation within minutes.'}
+              </p>
             </div>
           </motion.div>
         </div>

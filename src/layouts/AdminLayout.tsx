@@ -5,6 +5,7 @@ import { LanguageToggle } from '@/components/LanguageToggle';
 import { useLanguage } from '@/providers/LanguageProvider';
 import { useTranslation } from 'react-i18next';
 import { useSubscriptions } from '@/hooks/useSubscriptions';
+import { useRegistrationRequests } from '@/hooks/useRegistrationRequests';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import {
@@ -26,28 +27,32 @@ import {
   ChevronRight,
   ChevronLeft,
   User as UserIcon,
+  Inbox,
 } from 'lucide-react';
 import { Logo } from '@/components/Logo';
 
 const adminNavItems = [
-  { key: 'dashboard', icon: LayoutDashboard, path: '/admin/dashboard' },
-  { key: 'doctors', icon: Users, path: '/admin/doctors' },
-  { key: 'subscriptions', icon: CreditCard, path: '/admin/subscriptions' },
-  { key: 'pricing', icon: DollarSign, path: '/admin/pricing' },
-  { key: 'settings', icon: Settings, path: '/admin/settings' },
+  { key: 'dashboard',     icon: LayoutDashboard, path: '/admin/dashboard' },
+  { key: 'joinRequests',  icon: Inbox,           path: '/admin/join-requests' },
+  { key: 'doctors',       icon: Users,           path: '/admin/doctors' },
+  { key: 'subscriptions', icon: CreditCard,      path: '/admin/subscriptions' },
+  { key: 'pricing',       icon: DollarSign,      path: '/admin/pricing' },
+  { key: 'settings',      icon: Settings,        path: '/admin/settings' },
 ];
 
 const navLabels: Record<string, { en: string; ar: string }> = {
-  dashboard: { en: 'Dashboard', ar: 'لوحة التحكم' },
-  doctors: { en: 'Doctors', ar: 'الدكاترة' },
+  dashboard:     { en: 'Dashboard',     ar: 'لوحة التحكم' },
+  joinRequests:  { en: 'Join Requests', ar: 'طلبات الانضمام' },
+  doctors:       { en: 'Doctors',       ar: 'الدكاترة' },
   subscriptions: { en: 'Subscriptions', ar: 'الاشتراكات' },
-  pricing: { en: 'Pricing', ar: 'الأسعار' },
-  settings: { en: 'Settings', ar: 'الإعدادات' },
+  pricing:       { en: 'Pricing',       ar: 'الأسعار' },
+  settings:      { en: 'Settings',      ar: 'الإعدادات' },
 };
 
 export default function AdminLayout() {
   const { user, logout } = useAuth();
   const { getExpiringSubscriptions } = useSubscriptions();
+  const { newCount: joinRequestsNewCount } = useRegistrationRequests();
   const expiringCount = getExpiringSubscriptions(7).length;
   const navigate = useNavigate();
   const location = useLocation();
@@ -100,7 +105,10 @@ export default function AdminLayout() {
           {adminNavItems.map((item) => {
             const isActive = location.pathname === item.path;
             const label = isRtl ? navLabels[item.key].ar : navLabels[item.key].en;
-            const hasNotification = (item.key === 'subscriptions' || item.key === 'dashboard') && expiringCount > 0;
+            const hasNotification =
+              (item.key === 'subscriptions' || item.key === 'dashboard') && expiringCount > 0
+              || (item.key === 'joinRequests' && joinRequestsNewCount > 0);
+            const badgeCount = item.key === 'joinRequests' ? joinRequestsNewCount : expiringCount;
 
             return (
               <button
@@ -133,9 +141,9 @@ export default function AdminLayout() {
                   )}
                 </div>
                 <span className={`flex-1 text-start ${isActive ? 'font-bold' : ''}`}>{label}</span>
-                {hasNotification && item.key === 'subscriptions' && (
+                {hasNotification && (item.key === 'subscriptions' || item.key === 'joinRequests') && (
                   <span className="px-1.5 py-0.5 rounded-full bg-red-500 text-white text-[9px] font-black min-w-[18px] text-center">
-                    {expiringCount}
+                    {badgeCount}
                   </span>
                 )}
                 {isActive && !hasNotification && (isRtl ? <ChevronLeft className="h-4 w-4 opacity-50 text-amber-500" /> : <ChevronRight className="h-4 w-4 opacity-50 text-amber-500" />)}

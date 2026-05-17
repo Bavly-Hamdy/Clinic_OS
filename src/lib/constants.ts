@@ -8,19 +8,21 @@ export const USER_CACHE_KEY = 'Clinic Hub_user_cache' as const;
 
 // ── Firestore Collection Names ────────────────────────────────────────────────
 export const COLLECTIONS = {
-  USERS:             'users',
-  PATIENTS:          'patients',
-  APPOINTMENTS:      'appointments',
-  VISITS:            'visits',
-  PRESCRIPTIONS:     'prescriptions',
-  PAYMENTS:          'payments',
-  EXPENSES:          'expenses',
-  NOTIFICATIONS:     'notifications',
-  CLINIC_SETTINGS:   'clinic_settings',
-  VITAL_SIGNS:       'vital_signs',
-  SUBSCRIPTIONS:     'subscriptions',
-  PLATFORM_SETTINGS: 'platform_settings',
+  USERS:                 'users',
+  PATIENTS:              'patients',
+  APPOINTMENTS:          'appointments',
+  VISITS:                'visits',
+  PRESCRIPTIONS:         'prescriptions',
+  PAYMENTS:              'payments',
+  EXPENSES:              'expenses',
+  NOTIFICATIONS:         'notifications',
+  CLINIC_SETTINGS:       'clinic_settings',
+  VITAL_SIGNS:           'vital_signs',
+  SUBSCRIPTIONS:         'subscriptions',
+  PLATFORM_SETTINGS:     'platform_settings',
+  REGISTRATION_REQUESTS: 'registration_requests',
 } as const;
+
 
 // ── React Query Defaults ──────────────────────────────────────────────────────
 export const QUERY_STALE_TIME = 30_000; // 30 seconds

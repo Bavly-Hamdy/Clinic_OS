@@ -288,3 +288,18 @@ export interface AppNotification {
   isRead: boolean;
   createdAt: string;
 }
+
+// ── Registration Requests (from public join form) ─────────────────────────────
+export interface RegistrationRequest {
+  id: string;
+  name: string;
+  job?: string;
+  specialty?: string;
+  phone: string;
+  clinicName?: string;
+  promoCode?: string;
+  plan: 'monthly' | 'yearly';
+  status: 'new' | 'contacted' | 'activated';
+  submittedAt: string;
+}
+
