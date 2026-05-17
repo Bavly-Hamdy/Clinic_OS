@@ -168,60 +168,39 @@ export default function JoinRequestsPage() {
     const subSeparator = '------------------------------------';
 
     const msg = isRtl
-      ? `${separator}
-       *CLINIC HUB | SUPPORT*
-${separator}
-
-*سعادة الدكتور الموقر / ${req.name}*
-السلام عليكم ورحمة الله وبركاته،
-
-نحييكم من *فريق الدعم الفني لمنصة Clinic Hub* الفاخرة لإدارة العيادات الرقمية.
-
-يسعدنا جداً انضمامكم إلينا ومشاركتكم في الارتقاء بتجربة الرعاية الصحية. لقد تم استلام طلبكم ومراجعته بنجاح:
-
-*📋 تفاصيل الطلب المُسجّل:*
-\`\`\`
-${subSeparator}
-الاسـم    : د. ${req.name}
-${req.specialty ? `التخصص  : ${req.specialty}\n` : ''}${req.clinicName ? `العيادة  : ${req.clinicName}\n` : ''}الاشتراك : ${planName}
-${subSeparator}
-\`\`\`
-
-*🚀 الخطوة التالية للتفعيل الفوري:*
-يرجى من سعادتكم الرد على هذه الرسالة بكلمة *«تأكيد»* ليقوم مهندسو الأنظمة لدينا بإطلاق بيئة العمل المخصصة لكم وتسليمكم بيانات الدخول فوراً.
-
-نحن متواجدون لخدمتكم وتلبية استفساراتكم على مدار الساعة.
-
-شاكرين لتعاونكم وثقتكم الغالية،
-*إدارة علاقات العملاء | Clinic Hub*
-الويب: www.clinichub.com
-${separator}`
-      : `${separator}
-       *CLINIC HUB | SUPPORT*
-${separator}
-
-*Dear Dr. ${req.name},*
-Greetings from the Clinic Hub Support Relations Team.
-
-Thank you for choosing *Clinic Hub* to power your medical practice. We are thrilled to welcome you to our premium digital network. Your application has been successfully processed:
-
-*📋 Subscription Details:*
-\`\`\`
-${subSeparator}
-Name      : Dr. ${req.name}
-${req.specialty ? `Specialty : ${req.specialty}\n` : ''}${req.clinicName ? `Clinic    : ${req.clinicName}\n` : ''}Plan      : ${planName}
-${subSeparator}
-\`\`\`
-
-*🚀 Next Step for Instant Activation:*
-Please reply to this message with *\"CONFIRM\"*. Our systems engineers will immediately deploy your dedicated workspace and send your access credentials.
-
-We are fully committed to your success and available 24/7 for any assistance.
-
-Warmest regards,
-*Customer Relations | Clinic Hub*
-Web: www.clinichub.com
-${separator}`;
+      ? `✨ *CLINIC HUB | SUPPORT* ✨\n` +
+        `──────────────────────\n\n` +
+        `👋 *سعادة الدكتور الموقر / ${req.name}*\n` +
+        `السلام عليكم ورحمة الله وبركاته،\n` +
+        `نحييكم من *فريق الدعم الفني لمنصة Clinic Hub* 🏥\n\n` +
+        `نشكركم على اختياركم لمنصتنا لإدارة وتطوير عيادتكم. يسعدنا إعلامكم بأنه تم استلام طلبكم بنجاح ومراجعته من قبل الإدارة ✅.\n\n` +
+        `📋 *بيانات طلب الانضمام:*\n` +
+        `👨⚕️ *الاسم:* د. ${req.name}` +
+        (req.specialty ? `\n🩺 *التخصص:* ${req.specialty}` : '') +
+        (req.clinicName ? `\n🏢 *العيادة:* ${req.clinicName}` : '') +
+        `\n💎 *الاشتراك:* ${planName}\n\n` +
+        `🚀 *الخطوة التالية لتفعيل النظام:*\n` +
+        `يرجى التكرم بالرد على هذه الرسالة لتأكيد رغبتكم بالبدء، ليقوم مهندسو الدعم الفني بتفعيل بيئة العمل الخاصة بكم فوراً ⚙️.\n\n` +
+        `نحن متواجدون لخدمتكم وتلبية استفساراتكم على مدار الساعة 🕒.\n\n` +
+        `شاكرين لتعاونكم وثقتكم الغالية 🤝،\n` +
+        `*إدارة علاقات العملاء | Clinic Hub*\n` +
+        `🌐 www.clinichub.com`
+      : `✨ *CLINIC HUB | SUPPORT* ✨\n` +
+        `──────────────────────\n\n` +
+        `👋 *Dear Dr. ${req.name},*\n` +
+        `Greetings from the Clinic Hub Relations Team 🏥\n\n` +
+        `Thank you for choosing *Clinic Hub* to power your medical practice. We are pleased to inform you that your subscription request has been successfully received and processed ✅.\n\n` +
+        `📋 *Subscription Summary:*\n` +
+        `👨⚕️ *Doctor:* Dr. ${req.name}` +
+        (req.specialty ? `\n🩺 *Specialty:* ${req.specialty}` : '') +
+        (req.clinicName ? `\n🏢 *Clinic:* ${req.clinicName}` : '') +
+        `\n💎 *Plan:* ${planName}\n\n` +
+        `🚀 *Next Steps for Activation:*\n` +
+        `Please reply to this message to confirm your request. Our technical support team will instantly activate and configure your dedicated workspace ⚙️.\n\n` +
+        `We are fully committed to your success and available 24/7 for any assistance 🕒.\n\n` +
+        `Sincerely 🤝,\n` +
+        `*Customer Relations | Clinic Hub*\n` +
+        `🌐 www.clinichub.com`;
 
 
     const encoded = encodeURIComponent(msg);
