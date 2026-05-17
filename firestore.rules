@@ -107,6 +107,12 @@ service cloud.firestore {
       allow write: if isAuthenticated();
     }
 
+    // ── Registration Requests ─────────────────────────────────────────────────
+    match /registration_requests/{id} {
+      allow create: if true;
+      allow read, update, delete: if isAdmin();
+    }
+
     // ── Default: Deny everything not explicitly covered ───────────────────────
     // NOTE: Unlike the previous wildcard rule that allowed all authenticated users
     // to read/write ANYTHING, we now deny by default for unlisted collections.
