@@ -169,24 +169,26 @@ export default function JoinRequestsPage() {
 
     const msg = isRtl
       ? `${separator}
-      *CLINIC HUB | SUPPORT*
+       *CLINIC HUB | SUPPORT*
 ${separator}
 
 *سعادة الدكتور الموقر / ${req.name}*
 السلام عليكم ورحمة الله وبركاته،
 
-نحييكم من *فريق الدعم الفني لمنصة Clinic Hub*.
+نحييكم من *فريق الدعم الفني لمنصة Clinic Hub* الفاخرة لإدارة العيادات الرقمية.
 
-نشكركم على اختياركم Clinic Hub لإدارة وتطوير عيادتكم. يسعدنا إعلامكم بأنه تم استلام طلبكم بنجاح ومراجعته من قبل الإدارة.
+يسعدنا جداً انضمامكم إلينا ومشاركتكم في الارتقاء بتجربة الرعاية الصحية. لقد تم استلام طلبكم ومراجعته بنجاح:
 
-*بيانات طلب الانضمام:*
+*📋 تفاصيل الطلب المُسجّل:*
+\`\`\`
 ${subSeparator}
-الاسم: د. ${req.name}${req.specialty ? `\nالتخصص: ${req.specialty}` : ''}${req.clinicName ? `\nالعيادة: ${req.clinicName}` : ''}
-الاشتراك: ${planName}
+الاسـم    : د. ${req.name}
+${req.specialty ? `التخصص  : ${req.specialty}\n` : ''}${req.clinicName ? `العيادة  : ${req.clinicName}\n` : ''}الاشتراك : ${planName}
 ${subSeparator}
+\`\`\`
 
-*الخطوة التالية لتفعيل النظام:*
-يرجى التكرم بالرد على هذه الرسالة لتأكيد رغبتكم بالبدء، ليقوم مهندسو الدعم الفني بتفعيل بيئة العمل الخاصة بكم فوراً.
+*🚀 الخطوة التالية للتفعيل الفوري:*
+يرجى من سعادتكم الرد على هذه الرسالة بكلمة *«تأكيد»* ليقوم مهندسو الأنظمة لدينا بإطلاق بيئة العمل المخصصة لكم وتسليمكم بيانات الدخول فوراً.
 
 نحن متواجدون لخدمتكم وتلبية استفساراتكم على مدار الساعة.
 
@@ -195,26 +197,28 @@ ${subSeparator}
 الويب: www.clinichub.com
 ${separator}`
       : `${separator}
-      *CLINIC HUB | SUPPORT*
+       *CLINIC HUB | SUPPORT*
 ${separator}
 
 *Dear Dr. ${req.name},*
-Greetings from the Clinic Hub Relations Team.
+Greetings from the Clinic Hub Support Relations Team.
 
-Thank you for choosing *Clinic Hub* to power your medical practice. We are pleased to inform you that your subscription request has been successfully received and processed.
+Thank you for choosing *Clinic Hub* to power your medical practice. We are thrilled to welcome you to our premium digital network. Your application has been successfully processed:
 
-*Subscription Summary:*
+*📋 Subscription Details:*
+\`\`\`
 ${subSeparator}
-Doctor: Dr. ${req.name}${req.specialty ? `\nSpecialty: ${req.specialty}` : ''}${req.clinicName ? `\nClinic: ${req.clinicName}` : ''}
-Plan: ${planName}
+Name      : Dr. ${req.name}
+${req.specialty ? `Specialty : ${req.specialty}\n` : ''}${req.clinicName ? `Clinic    : ${req.clinicName}\n` : ''}Plan      : ${planName}
 ${subSeparator}
+\`\`\`
 
-*Next Steps for Activation:*
-Please reply to this message to confirm your request. Our technical support team will instantly activate and configure your dedicated workspace.
+*🚀 Next Step for Instant Activation:*
+Please reply to this message with *\"CONFIRM\"*. Our systems engineers will immediately deploy your dedicated workspace and send your access credentials.
 
 We are fully committed to your success and available 24/7 for any assistance.
 
-Sincerely,
+Warmest regards,
 *Customer Relations | Clinic Hub*
 Web: www.clinichub.com
 ${separator}`;
