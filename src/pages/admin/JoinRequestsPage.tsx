@@ -187,7 +187,7 @@ export default function JoinRequestsPage() {
         `فريق الدعم الفني متواجد دائماً لخدمتكم والإجابة على أي استفسارات على مدار الساعة.\n\n` +
         `شاكرين لثقتكم الغالية بـ *Clinic Hub*،\n` +
         `*إدارة علاقات الأطباء والعملاء*\n` +
-        `${globe} www.clinichub.com`
+        `${globe} clinic-os-beige.vercel.app/`
       : `*CLINIC HUB | Support*\n` +
         `───────────────────\n\n` +
         `*Dear Dr. ${req.name},*\n` +
@@ -203,7 +203,7 @@ export default function JoinRequestsPage() {
         `We are fully committed to your success and available 24/7 for any assistance.\n\n` +
         `Sincerely,\n` +
         `*Customer & Physician Relations*\n` +
-        `${globe} www.clinichub.com`;
+        `${globe} clinic-os-beige.vercel.app/`;
 
     SUPPORT_NUMBERS.forEach((num) => {
       // الحل السحري: استخدام API الواتساب المباشر وبناء الرابط بـ URLSearchParams
