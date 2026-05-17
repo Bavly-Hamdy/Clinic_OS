@@ -124,19 +124,18 @@
       "target": [
         "nsis"
       ],
-      "icon": "public/Icon.png"
+      "icon": "public/Icon.ico"
     },
     "nsis": {
       "oneClick": false,
       "perMachine": true,
       "allowToChangeInstallationDirectory": true,
-      "createDesktopShortcut": true,
-      "createStartMenuShortcut": true,
+      "shortcutName": "Clinic Hub",
+      "include": "electron/installer.nsh",
+      "createDesktopShortcut": false,
+      "warningsAsErrors": false,
       "installerIcon": "public/Icon.ico",
       "uninstallerIcon": "public/Icon.ico",
-      "installerHeaderIcon": "public/Icon.ico",
-      "installerSidebar": "public/installerSidebar.png",
-      "uninstallerSidebar": "public/installerSidebar.png",
       "runAfterFinish": true,
       "artifactName": "${productName} Setup ${version}.${ext}",
       "uninstallDisplayName": "${productName}",

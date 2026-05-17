@@ -1,4 +1,4 @@
-import { app, BrowserWindow, shell, ipcMain, Tray, Menu } from 'electron';
+import { app, BrowserWindow, shell, ipcMain, Tray, Menu, nativeImage } from 'electron';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 import os from 'node:os';
@@ -10,6 +10,11 @@ log.transports.file.level = 'info';
 autoUpdater.logger = log;
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+// Set AppUserModelID for Windows Taskbar consistency (Strict requirement)
+if (process.platform === 'win32') {
+  app.setAppUserModelId('com.clinichub.app');
+}
 
 // The built directory structure
 //
@@ -40,12 +45,22 @@ let tray: Tray | null = null;
 let isQuitting = false;
 
 function createWindow() {
+  // Use a reliable path for the icon (works in both dev and production)
+  const iconFileName = process.platform === 'win32' ? 'Icon.ico' : 'Icon.png';
+  const iconPath = path.join(process.env.VITE_PUBLIC || '', iconFileName);
+  const appIcon = nativeImage.createFromPath(iconPath);
+
+  // Fallback check
+  if (appIcon.isEmpty()) {
+    console.error('Critical: Failed to load app icon from:', iconPath);
+  }
+
   win = new BrowserWindow({
     width: 1280,
     height: 800,
     minWidth: 1024,
     minHeight: 768,
-    icon: path.join(process.env.VITE_PUBLIC || '', 'Icon.png'),
+    icon: appIcon,
     title: 'Clinic Hub',
     frame: false, // Custom Title Bar
     titleBarStyle: 'hidden',
@@ -90,8 +105,9 @@ function createWindow() {
 }
 
 function createTray() {
-  const iconPath = path.join(process.env.VITE_PUBLIC || '', 'Icon.png');
-  tray = new Tray(iconPath);
+  const iconPath = path.join(process.env.VITE_PUBLIC || '', 'Icon.ico');
+  const appIcon = nativeImage.createFromPath(iconPath);
+  tray = new Tray(appIcon);
   
   const contextMenu = Menu.buildFromTemplate([
     { label: 'Show Clinic Hub', click: () => win?.show() },
