@@ -164,61 +164,64 @@ export default function JoinRequestsPage() {
       ? (isRtl ? 'الخطة الشهرية' : 'Monthly Plan')
       : (isRtl ? 'الخطة السنوية' : 'Yearly Plan');
 
+    const separator = '----------------------------';
+
     const msg = isRtl
-      ? `━━━━━━━━━━━━━━━━━━━━━━━━━━
-⚕️ *CLINIC HUB | الدعم الفني* ⚕️
-━━━━━━━━━━━━━━━━━━━━━━━━━━
+      ? `${separator}
+🏥 *CLINIC HUB | الدعم الفني* 🏥
+${separator}
 
 *سعادة الدكتور / ${req.name} المحترم،*
 
-تحية طيبة وبعد من فريق عمل **Clinic Hub**، ✨
+تحية طيبة وبعد من فريق عمل *Clinic Hub*،
 
-سعداء جداً باختياركم منصة **Clinic Hub** لتطوير وإدارة عيادتكم الموقرة. لقد تم استلام طلب انضمامكم بنجاح بالبيانات التالية:
+سعداء جداً باختياركم منصة *Clinic Hub* لتطوير وإدارة عيادتكم الموقرة.
+لقد تم استلام طلب انضمامكم بنجاح بالبيانات التالية:
 
 📋 *تفاصيل الطلب:*
-• *الطبيب:* د. ${req.name}
-${req.specialty ? `• *التخصص:* ${req.specialty}` : ''}
-${req.clinicName ? `• *العيادة:* ${req.clinicName}` : ''}
-• *الخطة المختارة:* ${planName}
+👤 الطبيب: د. ${req.name}${req.specialty ? `\n🩺 التخصص: ${req.specialty}` : ''}${req.clinicName ? `\n🏢 العيادة: ${req.clinicName}` : ''}
+📅 الخطة: ${planName}
 
-نحن فخورون بانضمامكم إلى شبكتنا المميزة من نخبة الأطباء ومقدمي الرعاية الصحية. بيئة النظام الخاصة بكم جاهزة للتفعيل الفوري الآن! 🚀
+نحن فخورون بانضمامكم الى شبكتنا المميزة من نخبة الاطباء.
+بيئة النظام الخاصة بكم جاهزة للتفعيل الفوري الان! 🚀
 
-💬 *ما هي الخطوة التالية؟*
-يرجى فقط الرد على هذه الرسالة لتأكيد رغبتكم بالبدء وتفعيل حسابكم بشكل آمن ودون أي تأخير.
+📌 *ما هي الخطوة التالية؟*
+يرجى الرد على هذه الرسالة لتاكيد رغبتكم بالبدء وتفعيل حسابكم.
 
-فريق الدعم الفني والمهندسون المتخصصون في خدمتكم على مدار الساعة لأي استفسارات أو للمساعدة في الإعداد المخصص لعيادتكم.
+فريق الدعم والمهندسون في خدمتكم على مدار الساعة.
 
-مع خالص التقدير والاحترام،
+مع خالص التقدير،
 *فريق دعم Clinic Hub*
-🌐 _www.clinichub.com_
-━━━━━━━━━━━━━━━━━━━━━━━━━━`
-      : `━━━━━━━━━━━━━━━━━━━━━━━━━━
-⚕️ *CLINIC HUB | OFFICIAL* ⚕️
-━━━━━━━━━━━━━━━━━━━━━━━━━━
+🌐 www.clinichub.com
+${separator}`
+      : `${separator}
+🏥 *CLINIC HUB | OFFICIAL SUPPORT* 🏥
+${separator}
 
 *Dear Dr. ${req.name},*
 
-Greetings from the *Clinic Hub Support Team*! ✨
+Greetings from the *Clinic Hub Support Team*!
 
-Thank you for choosing **Clinic Hub** to power your medical practice. We have successfully received your registration request with the following details:
+Thank you for choosing *Clinic Hub* to power your medical practice.
+We have successfully received your registration request:
 
 📋 *Request Details:*
-• *Doctor:* Dr. ${req.name}
-${req.specialty ? `• *Specialty:* ${req.specialty}` : ''}
-${req.clinicName ? `• *Clinic:* ${req.clinicName}` : ''}
-• *Selected Plan:* ${planName}
+👤 Doctor: Dr. ${req.name}${req.specialty ? `\n🩺 Specialty: ${req.specialty}` : ''}${req.clinicName ? `\n🏢 Clinic: ${req.clinicName}` : ''}
+📅 Plan: ${planName}
 
-We are absolutely thrilled to welcome you to our premium network of healthcare providers. Your dedicated environment is ready for instant deployment! 🚀
+We are thrilled to welcome you to our premium network of healthcare providers.
+Your dedicated environment is ready for instant deployment! 🚀
 
-💬 *What is next?*
-Please reply to this message to confirm your identity and complete the secure activation of your Clinic Hub system.
+📌 *What is next?*
+Please reply to confirm and complete the secure activation of your Clinic Hub account.
 
-If you have any questions or require custom setup assistance, our engineering and support specialists are at your full service.
+Our engineering and support team is at your full service 24/7.
 
 Warmest regards,
 *Clinic Hub Support Team*
-🌐 _www.clinichub.com_
-━━━━━━━━━━━━━━━━━━━━━━━━━━`;
+🌐 www.clinichub.com
+${separator}`;
+
 
     const encoded = encodeURIComponent(msg);
     SUPPORT_NUMBERS.forEach((num) => {
