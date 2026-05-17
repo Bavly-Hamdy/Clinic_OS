@@ -57,7 +57,6 @@ export default function RegistrationPage() {
     setIsSubmitting(true);
 
     const supportNumbers = ['201111835471', '201153762560'];
-    const whatsappNumber = supportNumbers[Math.floor(Math.random() * supportNumbers.length)];
     const divider = '\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501';
     
     const lines: string[] = [];
@@ -102,10 +101,12 @@ export default function RegistrationPage() {
 
     const message = lines.join('\n');
     const encodedMessage = encodeURIComponent(message);
-    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
 
     setTimeout(() => {
-      window.open(whatsappUrl, '_blank');
+      supportNumbers.forEach((num) => {
+        const whatsappUrl = `https://wa.me/${num}?text=${encodedMessage}`;
+        window.open(whatsappUrl, '_blank');
+      });
       setIsSubmitting(false);
     }, 1000);
   };
