@@ -164,62 +164,59 @@ export default function JoinRequestsPage() {
       ? (isRtl ? 'الخطة الشهرية' : 'Monthly Plan')
       : (isRtl ? 'الخطة السنوية' : 'Yearly Plan');
 
-    const separator = '--------------------------------------------';
+    const separator = '====================================';
+    const subSeparator = '------------------------------------';
 
     const msg = isRtl
       ? `${separator}
-* CLINIC HUB | الدعم الفني *
+      *CLINIC HUB | SUPPORT*
 ${separator}
 
-*سعادة الدكتور / ${req.name} المحترم،*
+*سعادة الدكتور الموقر / ${req.name}*
+السلام عليكم ورحمة الله وبركاته،
 
-تحية طيبة وبعد من فريق عمل Clinic Hub،
+نحييكم من *فريق الدعم الفني لمنصة Clinic Hub*.
 
-سعداء جداً باختياركم منصة Clinic Hub لتطوير وإدارة عيادتكم الموقرة.
-لقد تم استلام طلب انضمامكم بنجاح بالبيانات التالية:
+نشكركم على اختياركم Clinic Hub لإدارة وتطوير عيادتكم. يسعدنا إعلامكم بأنه تم استلام طلبكم بنجاح ومراجعته من قبل الإدارة.
 
-[ تفاصيل الطلب ]
-- الطبيب: د. ${req.name}${req.specialty ? `\n- التخصص: ${req.specialty}` : ''}${req.clinicName ? `\n- العيادة: ${req.clinicName}` : ''}
-- الخطة: ${planName}
+*بيانات طلب الانضمام:*
+${subSeparator}
+الاسم: د. ${req.name}${req.specialty ? `\nالتخصص: ${req.specialty}` : ''}${req.clinicName ? `\nالعيادة: ${req.clinicName}` : ''}
+الاشتراك: ${planName}
+${subSeparator}
 
-نحن فخورون بانضمامكم الى شبكتنا المميزة من نخبة الاطباء.
-بيئة النظام الخاصة بكم جاهزة للتفعيل الفوري الان!
+*الخطوة التالية لتفعيل النظام:*
+يرجى التكرم بالرد على هذه الرسالة لتأكيد رغبتكم بالبدء، ليقوم مهندسو الدعم الفني بتفعيل بيئة العمل الخاصة بكم فوراً.
 
-[ ما هي الخطوة التالية؟ ]
-يرجى الرد على هذه الرسالة لتاكيد رغبتكم بالبدء وتفعيل حسابكم.
+نحن متواجدون لخدمتكم وتلبية استفساراتكم على مدار الساعة.
 
-فريق الدعم والمهندسون في خدمتكم على مدار الساعة.
-
-مع خالص التقدير،
-*فريق دعم Clinic Hub*
-الموقع: www.clinichub.com
+شاكرين لتعاونكم وثقتكم الغالية،
+*إدارة علاقات العملاء | Clinic Hub*
+الويب: www.clinichub.com
 ${separator}`
       : `${separator}
-* CLINIC HUB | OFFICIAL SUPPORT *
+      *CLINIC HUB | SUPPORT*
 ${separator}
 
 *Dear Dr. ${req.name},*
+Greetings from the Clinic Hub Relations Team.
 
-Greetings from the Clinic Hub Support Team!
+Thank you for choosing *Clinic Hub* to power your medical practice. We are pleased to inform you that your subscription request has been successfully received and processed.
 
-Thank you for choosing Clinic Hub to power your medical practice.
-We have successfully received your registration request:
+*Subscription Summary:*
+${subSeparator}
+Doctor: Dr. ${req.name}${req.specialty ? `\nSpecialty: ${req.specialty}` : ''}${req.clinicName ? `\nClinic: ${req.clinicName}` : ''}
+Plan: ${planName}
+${subSeparator}
 
-[ Request Details ]
-- Doctor: Dr. ${req.name}${req.specialty ? `\n- Specialty: ${req.specialty}` : ''}${req.clinicName ? `\n- Clinic: ${req.clinicName}` : ''}
-- Plan: ${planName}
+*Next Steps for Activation:*
+Please reply to this message to confirm your request. Our technical support team will instantly activate and configure your dedicated workspace.
 
-We are thrilled to welcome you to our premium network of healthcare providers.
-Your dedicated environment is ready for instant deployment!
+We are fully committed to your success and available 24/7 for any assistance.
 
-[ What is next? ]
-Please reply to confirm and complete the secure activation of your Clinic Hub account.
-
-Our engineering and support team is at your full service 24/7.
-
-Warmest regards,
-*Clinic Hub Support Team*
-Website: www.clinichub.com
+Sincerely,
+*Customer Relations | Clinic Hub*
+Web: www.clinichub.com
 ${separator}`;
 
 
