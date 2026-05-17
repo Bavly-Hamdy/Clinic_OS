@@ -164,49 +164,56 @@ export default function JoinRequestsPage() {
       ? (isRtl ? 'الخطة الشهرية' : 'Monthly Plan')
       : (isRtl ? 'الخطة السنوية' : 'Yearly Plan');
 
-    const separator = '====================================';
-    const subSeparator = '------------------------------------';
+    // تعريف الـ Emojis بنظام Unicode عشان نتفادى أي مشكلة في تشفير الملف
+    const star = '\u2728'; // ✨
+    const wave = '\uD83D\uDC4B'; // 👋
+    const hospital = '\uD83C\uDFE5'; // 🏥
+    const check = '\u2705'; // ✅
+    const list = '\uD83D\uDCCB'; // 📋
+    const docIcon = '\uD83D\uDC68\u200D\u2695\uFE0F'; // 👨⚕️
+    const steth = '\uD83E\uDE7A'; // 🩺
+    const building = '\uD83C\uDFE2'; // 🏢
+    const gem = '\uD83D\uDC8E'; // 💎
+    const rocket = '\uD83D\uDE80'; // 🚀
+    const gear = '\u2699\uFE0F'; // ⚙️
+    const clock = '\uD83D\uDD52'; // 🕒
+    const handshake = '\uD83E\uDD1D'; // 🤝
+    const globe = '\uD83C\uDF10'; // 🌐
 
     const msg = isRtl
-      ? `${separator}\n` +
-        `       *CLINIC HUB | SUPPORT*\n` +
-        `${separator}\n\n` +
-        `*سعادة الدكتور الموقر / ${req.name}*\n` +
-        `السلام عليكم ورحمة الله وبركاته،\n\n` +
-        `نحييكم من *فريق الدعم الفني لمنصة Clinic Hub* لإدارة وتطوير العيادات الرقمية.\n\n` +
-        `نشكركم على اختياركم لمنصتنا. يسعدنا جداً إعلامكم بأنه تم استلام طلبكم بنجاح ومراجعته من قبل الإدارة.\n\n` +
-        `*-- بيانات طلب الانضمام: --*\n` +
-        `الاسم    : د. ${req.name}` +
-        (req.specialty ? `\nالتخصص  : ${req.specialty}` : '') +
-        (req.clinicName ? `\nالعيادة  : ${req.clinicName}` : '') +
-        `\nالاشتراك : ${planName}\n` +
-        `${subSeparator}\n\n` +
-        `*-- الخطوة التالية للتفعيل الفوري: --*\n` +
-        `يرجى من سعادتكم الرد على هذه الرسالة لتأكيد رغبتكم بالبدء، ليقوم مهندسو الدعم الفني بإطلاق بيئة العمل وتفعيل حسابكم فوراً.\n\n` +
-        `نحن متواجدون لخدمتكم وتلبية استفساراتكم على مدار الساعة.\n\n` +
-        `شاكرين لتعاونكم وثقتكم الغالية،\n` +
+      ? `${star} *CLINIC HUB | SUPPORT* ${star}\n` +
+        `──────────────────────\n\n` +
+        `${wave} *سعادة الدكتور الموقر / ${req.name}*\n` +
+        `السلام عليكم ورحمة الله وبركاته،\n` +
+        `نحييكم من *فريق الدعم الفني لمنصة Clinic Hub* ${hospital}\n\n` +
+        `نشكركم على اختياركم لمنصتنا لإدارة وتطوير عيادتكم. يسعدنا إعلامكم بأنه تم استلام طلبكم بنجاح ومراجعته من قبل الإدارة ${check}.\n\n` +
+        `${list} *بيانات طلب الانضمام:*\n` +
+        `${docIcon} *الاسم:* د. ${req.name}` +
+        (req.specialty ? `\n${steth} *التخصص:* ${req.specialty}` : '') +
+        (req.clinicName ? `\n${building} *العيادة:* ${req.clinicName}` : '') +
+        `\n${gem} *الاشتراك:* ${planName}\n\n` +
+        `${rocket} *الخطوة التالية لتفعيل النظام:*\n` +
+        `يرجى التكرم بالرد على هذه الرسالة لتأكيد رغبتكم بالبدء، ليقوم مهندسو الدعم الفني بتفعيل بيئة العمل الخاصة بكم فوراً ${gear}.\n\n` +
+        `نحن متواجدون لخدمتكم وتلبية استفساراتكم على مدار الساعة ${clock}.\n\n` +
+        `شاكرين لتعاونكم وثقتكم الغالية ${handshake}،\n` +
         `*إدارة علاقات العملاء | Clinic Hub*\n` +
-        `الويب: www.clinichub.com\n` +
-        `${separator}`
-      : `${separator}\n` +
-        `       *CLINIC HUB | SUPPORT*\n` +
-        `${separator}\n\n` +
-        `*Dear Dr. ${req.name},*\n` +
-        `Greetings from the Clinic Hub Support Relations Team.\n\n` +
-        `Thank you for choosing *Clinic Hub* to power your medical practice. We are thrilled to welcome you to our premium digital network. Your application has been successfully processed.\n\n` +
-        `*-- Subscription Summary: --*\n` +
-        `Name      : Dr. ${req.name}` +
-        (req.specialty ? `\nSpecialty : ${req.specialty}` : '') +
-        (req.clinicName ? `\nClinic    : ${req.clinicName}` : '') +
-        `\nPlan      : ${planName}\n` +
-        `${subSeparator}\n\n` +
-        `*-- Next Steps for Activation: --*\n` +
-        `Please reply to this message to confirm your request. Our technical support team will instantly activate and configure your dedicated workspace.\n\n` +
-        `We are fully committed to your success and available 24/7 for any assistance.\n\n` +
-        `Warmest regards,\n` +
+        `${globe} www.clinichub.com`
+      : `${star} *CLINIC HUB | SUPPORT* ${star}\n` +
+        `──────────────────────\n\n` +
+        `${wave} *Dear Dr. ${req.name},*\n` +
+        `Greetings from the Clinic Hub Relations Team ${hospital}\n\n` +
+        `Thank you for choosing *Clinic Hub* to power your medical practice. We are pleased to inform you that your subscription request has been successfully received and processed ${check}.\n\n` +
+        `${list} *Subscription Summary:*\n` +
+        `${docIcon} *Doctor:* Dr. ${req.name}` +
+        (req.specialty ? `\n${steth} *Specialty:* ${req.specialty}` : '') +
+        (req.clinicName ? `\n${building} *Clinic:* ${req.clinicName}` : '') +
+        `\n${gem} *Plan:* ${planName}\n\n` +
+        `${rocket} *Next Steps for Activation:*\n` +
+        `Please reply to this message to confirm your request. Our technical support team will instantly activate and configure your dedicated workspace ${gear}.\n\n` +
+        `We are fully committed to your success and available 24/7 for any assistance ${clock}.\n\n` +
+        `Sincerely ${handshake},\n` +
         `*Customer Relations | Clinic Hub*\n` +
-        `Web: www.clinichub.com\n` +
-        `${separator}`;
+        `${globe} www.clinichub.com`;
 
 
     const encoded = encodeURIComponent(msg);
