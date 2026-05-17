@@ -160,7 +160,66 @@ export default function JoinRequestsPage() {
 
   // Open WhatsApp for both support numbers at once
   const handleWhatsApp = (req: RegistrationRequest) => {
-    const msg = isRtl ? L.whatsappMsgAr(req.name) : L.whatsappMsg(req.name);
+    const planName = req.plan === 'monthly'
+      ? (isRtl ? 'الخطة الشهرية' : 'Monthly Plan')
+      : (isRtl ? 'الخطة السنوية' : 'Yearly Plan');
+
+    const msg = isRtl
+      ? `━━━━━━━━━━━━━━━━━━━━━━━━━━
+⚕️ *CLINIC HUB | الدعم الفني* ⚕️
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+*سعادة الدكتور / ${req.name} المحترم،*
+
+تحية طيبة وبعد من فريق عمل **Clinic Hub**، ✨
+
+سعداء جداً باختياركم منصة **Clinic Hub** لتطوير وإدارة عيادتكم الموقرة. لقد تم استلام طلب انضمامكم بنجاح بالبيانات التالية:
+
+📋 *تفاصيل الطلب:*
+• *الطبيب:* د. ${req.name}
+${req.specialty ? `• *التخصص:* ${req.specialty}` : ''}
+${req.clinicName ? `• *العيادة:* ${req.clinicName}` : ''}
+• *الخطة المختارة:* ${planName}
+
+نحن فخورون بانضمامكم إلى شبكتنا المميزة من نخبة الأطباء ومقدمي الرعاية الصحية. بيئة النظام الخاصة بكم جاهزة للتفعيل الفوري الآن! 🚀
+
+💬 *ما هي الخطوة التالية؟*
+يرجى فقط الرد على هذه الرسالة لتأكيد رغبتكم بالبدء وتفعيل حسابكم بشكل آمن ودون أي تأخير.
+
+فريق الدعم الفني والمهندسون المتخصصون في خدمتكم على مدار الساعة لأي استفسارات أو للمساعدة في الإعداد المخصص لعيادتكم.
+
+مع خالص التقدير والاحترام،
+*فريق دعم Clinic Hub*
+🌐 _www.clinichub.com_
+━━━━━━━━━━━━━━━━━━━━━━━━━━`
+      : `━━━━━━━━━━━━━━━━━━━━━━━━━━
+⚕️ *CLINIC HUB | OFFICIAL* ⚕️
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+*Dear Dr. ${req.name},*
+
+Greetings from the *Clinic Hub Support Team*! ✨
+
+Thank you for choosing **Clinic Hub** to power your medical practice. We have successfully received your registration request with the following details:
+
+📋 *Request Details:*
+• *Doctor:* Dr. ${req.name}
+${req.specialty ? `• *Specialty:* ${req.specialty}` : ''}
+${req.clinicName ? `• *Clinic:* ${req.clinicName}` : ''}
+• *Selected Plan:* ${planName}
+
+We are absolutely thrilled to welcome you to our premium network of healthcare providers. Your dedicated environment is ready for instant deployment! 🚀
+
+💬 *What is next?*
+Please reply to this message to confirm your identity and complete the secure activation of your Clinic Hub system.
+
+If you have any questions or require custom setup assistance, our engineering and support specialists are at your full service.
+
+Warmest regards,
+*Clinic Hub Support Team*
+🌐 _www.clinichub.com_
+━━━━━━━━━━━━━━━━━━━━━━━━━━`;
+
     const encoded = encodeURIComponent(msg);
     SUPPORT_NUMBERS.forEach((num) => {
       window.open(`https://wa.me/${num}?text=${encoded}`, '_blank');
